@@ -68,25 +68,113 @@ if LOGO_PATH.exists():
 # CATÁLOGO DE ACTIVOS — los más demandados, con su ticker ya resuelto
 # ============================================================================
 
-CATALOGO = {
-    "MSCI World — iShares Core (EUR, Ámsterdam)":      "IWDA.AS",
-    "MSCI World — iShares Core (EUR, Xetra)":          "EUNL.DE",
-    "MSCI World — iShares (USD, NY)":                  "URTH",
-    "FTSE All-World — Vanguard VWCE (EUR)":            "VWCE.DE",
-    "S&P 500 — índice":                                "^GSPC",
-    "S&P 500 — Vanguard VOO (USD)":                    "VOO",
-    "Nasdaq 100 — índice":                             "^NDX",
-    "EuroStoxx 50 — índice":                           "^STOXX50E",
-    "IBEX 35 — índice":                                "^IBEX",
-    "MSCI Emerging Markets — iShares (USD)":           "EEM",
-    "Oro — futuro COMEX":                              "GC=F",
-    "Oro físico — Invesco Physical Gold (EUR)":        "8PSG.DE",
-    "Bonos zona euro — iShares Core Aggregate (EUR)":  "IEAG.AS",
-    "Bonos globales — iShares Core US Aggregate":      "AGG",
-    "Bono EEUU 20+ años — iShares TLT":                "TLT",
-    "Bitcoin (USD)":                                   "BTC-USD",
-    "REIT global — iShares Developed Property":        "IWDP.AS",
+# Organizado por categorías; la etiqueta incluye el símbolo para total transparencia.
+_CATEGORIAS = {
+    "Índices bursátiles": {
+        "S&P 500 (^GSPC)": "^GSPC", "Nasdaq 100 (^NDX)": "^NDX", "Dow Jones (^DJI)": "^DJI",
+        "Russell 2000 — small caps EEUU (^RUT)": "^RUT", "EuroStoxx 50 (^STOXX50E)": "^STOXX50E",
+        "DAX 40 Alemania (^GDAXI)": "^GDAXI", "CAC 40 Francia (^FCHI)": "^FCHI",
+        "FTSE 100 Reino Unido (^FTSE)": "^FTSE", "IBEX 35 España (^IBEX)": "^IBEX",
+        "AEX Países Bajos (^AEX)": "^AEX", "SMI Suiza (^SSMI)": "^SSMI",
+        "Nikkei 225 Japón (^N225)": "^N225", "Hang Seng Hong Kong (^HSI)": "^HSI",
+        "KOSPI Corea (^KS11)": "^KS11", "SENSEX India (^BSESN)": "^BSESN",
+        "Bovespa Brasil (^BVSP)": "^BVSP", "S&P/TSX Canadá (^GSPTSE)": "^GSPTSE",
+        "ASX 200 Australia (^AXJO)": "^AXJO",
+    },
+    "RV global y regional (ETF)": {
+        "MSCI World — iShares Core EUR (IWDA.AS)": "IWDA.AS",
+        "MSCI World — iShares Core Xetra (EUNL.DE)": "EUNL.DE",
+        "MSCI World — iShares Milán (SWDA.MI)": "SWDA.MI",
+        "MSCI World — iShares USD (URTH)": "URTH",
+        "MSCI ACWI — todo el mundo (ACWI)": "ACWI",
+        "FTSE All-World — Vanguard EUR (VWCE.DE)": "VWCE.DE",
+        "FTSE All-World — Vanguard dist. (VWRL.AS)": "VWRL.AS",
+        "Total World — Vanguard USD (VT)": "VT",
+        "MSCI Emerging Markets (EEM)": "EEM", "Emergentes — iShares Core (IEMG)": "IEMG",
+        "Emergentes — Vanguard (VWO)": "VWO", "Europa — Vanguard FTSE Europe (VGK)": "VGK",
+        "Zona euro — iShares MSCI EMU (EZU)": "EZU", "Pacífico — Vanguard (VPL)": "VPL",
+        "Japón — iShares MSCI Japan (EWJ)": "EWJ", "China — iShares MSCI China (MCHI)": "MCHI",
+        "India — iShares MSCI India (INDA)": "INDA", "Brasil — iShares MSCI Brazil (EWZ)": "EWZ",
+        "Reino Unido (EWU)": "EWU", "Alemania (EWG)": "EWG", "Francia (EWQ)": "EWQ",
+        "España — iShares MSCI Spain (EWP)": "EWP",
+    },
+    "RV EEUU (ETF)": {
+        "S&P 500 — Vanguard (VOO)": "VOO", "S&P 500 — SPDR (SPY)": "SPY",
+        "S&P 500 UCITS — iShares Xetra (SXR8.DE)": "SXR8.DE",
+        "S&P 500 UCITS — Vanguard EUR (VUSA.AS)": "VUSA.AS",
+        "S&P 500 UCITS — iShares Londres (CSPX.L)": "CSPX.L",
+        "Mercado total EEUU — Vanguard (VTI)": "VTI", "Nasdaq 100 — Invesco (QQQ)": "QQQ",
+        "Small caps — iShares Russell 2000 (IWM)": "IWM",
+        "Value — Vanguard (VTV)": "VTV", "Growth — Vanguard (VUG)": "VUG",
+        "Dividendo creciente — Vanguard (VIG)": "VIG", "Dividendos — Schwab (SCHD)": "SCHD",
+    },
+    "Sectores EEUU (ETF)": {
+        "Tecnología (XLK)": "XLK", "Semiconductores (SMH)": "SMH", "Financiero (XLF)": "XLF",
+        "Energía (XLE)": "XLE", "Salud (XLV)": "XLV", "Consumo discrecional (XLY)": "XLY",
+        "Consumo básico (XLP)": "XLP", "Industrial (XLI)": "XLI", "Materiales (XLB)": "XLB",
+        "Utilities (XLU)": "XLU", "Inmobiliario (XLRE)": "XLRE", "Comunicaciones (XLC)": "XLC",
+    },
+    "Renta fija (ETF)": {
+        "Bonos zona euro agregado — iShares (IEAG.AS)": "IEAG.AS",
+        "Bonos EEUU agregado — iShares (AGG)": "AGG", "Bonos EEUU total — Vanguard (BND)": "BND",
+        "Bonos globales ex-US (BNDX)": "BNDX",
+        "Tesoro EEUU 20+ años (TLT)": "TLT", "Tesoro EEUU 7-10 años (IEF)": "IEF",
+        "Tesoro EEUU 1-3 años (SHY)": "SHY", "Corporativo grado inversión (LQD)": "LQD",
+        "High yield EEUU (HYG)": "HYG", "Bonos emergentes USD (EMB)": "EMB",
+        "Bonos ligados a inflación EEUU (TIP)": "TIP",
+    },
+    "Materias primas": {
+        "Oro — futuro (GC=F)": "GC=F", "Oro — SPDR Gold Shares (GLD)": "GLD",
+        "Oro físico UCITS — Invesco EUR (8PSG.DE)": "8PSG.DE", "Oro — iShares (IAU)": "IAU",
+        "Plata — futuro (SI=F)": "SI=F", "Plata — iShares (SLV)": "SLV",
+        "Petróleo WTI — futuro (CL=F)": "CL=F", "Petróleo Brent — futuro (BZ=F)": "BZ=F",
+        "Gas natural — futuro (NG=F)": "NG=F", "Cobre — futuro (HG=F)": "HG=F",
+        "Cesta diversificada — Invesco DB (DBC)": "DBC",
+    },
+    "Criptomonedas": {
+        "Bitcoin (BTC-USD)": "BTC-USD", "Ethereum (ETH-USD)": "ETH-USD",
+        "Solana (SOL-USD)": "SOL-USD", "BNB (BNB-USD)": "BNB-USD",
+        "XRP (XRP-USD)": "XRP-USD", "Cardano (ADA-USD)": "ADA-USD",
+    },
+    "Divisas": {
+        "EUR/USD (EURUSD=X)": "EURUSD=X", "GBP/USD (GBPUSD=X)": "GBPUSD=X",
+        "USD/JPY (USDJPY=X)": "USDJPY=X", "EUR/GBP (EURGBP=X)": "EURGBP=X",
+    },
+    "Inmobiliario": {
+        "REIT EEUU — Vanguard (VNQ)": "VNQ",
+        "REIT global desarrollado — iShares (IWDP.AS)": "IWDP.AS",
+        "Realty Income (O)": "O",
+    },
+    "Acciones EEUU": {
+        "Apple (AAPL)": "AAPL", "Microsoft (MSFT)": "MSFT", "NVIDIA (NVDA)": "NVDA",
+        "Amazon (AMZN)": "AMZN", "Alphabet/Google (GOOGL)": "GOOGL", "Meta (META)": "META",
+        "Tesla (TSLA)": "TSLA", "Berkshire Hathaway (BRK-B)": "BRK-B", "JPMorgan (JPM)": "JPM",
+        "Visa (V)": "V", "Mastercard (MA)": "MA", "Johnson & Johnson (JNJ)": "JNJ",
+        "Walmart (WMT)": "WMT", "Coca-Cola (KO)": "KO", "Procter & Gamble (PG)": "PG",
+        "Exxon Mobil (XOM)": "XOM", "Disney (DIS)": "DIS", "Netflix (NFLX)": "NFLX",
+        "AMD (AMD)": "AMD", "McDonald's (MCD)": "MCD", "Nike (NKE)": "NKE",
+    },
+    "Acciones Europa": {
+        "ASML (ASML.AS)": "ASML.AS", "SAP (SAP.DE)": "SAP.DE", "LVMH (MC.PA)": "MC.PA",
+        "L'Oréal (OR.PA)": "OR.PA", "TotalEnergies (TTE.PA)": "TTE.PA",
+        "Siemens (SIE.DE)": "SIE.DE", "Allianz (ALV.DE)": "ALV.DE", "Airbus (AIR.PA)": "AIR.PA",
+        "Nestlé (NESN.SW)": "NESN.SW", "Novartis (NOVN.SW)": "NOVN.SW", "Roche (ROG.SW)": "ROG.SW",
+        "Novo Nordisk (NOVO-B.CO)": "NOVO-B.CO", "Shell (SHELL.AS)": "SHELL.AS",
+        "AstraZeneca (AZN.L)": "AZN.L", "HSBC (HSBA.L)": "HSBA.L", "Unilever (ULVR.L)": "ULVR.L",
+    },
+    "Acciones España": {
+        "Inditex (ITX.MC)": "ITX.MC", "Banco Santander (SAN.MC)": "SAN.MC",
+        "BBVA (BBVA.MC)": "BBVA.MC", "Iberdrola (IBE.MC)": "IBE.MC", "Repsol (REP.MC)": "REP.MC",
+        "Telefónica (TEF.MC)": "TEF.MC", "Amadeus (AMS.MC)": "AMS.MC", "Ferrovial (FER.MC)": "FER.MC",
+        "ACS (ACS.MC)": "ACS.MC", "CaixaBank (CABK.MC)": "CABK.MC", "Aena (AENA.MC)": "AENA.MC",
+        "Endesa (ELE.MC)": "ELE.MC", "Mapfre (MAP.MC)": "MAP.MC", "Grifols (GRF.MC)": "GRF.MC",
+    },
 }
+
+# Catálogo plano: "Categoría · Nombre (TICKER)" -> ticker
+CATALOGO = {f"{cat} · {nombre}": tk
+            for cat, activos in _CATEGORIAS.items()
+            for nombre, tk in activos.items()}
 
 # ============================================================================
 # CAPA DE DATOS MULTI-FUENTE
@@ -307,10 +395,13 @@ st.sidebar.markdown(f"<h2 style='color:{AZUL};margin-bottom:0'>Configuración</h
 
 st.sidebar.markdown("**1 · Activos de la cartera**")
 seleccion_catalogo = st.sidebar.multiselect(
-    "Elige del catálogo",
+    "Elige del catálogo (más de 140 activos; escribe para filtrar)",
     options=list(CATALOGO.keys()),
-    default=["S&P 500 — índice", "Bonos zona euro — iShares Core Aggregate (EUR)", "Oro — futuro COMEX"],
-    help="Activos verificados con su símbolo ya resuelto. Puedes añadir otros abajo.",
+    default=["Índices bursátiles · S&P 500 (^GSPC)",
+             "Renta fija (ETF) · Bonos zona euro agregado — iShares (IEAG.AS)",
+             "Materias primas · Oro — futuro (GC=F)"],
+    help="Índices, ETFs (MSCI World, sectores, renta fija), materias primas, cripto, divisas y "
+         "acciones de EEUU, Europa y España, con el símbolo ya resuelto. Puedes añadir otros abajo.",
 )
 tickers_extra = st.sidebar.text_input(
     "Otros símbolos (separados por comas)", value="",
@@ -403,15 +494,11 @@ if ejecutar:
     retornos_df = np.log(precios_hist / precios_hist.shift(1)).dropna()
     n_act = len(tickers)
 
-    # --- Salvaguarda de memoria (el servidor gratuito tiene ~1 GB de RAM) ---
-    mem_estimada_mb = M * (int(T * 252) + 1) * n_act * 4 / 1e6
-    limite = 320 if motor != "Merton con saltos (principal)" else 450
-    if mem_estimada_mb > limite:
-        st.error(
-            f"Esta combinación ({M:,} escenarios × {T} años × {n_act} activos) excede la memoria "
-            "del servidor. Reduzca el número de escenarios o el horizonte.".replace(",", ".")
-        )
-        st.stop()
+    # La simulación es en streaming (dos pasadas): la memoria no depende del
+    # número de escenarios. Solo avisamos si el cálculo va a tardar.
+    if M * int(T * 252) > 60_000_000:
+        st.info("Cálculo grande: puede tardar 1-3 minutos. Procesamos por pasadas "
+                "para que el servidor no agote la memoria.")
 
     # --- Calibración Merton (también se muestra como información del activo) ---
     parametros = [calibrar(retornos_df[tk].values, n_sigmas) for tk in tickers]
@@ -423,26 +510,68 @@ if ejecutar:
     except np.linalg.LinAlgError:
         L = np.linalg.cholesky(corr + 1e-8 * np.eye(n_act))
 
-    # --- Simulación según el motor elegido ---
+    # --- Simulación en STREAMING (dos pasadas, misma semilla) ---
+    # Nunca se almacena el cubo (M, N+1, n_act): cada motor produce los
+    # retornos diarios paso a paso y se agregan al vuelo. Así 10.000
+    # escenarios caben de sobra en el servidor gratuito de 1 GB.
+    N = int(T * 252)
+    dt = 1 / 252
     phi = 0.5 if saltos_comunes else 0.0
-    with st.spinner(f"Generando {M:,} escenarios de {T} años…".replace(",", ".")):
+    S0 = 100.0
+
+    def pasos_merton(M_, seed_):
+        """Genera, paso a paso, los retornos log diarios (M_, n_act) del motor Merton."""
+        np.random.seed(seed_)
+        drift = ((mu_v - 0.5 * sigma_v**2) * dt).astype(np.float32)
+        vol = (sigma_v * np.sqrt(dt)).astype(np.float32)
+        lam_sys = phi * lam_v.min()
+        lam_idio = lam_v - lam_sys
+        for _ in range(N):
+            Z = np.random.randn(M_, n_act) @ L.T
+            if lam_sys > 0:
+                n_j = (np.random.poisson(lam_idio * dt, size=(M_, n_act))
+                       + np.random.poisson(lam_sys * dt, size=(M_, 1)))
+            else:
+                n_j = np.random.poisson(lam_v * dt, size=(M_, n_act))
+            Zj = np.random.randn(M_, n_act)
+            yield (drift + vol * Z + n_j * mu_J_v + np.sqrt(n_j) * sigma_J_v * Zj).astype(np.float32)
+
+    R_hist = retornos_df.values.astype(np.float32)
+    BLOQUE_BOOT = 21                                # bloques de ~1 mes de días reales
+
+    def pasos_bootstrap(M_, seed_):
+        """Genera retornos remuestreando bloques mensuales de la historia conjunta."""
+        np.random.seed(seed_)
+        D = len(R_hist)
+        n_bloques = N // BLOQUE_BOOT + 1
+        inicios = np.random.randint(0, D - BLOQUE_BOOT + 1, size=(M_, n_bloques))
+        for t in range(N):
+            idx = inicios[:, t // BLOQUE_BOOT] + (t % BLOQUE_BOOT)
+            yield R_hist[idx]
+
+    def motores():
+        """(generador, nº escenarios, semilla) según el motor elegido."""
         if motor == "Merton con saltos (principal)":
-            precio = simular_merton(mu_v, sigma_v, lam_v, mu_J_v, sigma_J_v, L,
-                                    T=T, M=M, seed=int(seed), phi_comun=phi)
-        elif motor == "Bootstrap histórico":
-            precio = simular_bootstrap(retornos_df.values, T=T, M=M, seed=int(seed))
-        else:                                       # Ensemble 50/50
-            M1 = M - M // 2
-            p1 = simular_merton(mu_v, sigma_v, lam_v, mu_J_v, sigma_J_v, L,
-                                T=T, M=M1, seed=int(seed), phi_comun=phi)
-            p2 = simular_bootstrap(retornos_df.values, T=T, M=M // 2, seed=int(seed) + 1)
-            precio = np.concatenate([p1, p2], axis=0)
-            del p1, p2
+            return [(pasos_merton, M, int(seed))]
+        if motor == "Bootstrap histórico":
+            return [(pasos_bootstrap, M, int(seed))]
+        M1 = M - M // 2                             # Ensemble 50/50
+        return [(pasos_merton, M1, int(seed)), (pasos_bootstrap, M // 2, int(seed) + 1)]
+
+    # PASADA 1: solo el valor final de cada activo en cada escenario
+    with st.spinner(f"Pasada 1 de 2: generando {M:,} escenarios de {T} años…".replace(",", ".")):
+        partes_finales = []
+        for gen, M_, sd in motores():
+            log_acum = np.zeros((M_, n_act), dtype=np.float32)
+            for r_t in gen(M_, sd):
+                log_acum += r_t
+            partes_finales.append(S0 * np.exp(log_acum))
+        precio_final = np.concatenate(partes_finales, axis=0)
+        del partes_finales, log_acum
 
     # --- Optimización de cartera por muestreo Dirichlet, evaluada por bloques ---
     n_carteras = 10000
     pesos = np.random.dirichlet(np.ones(n_act), size=n_carteras)
-    precio_final = precio[:, -1, :]
     vol_cart = np.empty(n_carteras)
     ret_cart = np.empty(n_carteras)
     BLOQUE = 500
@@ -456,46 +585,79 @@ if ejecutar:
     valor_ms = (precio_final @ pesos[idx_ms].astype(np.float32)).astype(np.float64)
     valor_mv = (precio_final @ pesos[idx_mv].astype(np.float32)).astype(np.float64)
 
-    # --- Plan de aportaciones (DCA) con la cartera de mejor equilibrio ---
+    # --- PASADA 2: mismos escenarios (misma semilla), agregando al vuelo ---
+    # Se recorren otra vez los retornos y se calculan, sin matrices gigantes:
+    # plan DCA, drawdowns de ambas carteras, crecimiento lump-sum y los
+    # retornos del primer año para la validación.
     dias_por_mes = 21
-    N = precio.shape[1] - 1
-    w_opt = pesos[idx_ms].astype(np.float32)
-    valor_cartera = precio @ w_opt
     fechas_aporte = np.arange(dias_por_mes, N + 1, dias_por_mes)
     n_aportes = len(fechas_aporte)
     total_aportado = aporte_inicial + n_aportes * aporte_mensual
     if total_aportado <= 0:
         st.error("Introduzca una aportación inicial o mensual mayor que cero.")
         st.stop()
-
-    W = np.zeros((M, N + 1), dtype=np.float32)
-    W[:, 0] = aporte_inicial * (1 - comision_aporte)
-    aporte_neto_mes = aporte_mensual * (1 - comision_aporte)
     fechas_set = set(fechas_aporte.tolist())
-    for t_ in range(1, N + 1):
-        W[:, t_] = W[:, t_ - 1] * (valor_cartera[:, t_] / valor_cartera[:, t_ - 1])
-        if t_ in fechas_set:
-            W[:, t_] += aporte_neto_mes
+    aporte_neto_mes = aporte_mensual * (1 - comision_aporte)
+    w_ms32 = pesos[idx_ms].astype(np.float32)
+    w_mv32 = pesos[idx_mv].astype(np.float32)
+    salto_paths = max(1, M // 200)                  # ~200 trayectorias para el gráfico
 
-    W_nominal = W[:, -1].astype(np.float64)
+    acum = {k: [] for k in ("dd_ms", "dd_mv", "W_fin", "W_paths", "ret1d", "ls_crec")}
+    with st.spinner("Pasada 2 de 2: evaluando su plan de inversión…"):
+        for gen, M_, sd in motores():
+            P = np.full((M_, n_act), S0, dtype=np.float32)
+            V = P @ w_ms32                          # valor cartera mejor equilibrio
+            V0, V_prev = V.copy(), V.copy()
+            Vmv = P @ w_mv32
+            cmax_ms, dd_ms_p = V.copy(), np.zeros(M_, np.float32)
+            cmax_mv, dd_mv_p = Vmv.copy(), np.zeros(M_, np.float32)
+            Wp = np.full(M_, aporte_inicial * (1 - comision_aporte), dtype=np.float32)
+            idx_paths = np.arange(0, M_, salto_paths)
+            W_path = np.empty((len(idx_paths), N + 1), dtype=np.float32)
+            W_path[:, 0] = Wp[idx_paths]
+            ret1d = []
+            for t, r_t in enumerate(gen(M_, sd), start=1):
+                if t <= 252:
+                    ret1d.append(r_t[:, 0].copy())  # validación: 1er año, 1er activo
+                P *= np.exp(r_t)
+                V = P @ w_ms32
+                Wp *= V / V_prev                    # el patrimonio crece con la cartera
+                if t in fechas_set:
+                    Wp += aporte_neto_mes           # ...y recibe el aporte mensual
+                np.maximum(cmax_ms, V, out=cmax_ms)
+                np.maximum(dd_ms_p, 1.0 - V / cmax_ms, out=dd_ms_p)
+                Vmv = P @ w_mv32
+                np.maximum(cmax_mv, Vmv, out=cmax_mv)
+                np.maximum(dd_mv_p, 1.0 - Vmv / cmax_mv, out=dd_mv_p)
+                V_prev = V
+                W_path[:, t] = Wp[idx_paths]
+            acum["dd_ms"].append(dd_ms_p)
+            acum["dd_mv"].append(dd_mv_p)
+            acum["W_fin"].append(Wp.astype(np.float64))
+            acum["W_paths"].append(W_path)
+            acum["ret1d"].append(np.concatenate(ret1d))
+            acum["ls_crec"].append((V / V0).astype(np.float64))
+
+    dd_ms = np.concatenate(acum["dd_ms"])
+    dd_mv = np.concatenate(acum["dd_mv"])
+    W_nominal = np.concatenate(acum["W_fin"])
+    W_paths_arr = np.concatenate(acum["W_paths"], axis=0).astype(np.float64)
+    ret_sim_1d = np.concatenate(acum["ret1d"])
+    ls_crec = np.concatenate(acum["ls_crec"])
+    del acum
+
     impuesto = np.maximum(0, W_nominal - total_aportado) * tipo_impositivo
     W_real = (W_nominal - impuesto) / (1 + inflacion_anual) ** T
 
-    # --- Alternativa lump-sum (mismo dinero, todo el día 0) ---
-    ls_nominal = (total_aportado * (1 - comision_aporte) * valor_cartera[:, -1] / valor_cartera[:, 0]).astype(np.float64)
+    # Alternativa lump-sum: el mismo capital total invertido íntegro el día 0
+    ls_nominal = total_aportado * (1 - comision_aporte) * ls_crec
     ls_real = (ls_nominal - np.maximum(0, ls_nominal - total_aportado) * tipo_impositivo) / (1 + inflacion_anual) ** T
 
-    # --- Validación: retornos diarios simulados vs históricos (1er activo) ---
-    ret_sim_1d = np.log(precio[:, 1:min(253, N + 1), 0] / precio[:, 0:min(252, N), 0]).flatten()
-
-    # --- Riesgo ---
+    # --- Riesgo sobre el valor final (de la pasada 1) ---
     riesgo_ms = metricas_riesgo(valor_ms)
     riesgo_mv = metricas_riesgo(valor_mv)
-    dd_ms = max_drawdown(valor_cartera)
-    traj_mv = precio @ pesos[idx_mv].astype(np.float32)
-    dd_mv = max_drawdown(traj_mv)
 
-    del precio, precio_final, traj_mv               # liberar memoria del servidor
+    del precio_final                                # liberar memoria del servidor
 
     st.session_state["resultados"] = dict(
         tickers=tickers, fuentes=fuentes, motor=motor, parametros=parametros,
@@ -505,12 +667,19 @@ if ejecutar:
         vol_cart=vol_cart, ret_cart=ret_cart, sharpes=sharpes, idx_ms=idx_ms, idx_mv=idx_mv,
         valor_ms=valor_ms, valor_mv=valor_mv,
         riesgo_ms=riesgo_ms, riesgo_mv=riesgo_mv, dd_ms=dd_ms, dd_mv=dd_mv,
-        W_paths=W[::max(1, M // 200)].astype(np.float64), W_real=W_real, ls_real=ls_real,
+        W_paths=W_paths_arr, W_real=W_real, ls_real=ls_real,
         total_aportado=total_aportado, T=T, RF=RF, n_aportes=n_aportes,
         fechas_aporte=fechas_aporte, aporte_inicial=aporte_inicial, aporte_mensual=aporte_mensual,
         rango_datos=(precios_hist.index[0].date(), precios_hist.index[-1].date()),
         n_dias=len(precios_hist), saltos_comunes=saltos_comunes,
     )
+
+    # Liberar todo lo grande que queda y compactar memoria antes de pintar:
+    # en un servidor de 1 GB esto evita el cierre silencioso de la app.
+    import gc
+    del W_nominal, W_real, ls_nominal, ls_real, ls_crec, impuesto, W_paths_arr
+    plt.close("all")
+    gc.collect()
 
 r = st.session_state["resultados"]
 tickers, T = r["tickers"], r["T"]
@@ -580,6 +749,7 @@ with tab_cartera:
     ax.set_xlabel("Riesgo (volatilidad anual)"); ax.set_ylabel("Rentabilidad anual esperada (log)")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)
     st.pyplot(fig, width="stretch")
+    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
 
     col_a, col_b = st.columns(2)
     with col_a:
@@ -638,6 +808,7 @@ with tab_riesgo:
         ax.set_title(f"{titulo}: valor final de 100 € a {T} años")
         ax.set_xlabel("€ finales"); ax.legend(fontsize=8)
     st.pyplot(fig, width="stretch")
+    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
     st.caption("Cada barra cuenta cuántos escenarios terminan en ese rango. A la izquierda de la línea dorada, pérdidas; "
                "a la derecha, ganancias.")
 
@@ -673,6 +844,7 @@ with tab_plan:
     ax.set_title("Evolución del patrimonio (100 escenarios de ejemplo)")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)
     st.pyplot(fig, width="stretch")
+    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
     st.caption("La línea dorada es el dinero aportado. Cuando la nube azul discurre por encima, el plan va en ganancias.")
 
     st.markdown("#### Aportación única frente a aportaciones mensuales")
@@ -685,6 +857,7 @@ with tab_plan:
         ax.axvline(np.median(datos), color="black", lw=2, label=f"Típico: {formato_euro(np.median(datos))}")
         ax.set_title(titulo); ax.set_xlabel("Patrimonio final (€ de hoy)"); ax.legend(fontsize=8)
     st.pyplot(fig, width="stretch")
+    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
     st.markdown(
         f"- **Aportación única**: resultado típico {formato_euro(np.median(r['ls_real']))}; "
         f"probabilidad de terminar con menos: {np.mean(r['ls_real'] < r['total_aportado']):.1%}.\n"
@@ -711,6 +884,7 @@ with tab_valida:
     ax.set_xlabel("Movimiento diario (retorno log)"); ax.set_ylabel("Frecuencia (escala log)")
     ax.legend(); ax.grid(alpha=0.3)
     st.pyplot(fig, width="stretch")
+    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
 
     def momentos(x):
         m, s = np.mean(x), np.std(x)
