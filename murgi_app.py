@@ -219,7 +219,7 @@ def _descarga_stooq(ticker, start, end):
     return None
 
 
-@st.cache_data(show_spinner=False, ttl=3600)
+@st.cache_data(show_spinner=False, ttl=86400)   # caché de 24 h: minimiza el rate-limit de Yahoo
 def descargar_precios(tickers, start, end):
     """Descarga cada activo probando Yahoo y después Stooq.
     Devuelve (tabla de precios en días comunes, dict ticker→fuente usada)."""
@@ -393,21 +393,7 @@ def formato_euro(x):
 
 st.sidebar.markdown(f"<h2 style='color:{AZUL};margin-bottom:0'>Configuración</h2>", unsafe_allow_html=True)
 
-st.sidebar.markdown("**1 · Activos de la cartera**")
-seleccion_catalogo = st.sidebar.multiselect(
-    "Elige del catálogo (más de 140 activos; escribe para filtrar)",
-    options=list(CATALOGO.keys()),
-    default=["Índices bursátiles · S&P 500 (^GSPC)",
-             "Renta fija (ETF) · Bonos zona euro agregado — iShares (IEAG.AS)",
-             "Materias primas · Oro — futuro (GC=F)"],
-    help="Índices, ETFs (MSCI World, sectores, renta fija), materias primas, cripto, divisas y "
-         "acciones de EEUU, Europa y España, con el símbolo ya resuelto. Puedes añadir otros abajo.",
-)
-tickers_extra = st.sidebar.text_input(
-    "Otros símbolos (separados por comas)", value="",
-    help="Cualquier símbolo de Yahoo Finance o Stooq, por ejemplo AAPL, VUSA.AS, SWDA.MI",
-)
-
+# El buscador queda FUERA del formulario porque necesita reaccionar al teclear.
 with st.sidebar.expander("¿No encuentras un activo? Búscalo por nombre"):
     consulta = st.text_input("Nombre del fondo, ETF o índice", placeholder="ej.: msci world acumulación")
     if consulta:
@@ -420,41 +406,62 @@ with st.sidebar.expander("¿No encuentras un activo? Búscalo por nombre"):
             st.warning("Sin resultados desde esta red. Busca el símbolo en finance.yahoo.com, "
                        "stooq.com o justetf.com (con el ISIN del fondo) y pégalo en 'Otros símbolos'.")
 
-st.sidebar.markdown("**2 · Periodo histórico de aprendizaje**")
-c1, c2 = st.sidebar.columns(2)
-fecha_inicio = c1.date_input("Desde", value=pd.Timestamp("1990-01-01"), min_value=pd.Timestamp("1950-01-01"))
-fecha_fin = c2.date_input("Hasta", value=pd.Timestamp.today())
-
-st.sidebar.markdown("**3 · Plan de inversión**")
-T = st.sidebar.slider("Años de horizonte", 1, 40, 20)
-aporte_inicial = st.sidebar.number_input("Aportación inicial (€)", min_value=0, value=600, step=100)
-aporte_mensual = st.sidebar.number_input("Aportación mensual (€)", min_value=0, value=300, step=50)
-
-with st.sidebar.expander("4 · Costes, impuestos e inflación"):
-    comision_aporte = st.number_input("Comisión por aporte (%)", 0.0, 5.0, 0.1, 0.05) / 100
-    tipo_impositivo = st.number_input("Impuesto sobre la ganancia (%)", 0.0, 60.0, 21.0, 1.0) / 100
-    inflacion_anual = st.number_input("Inflación anual estimada (%)", 0.0, 15.0, 2.0, 0.5) / 100
-
-with st.sidebar.expander("5 · Motor de simulación y ajustes"):
-    motor = st.radio(
-        "Motor",
-        ["Merton con saltos (principal)", "Bootstrap histórico", "Ensemble (Merton + Bootstrap)"],
-        help="Merton: modelo paramétrico con desplomes súbitos (reproduce el estudio de referencia). "
-             "Bootstrap: remuestrea meses reales de la historia, crisis incluidas. "
-             "Ensemble: mitad de escenarios con cada motor; reduce la dependencia de un único modelo.",
+# TODO el panel va dentro de un FORMULARIO: cambiar el motor, los años o
+# cualquier otro control NO relanza la app (y por tanto no puede tirarla);
+# solo el botón 'Ejecutar simulación' aplica los cambios de una vez.
+with st.sidebar.form("configuracion", border=False):
+    st.markdown("**1 · Activos de la cartera**")
+    seleccion_catalogo = st.multiselect(
+        "Elige del catálogo (más de 140 activos; escribe para filtrar)",
+        options=list(CATALOGO.keys()),
+        default=["Índices bursátiles · S&P 500 (^GSPC)",
+                 "Renta fija (ETF) · Bonos zona euro agregado — iShares (IEAG.AS)",
+                 "Materias primas · Oro — futuro (GC=F)"],
+        help="Índices, ETFs (MSCI World, sectores, renta fija), materias primas, cripto, divisas y "
+             "acciones de EEUU, Europa y España, con el símbolo ya resuelto. Puedes añadir otros abajo.",
     )
-    M = st.select_slider("Número de escenarios", options=[1000, 2000, 3000, 5000, 10000], value=3000)
-    n_sigmas = st.slider("Umbral de detección de crisis (σ)", 2.0, 4.0, 3.0, 0.5)
-    rf_pct = st.number_input("Tipo de interés sin riesgo (%)", 0.0, 10.0, 2.193, 0.1)
-    seed = st.number_input("Semilla aleatoria", 0, 99999, 42)
-    saltos_comunes = st.checkbox(
-        "Escenario prudente: crisis simultáneas entre activos", value=False,
-        help="Sólo afecta al motor Merton. El bootstrap ya recoge crisis conjuntas por construcción.",
+    tickers_extra = st.text_input(
+        "Otros símbolos (separados por comas)", value="",
+        help="Cualquier símbolo de Yahoo Finance o Stooq, por ejemplo AAPL, VUSA.AS, SWDA.MI",
     )
+
+    st.markdown("**2 · Periodo histórico de aprendizaje**")
+    c1, c2 = st.columns(2)
+    fecha_inicio = c1.date_input("Desde", value=pd.Timestamp("1990-01-01"), min_value=pd.Timestamp("1950-01-01"))
+    fecha_fin = c2.date_input("Hasta", value=pd.Timestamp.today())
+
+    st.markdown("**3 · Plan de inversión**")
+    T = st.slider("Años de horizonte", 1, 40, 20)
+    aporte_inicial = st.number_input("Aportación inicial (€)", min_value=0, value=600, step=100)
+    aporte_mensual = st.number_input("Aportación mensual (€)", min_value=0, value=300, step=50)
+
+    with st.expander("4 · Costes, impuestos e inflación"):
+        comision_aporte = st.number_input("Comisión por aporte (%)", 0.0, 5.0, 0.1, 0.05) / 100
+        tipo_impositivo = st.number_input("Impuesto sobre la ganancia (%)", 0.0, 60.0, 21.0, 1.0) / 100
+        inflacion_anual = st.number_input("Inflación anual estimada (%)", 0.0, 15.0, 2.0, 0.5) / 100
+
+    with st.expander("5 · Motor de simulación y ajustes"):
+        motor = st.radio(
+            "Motor",
+            ["Merton con saltos (principal)", "Bootstrap histórico", "Ensemble (Merton + Bootstrap)"],
+            help="Merton: modelo paramétrico con desplomes súbitos (reproduce el estudio de referencia). "
+                 "Bootstrap: remuestrea meses reales de la historia, crisis incluidas. "
+                 "Ensemble: mitad de escenarios con cada motor; reduce la dependencia de un único modelo.",
+        )
+        M = st.select_slider("Número de escenarios", options=[1000, 2000, 3000, 5000, 10000], value=3000)
+        n_sigmas = st.slider("Umbral de detección de crisis (σ)", 2.0, 4.0, 3.0, 0.5)
+        rf_pct = st.number_input("Tipo de interés sin riesgo (%)", 0.0, 10.0, 2.193, 0.1)
+        seed = st.number_input("Semilla aleatoria", 0, 99999, 42)
+        saltos_comunes = st.checkbox(
+            "Escenario prudente: crisis simultáneas entre activos", value=False,
+            help="Sólo afecta al motor Merton. El bootstrap ya recoge crisis conjuntas por construcción.",
+        )
+
+    ejecutar = st.form_submit_button("Ejecutar simulación", type="primary")
 
 RF = np.log(1 + rf_pct / 100)
-ejecutar = st.sidebar.button("Ejecutar simulación", type="primary", width="stretch")
-st.sidebar.caption("Herramienta educativa de MurgiCapital. No constituye asesoramiento financiero.")
+st.sidebar.caption("Los cambios del panel se aplican al pulsar 'Ejecutar simulación'. "
+                   "Herramienta educativa de MurgiCapital. No constituye asesoramiento financiero.")
 
 # ============================================================================
 # CABECERA
@@ -935,6 +942,6 @@ no constituyen asesoramiento financiero. La fiscalidad depende de la situación 
 
 st.markdown(
     f"<div class='murgi-footer'>© 2026 MurgiCapital · Herramienta educativa · "
-    "Las rentabilidades pasadas no garantizan rentabilidades futuras</div>",
+    "Las rentabilidades pasadas no garantizan rentabilidades futuras · v4-form</div>",
     unsafe_allow_html=True,
 )
