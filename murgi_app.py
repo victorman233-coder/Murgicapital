@@ -18,11 +18,14 @@ Versión 2. Novedades respecto a la v1:
 El archivo app.py es solo el punto de entrada; todo el código vive aquí.
 """
 
+import gc
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import streamlit as st
+import matplotlib
+matplotlib.use("Agg")            # backend headless: sin GUI, memoria predecible en el servidor
 import matplotlib.pyplot as plt
 import yfinance as yf
 
@@ -68,113 +71,25 @@ if LOGO_PATH.exists():
 # CATÁLOGO DE ACTIVOS — los más demandados, con su ticker ya resuelto
 # ============================================================================
 
-# Organizado por categorías; la etiqueta incluye el símbolo para total transparencia.
-_CATEGORIAS = {
-    "Índices bursátiles": {
-        "S&P 500 (^GSPC)": "^GSPC", "Nasdaq 100 (^NDX)": "^NDX", "Dow Jones (^DJI)": "^DJI",
-        "Russell 2000 — small caps EEUU (^RUT)": "^RUT", "EuroStoxx 50 (^STOXX50E)": "^STOXX50E",
-        "DAX 40 Alemania (^GDAXI)": "^GDAXI", "CAC 40 Francia (^FCHI)": "^FCHI",
-        "FTSE 100 Reino Unido (^FTSE)": "^FTSE", "IBEX 35 España (^IBEX)": "^IBEX",
-        "AEX Países Bajos (^AEX)": "^AEX", "SMI Suiza (^SSMI)": "^SSMI",
-        "Nikkei 225 Japón (^N225)": "^N225", "Hang Seng Hong Kong (^HSI)": "^HSI",
-        "KOSPI Corea (^KS11)": "^KS11", "SENSEX India (^BSESN)": "^BSESN",
-        "Bovespa Brasil (^BVSP)": "^BVSP", "S&P/TSX Canadá (^GSPTSE)": "^GSPTSE",
-        "ASX 200 Australia (^AXJO)": "^AXJO",
-    },
-    "RV global y regional (ETF)": {
-        "MSCI World — iShares Core EUR (IWDA.AS)": "IWDA.AS",
-        "MSCI World — iShares Core Xetra (EUNL.DE)": "EUNL.DE",
-        "MSCI World — iShares Milán (SWDA.MI)": "SWDA.MI",
-        "MSCI World — iShares USD (URTH)": "URTH",
-        "MSCI ACWI — todo el mundo (ACWI)": "ACWI",
-        "FTSE All-World — Vanguard EUR (VWCE.DE)": "VWCE.DE",
-        "FTSE All-World — Vanguard dist. (VWRL.AS)": "VWRL.AS",
-        "Total World — Vanguard USD (VT)": "VT",
-        "MSCI Emerging Markets (EEM)": "EEM", "Emergentes — iShares Core (IEMG)": "IEMG",
-        "Emergentes — Vanguard (VWO)": "VWO", "Europa — Vanguard FTSE Europe (VGK)": "VGK",
-        "Zona euro — iShares MSCI EMU (EZU)": "EZU", "Pacífico — Vanguard (VPL)": "VPL",
-        "Japón — iShares MSCI Japan (EWJ)": "EWJ", "China — iShares MSCI China (MCHI)": "MCHI",
-        "India — iShares MSCI India (INDA)": "INDA", "Brasil — iShares MSCI Brazil (EWZ)": "EWZ",
-        "Reino Unido (EWU)": "EWU", "Alemania (EWG)": "EWG", "Francia (EWQ)": "EWQ",
-        "España — iShares MSCI Spain (EWP)": "EWP",
-    },
-    "RV EEUU (ETF)": {
-        "S&P 500 — Vanguard (VOO)": "VOO", "S&P 500 — SPDR (SPY)": "SPY",
-        "S&P 500 UCITS — iShares Xetra (SXR8.DE)": "SXR8.DE",
-        "S&P 500 UCITS — Vanguard EUR (VUSA.AS)": "VUSA.AS",
-        "S&P 500 UCITS — iShares Londres (CSPX.L)": "CSPX.L",
-        "Mercado total EEUU — Vanguard (VTI)": "VTI", "Nasdaq 100 — Invesco (QQQ)": "QQQ",
-        "Small caps — iShares Russell 2000 (IWM)": "IWM",
-        "Value — Vanguard (VTV)": "VTV", "Growth — Vanguard (VUG)": "VUG",
-        "Dividendo creciente — Vanguard (VIG)": "VIG", "Dividendos — Schwab (SCHD)": "SCHD",
-    },
-    "Sectores EEUU (ETF)": {
-        "Tecnología (XLK)": "XLK", "Semiconductores (SMH)": "SMH", "Financiero (XLF)": "XLF",
-        "Energía (XLE)": "XLE", "Salud (XLV)": "XLV", "Consumo discrecional (XLY)": "XLY",
-        "Consumo básico (XLP)": "XLP", "Industrial (XLI)": "XLI", "Materiales (XLB)": "XLB",
-        "Utilities (XLU)": "XLU", "Inmobiliario (XLRE)": "XLRE", "Comunicaciones (XLC)": "XLC",
-    },
-    "Renta fija (ETF)": {
-        "Bonos zona euro agregado — iShares (IEAG.AS)": "IEAG.AS",
-        "Bonos EEUU agregado — iShares (AGG)": "AGG", "Bonos EEUU total — Vanguard (BND)": "BND",
-        "Bonos globales ex-US (BNDX)": "BNDX",
-        "Tesoro EEUU 20+ años (TLT)": "TLT", "Tesoro EEUU 7-10 años (IEF)": "IEF",
-        "Tesoro EEUU 1-3 años (SHY)": "SHY", "Corporativo grado inversión (LQD)": "LQD",
-        "High yield EEUU (HYG)": "HYG", "Bonos emergentes USD (EMB)": "EMB",
-        "Bonos ligados a inflación EEUU (TIP)": "TIP",
-    },
-    "Materias primas": {
-        "Oro — futuro (GC=F)": "GC=F", "Oro — SPDR Gold Shares (GLD)": "GLD",
-        "Oro físico UCITS — Invesco EUR (8PSG.DE)": "8PSG.DE", "Oro — iShares (IAU)": "IAU",
-        "Plata — futuro (SI=F)": "SI=F", "Plata — iShares (SLV)": "SLV",
-        "Petróleo WTI — futuro (CL=F)": "CL=F", "Petróleo Brent — futuro (BZ=F)": "BZ=F",
-        "Gas natural — futuro (NG=F)": "NG=F", "Cobre — futuro (HG=F)": "HG=F",
-        "Cesta diversificada — Invesco DB (DBC)": "DBC",
-    },
-    "Criptomonedas": {
-        "Bitcoin (BTC-USD)": "BTC-USD", "Ethereum (ETH-USD)": "ETH-USD",
-        "Solana (SOL-USD)": "SOL-USD", "BNB (BNB-USD)": "BNB-USD",
-        "XRP (XRP-USD)": "XRP-USD", "Cardano (ADA-USD)": "ADA-USD",
-    },
-    "Divisas": {
-        "EUR/USD (EURUSD=X)": "EURUSD=X", "GBP/USD (GBPUSD=X)": "GBPUSD=X",
-        "USD/JPY (USDJPY=X)": "USDJPY=X", "EUR/GBP (EURGBP=X)": "EURGBP=X",
-    },
-    "Inmobiliario": {
-        "REIT EEUU — Vanguard (VNQ)": "VNQ",
-        "REIT global desarrollado — iShares (IWDP.AS)": "IWDP.AS",
-        "Realty Income (O)": "O",
-    },
-    "Acciones EEUU": {
-        "Apple (AAPL)": "AAPL", "Microsoft (MSFT)": "MSFT", "NVIDIA (NVDA)": "NVDA",
-        "Amazon (AMZN)": "AMZN", "Alphabet/Google (GOOGL)": "GOOGL", "Meta (META)": "META",
-        "Tesla (TSLA)": "TSLA", "Berkshire Hathaway (BRK-B)": "BRK-B", "JPMorgan (JPM)": "JPM",
-        "Visa (V)": "V", "Mastercard (MA)": "MA", "Johnson & Johnson (JNJ)": "JNJ",
-        "Walmart (WMT)": "WMT", "Coca-Cola (KO)": "KO", "Procter & Gamble (PG)": "PG",
-        "Exxon Mobil (XOM)": "XOM", "Disney (DIS)": "DIS", "Netflix (NFLX)": "NFLX",
-        "AMD (AMD)": "AMD", "McDonald's (MCD)": "MCD", "Nike (NKE)": "NKE",
-    },
-    "Acciones Europa": {
-        "ASML (ASML.AS)": "ASML.AS", "SAP (SAP.DE)": "SAP.DE", "LVMH (MC.PA)": "MC.PA",
-        "L'Oréal (OR.PA)": "OR.PA", "TotalEnergies (TTE.PA)": "TTE.PA",
-        "Siemens (SIE.DE)": "SIE.DE", "Allianz (ALV.DE)": "ALV.DE", "Airbus (AIR.PA)": "AIR.PA",
-        "Nestlé (NESN.SW)": "NESN.SW", "Novartis (NOVN.SW)": "NOVN.SW", "Roche (ROG.SW)": "ROG.SW",
-        "Novo Nordisk (NOVO-B.CO)": "NOVO-B.CO", "Shell (SHELL.AS)": "SHELL.AS",
-        "AstraZeneca (AZN.L)": "AZN.L", "HSBC (HSBA.L)": "HSBA.L", "Unilever (ULVR.L)": "ULVR.L",
-    },
-    "Acciones España": {
-        "Inditex (ITX.MC)": "ITX.MC", "Banco Santander (SAN.MC)": "SAN.MC",
-        "BBVA (BBVA.MC)": "BBVA.MC", "Iberdrola (IBE.MC)": "IBE.MC", "Repsol (REP.MC)": "REP.MC",
-        "Telefónica (TEF.MC)": "TEF.MC", "Amadeus (AMS.MC)": "AMS.MC", "Ferrovial (FER.MC)": "FER.MC",
-        "ACS (ACS.MC)": "ACS.MC", "CaixaBank (CABK.MC)": "CABK.MC", "Aena (AENA.MC)": "AENA.MC",
-        "Endesa (ELE.MC)": "ELE.MC", "Mapfre (MAP.MC)": "MAP.MC", "Grifols (GRF.MC)": "GRF.MC",
-    },
+CATALOGO = {
+    "MSCI World — iShares Core (EUR, Ámsterdam)":      "IWDA.AS",
+    "MSCI World — iShares Core (EUR, Xetra)":          "EUNL.DE",
+    "MSCI World — iShares (USD, NY)":                  "URTH",
+    "FTSE All-World — Vanguard VWCE (EUR)":            "VWCE.DE",
+    "S&P 500 — índice":                                "^GSPC",
+    "S&P 500 — Vanguard VOO (USD)":                    "VOO",
+    "Nasdaq 100 — índice":                             "^NDX",
+    "EuroStoxx 50 — índice":                           "^STOXX50E",
+    "IBEX 35 — índice":                                "^IBEX",
+    "MSCI Emerging Markets — iShares (USD)":           "EEM",
+    "Oro — futuro COMEX":                              "GC=F",
+    "Oro físico — Invesco Physical Gold (EUR)":        "8PSG.DE",
+    "Bonos zona euro — iShares Core Aggregate (EUR)":  "IEAG.AS",
+    "Bonos globales — iShares Core US Aggregate":      "AGG",
+    "Bono EEUU 20+ años — iShares TLT":                "TLT",
+    "Bitcoin (USD)":                                   "BTC-USD",
+    "REIT global — iShares Developed Property":        "IWDP.AS",
 }
-
-# Catálogo plano: "Categoría · Nombre (TICKER)" -> ticker
-CATALOGO = {f"{cat} · {nombre}": tk
-            for cat, activos in _CATEGORIAS.items()
-            for nombre, tk in activos.items()}
 
 # ============================================================================
 # CAPA DE DATOS MULTI-FUENTE
@@ -219,7 +134,7 @@ def _descarga_stooq(ticker, start, end):
     return None
 
 
-@st.cache_data(show_spinner=False, ttl=86400)   # caché de 24 h: minimiza el rate-limit de Yahoo
+@st.cache_data(show_spinner=False, ttl=3600)
 def descargar_precios(tickers, start, end):
     """Descarga cada activo probando Yahoo y después Stooq.
     Devuelve (tabla de precios en días comunes, dict ticker→fuente usada)."""
@@ -387,13 +302,38 @@ def formato_euro(x):
     return f"{x:,.0f} €".replace(",", ".")
 
 
+def mostrar_figura(fig):
+    """Renderiza una figura de Matplotlib y la cierra de inmediato.
+
+    Cerrar la figura es imprescindible en Streamlit: la interfaz pyplot
+    retiene en memoria cada figura hasta cerrarla explícitamente. Como el
+    script se re-ejecuta entero en cada interacción (cambiar de modelo,
+    pulsar un botón…), las figuras no cerradas se acumulan sin límite hasta
+    agotar la RAM del servidor (Streamlit Cloud impone ~1 GB). Esa fuga era
+    la causa de la 'pantalla en blanco' al re-simular tras cambiar de modelo.
+    """
+    st.pyplot(fig, width="stretch")
+    plt.close(fig)
+
+
 # ============================================================================
 # PANEL LATERAL
 # ============================================================================
 
 st.sidebar.markdown(f"<h2 style='color:{AZUL};margin-bottom:0'>Configuración</h2>", unsafe_allow_html=True)
 
-# El buscador queda FUERA del formulario porque necesita reaccionar al teclear.
+st.sidebar.markdown("**1 · Activos de la cartera**")
+seleccion_catalogo = st.sidebar.multiselect(
+    "Elige del catálogo",
+    options=list(CATALOGO.keys()),
+    default=["S&P 500 — índice", "Bonos zona euro — iShares Core Aggregate (EUR)", "Oro — futuro COMEX"],
+    help="Activos verificados con su símbolo ya resuelto. Puedes añadir otros abajo.",
+)
+tickers_extra = st.sidebar.text_input(
+    "Otros símbolos (separados por comas)", value="",
+    help="Cualquier símbolo de Yahoo Finance o Stooq, por ejemplo AAPL, VUSA.AS, SWDA.MI",
+)
+
 with st.sidebar.expander("¿No encuentras un activo? Búscalo por nombre"):
     consulta = st.text_input("Nombre del fondo, ETF o índice", placeholder="ej.: msci world acumulación")
     if consulta:
@@ -406,62 +346,52 @@ with st.sidebar.expander("¿No encuentras un activo? Búscalo por nombre"):
             st.warning("Sin resultados desde esta red. Busca el símbolo en finance.yahoo.com, "
                        "stooq.com o justetf.com (con el ISIN del fondo) y pégalo en 'Otros símbolos'.")
 
-# TODO el panel va dentro de un FORMULARIO: cambiar el motor, los años o
-# cualquier otro control NO relanza la app (y por tanto no puede tirarla);
-# solo el botón 'Ejecutar simulación' aplica los cambios de una vez.
-with st.sidebar.form("configuracion", border=False):
-    st.markdown("**1 · Activos de la cartera**")
-    seleccion_catalogo = st.multiselect(
-        "Elige del catálogo (más de 140 activos; escribe para filtrar)",
-        options=list(CATALOGO.keys()),
-        default=["Índices bursátiles · S&P 500 (^GSPC)",
-                 "Renta fija (ETF) · Bonos zona euro agregado — iShares (IEAG.AS)",
-                 "Materias primas · Oro — futuro (GC=F)"],
-        help="Índices, ETFs (MSCI World, sectores, renta fija), materias primas, cripto, divisas y "
-             "acciones de EEUU, Europa y España, con el símbolo ya resuelto. Puedes añadir otros abajo.",
+st.sidebar.markdown("**2 · Periodo histórico de aprendizaje**")
+c1, c2 = st.sidebar.columns(2)
+fecha_inicio = c1.date_input("Desde", value=pd.Timestamp("1990-01-01"), min_value=pd.Timestamp("1950-01-01"))
+fecha_fin = c2.date_input("Hasta", value=pd.Timestamp.today())
+
+st.sidebar.markdown("**3 · Plan de inversión**")
+T = st.sidebar.slider("Años de horizonte", 1, 40, 20)
+aporte_inicial = st.sidebar.number_input("Aportación inicial (€)", min_value=0, value=600, step=100)
+aporte_mensual = st.sidebar.number_input("Aportación mensual (€)", min_value=0, value=300, step=50)
+
+with st.sidebar.expander("4 · Costes, impuestos e inflación"):
+    comision_aporte = st.number_input("Comisión por aporte (%)", 0.0, 5.0, 0.1, 0.05) / 100
+    tipo_impositivo = st.number_input("Impuesto sobre la ganancia (%)", 0.0, 60.0, 21.0, 1.0) / 100
+    inflacion_anual = st.number_input("Inflación anual estimada (%)", 0.0, 15.0, 2.0, 0.5) / 100
+
+with st.sidebar.expander("5 · Motor de simulación y ajustes"):
+    motor = st.radio(
+        "Motor",
+        ["Merton con saltos (principal)", "Bootstrap histórico", "Ensemble (Merton + Bootstrap)"],
+        help="Merton: modelo paramétrico con desplomes súbitos (reproduce el estudio de referencia). "
+             "Bootstrap: remuestrea meses reales de la historia, crisis incluidas. "
+             "Ensemble: mitad de escenarios con cada motor; reduce la dependencia de un único modelo.",
     )
-    tickers_extra = st.text_input(
-        "Otros símbolos (separados por comas)", value="",
-        help="Cualquier símbolo de Yahoo Finance o Stooq, por ejemplo AAPL, VUSA.AS, SWDA.MI",
+    M = st.select_slider("Número de escenarios", options=[1000, 2000, 3000, 5000, 10000], value=3000)
+    n_sigmas = st.slider("Umbral de detección de crisis (σ)", 2.0, 4.0, 3.0, 0.5)
+    rf_pct = st.number_input("Tipo de interés sin riesgo (%)", 0.0, 10.0, 2.193, 0.1)
+    seed = st.number_input("Semilla aleatoria", 0, 99999, 42)
+    saltos_comunes = st.checkbox(
+        "Escenario prudente: crisis simultáneas entre activos", value=False,
+        help="Sólo afecta al motor Merton. El bootstrap ya recoge crisis conjuntas por construcción.",
     )
-
-    st.markdown("**2 · Periodo histórico de aprendizaje**")
-    c1, c2 = st.columns(2)
-    fecha_inicio = c1.date_input("Desde", value=pd.Timestamp("1990-01-01"), min_value=pd.Timestamp("1950-01-01"))
-    fecha_fin = c2.date_input("Hasta", value=pd.Timestamp.today())
-
-    st.markdown("**3 · Plan de inversión**")
-    T = st.slider("Años de horizonte", 1, 40, 20)
-    aporte_inicial = st.number_input("Aportación inicial (€)", min_value=0, value=600, step=100)
-    aporte_mensual = st.number_input("Aportación mensual (€)", min_value=0, value=300, step=50)
-
-    with st.expander("4 · Costes, impuestos e inflación"):
-        comision_aporte = st.number_input("Comisión por aporte (%)", 0.0, 5.0, 0.1, 0.05) / 100
-        tipo_impositivo = st.number_input("Impuesto sobre la ganancia (%)", 0.0, 60.0, 21.0, 1.0) / 100
-        inflacion_anual = st.number_input("Inflación anual estimada (%)", 0.0, 15.0, 2.0, 0.5) / 100
-
-    with st.expander("5 · Motor de simulación y ajustes"):
-        motor = st.radio(
-            "Motor",
-            ["Merton con saltos (principal)", "Bootstrap histórico", "Ensemble (Merton + Bootstrap)"],
-            help="Merton: modelo paramétrico con desplomes súbitos (reproduce el estudio de referencia). "
-                 "Bootstrap: remuestrea meses reales de la historia, crisis incluidas. "
-                 "Ensemble: mitad de escenarios con cada motor; reduce la dependencia de un único modelo.",
-        )
-        M = st.select_slider("Número de escenarios", options=[1000, 2000, 3000, 5000, 10000], value=3000)
-        n_sigmas = st.slider("Umbral de detección de crisis (σ)", 2.0, 4.0, 3.0, 0.5)
-        rf_pct = st.number_input("Tipo de interés sin riesgo (%)", 0.0, 10.0, 2.193, 0.1)
-        seed = st.number_input("Semilla aleatoria", 0, 99999, 42)
-        saltos_comunes = st.checkbox(
-            "Escenario prudente: crisis simultáneas entre activos", value=False,
-            help="Sólo afecta al motor Merton. El bootstrap ya recoge crisis conjuntas por construcción.",
-        )
-
-    ejecutar = st.form_submit_button("Ejecutar simulación", type="primary")
 
 RF = np.log(1 + rf_pct / 100)
-st.sidebar.caption("Los cambios del panel se aplican al pulsar 'Ejecutar simulación'. "
-                   "Herramienta educativa de MurgiCapital. No constituye asesoramiento financiero.")
+ejecutar = st.sidebar.button("Ejecutar simulación", type="primary", width="stretch")
+st.sidebar.caption("Herramienta educativa de MurgiCapital. No constituye asesoramiento financiero.")
+
+# Firma de la configuración actual. Permite detectar que los resultados en
+# pantalla pertenecen a una ejecución previa cuando el usuario cambia un ajuste
+# (por ejemplo, el modelo) sin volver a pulsar "Ejecutar simulación".
+firma_config = (
+    tuple(seleccion_catalogo), tickers_extra.strip(), str(fecha_inicio), str(fecha_fin),
+    int(T), int(aporte_inicial), int(aporte_mensual),
+    round(float(comision_aporte), 6), round(float(tipo_impositivo), 6),
+    round(float(inflacion_anual), 6), motor, int(M), float(n_sigmas), float(rf_pct),
+    int(seed), bool(saltos_comunes),
+)
 
 # ============================================================================
 # CABECERA
@@ -498,14 +428,36 @@ if ejecutar:
         st.error(f"Problema con los datos: {e}")
         st.stop()
 
-    retornos_df = np.log(precios_hist / precios_hist.shift(1)).dropna()
+    retornos_df = np.log(precios_hist / precios_hist.shift(1))
+    retornos_df = retornos_df.replace([np.inf, -np.inf], np.nan).dropna()
+    if len(retornos_df) < 60:
+        st.error(
+            "Tras descartar precios no válidos quedan muy pocas observaciones comunes a todos "
+            "los activos. Amplíe el periodo histórico o sustituya el activo con menos historia."
+        )
+        st.stop()
     n_act = len(tickers)
 
-    # La simulación es en streaming (dos pasadas): la memoria no depende del
-    # número de escenarios. Solo avisamos si el cálculo va a tardar.
-    if M * int(T * 252) > 60_000_000:
-        st.info("Cálculo grande: puede tardar 1-3 minutos. Procesamos por pasadas "
-                "para que el servidor no agote la memoria.")
+    # --- Salvaguarda de memoria (Streamlit Cloud impone ~1 GB de RAM) ---------
+    # El array de precios es solo una parte del consumo: la optimización de
+    # cartera, el plan de aportaciones y el cálculo de drawdown crean arrays
+    # adicionales. El estimador anterior solo miraba 'precio' e infravaloraba
+    # el pico real (~2,5-3x), por lo que dejaba pasar combinaciones que
+    # tumbaban el servidor. Aproximamos el pico realista: precio × (1 + 3/n).
+    N_pasos = int(T * 252) + 1
+    precio_mb = M * N_pasos * n_act * 4 / 1e6
+    pico_estimado_mb = precio_mb * (1 + 3.0 / n_act)
+    PRESUPUESTO_MB = 600                 # margen prudente bajo el límite de 1 GB
+    if pico_estimado_mb > PRESUPUESTO_MB:
+        denom = (N_pasos * n_act * 4 / 1e6) * (1 + 3.0 / n_act)
+        M_sugerido = max(1000, int(PRESUPUESTO_MB / denom) // 1000 * 1000)
+        st.error(
+            f"Esta combinación ({M:,} escenarios × {T} años × {n_act} activos) puede agotar la "
+            f"memoria del servidor (pico estimado ≈ {pico_estimado_mb:,.0f} MB; límite ~1 GB en "
+            f"Streamlit Cloud). Reduzca a unos {M_sugerido:,} escenarios, acorte el horizonte o "
+            f"use menos activos.".replace(",", ".")
+        )
+        st.stop()
 
     # --- Calibración Merton (también se muestra como información del activo) ---
     parametros = [calibrar(retornos_df[tk].values, n_sigmas) for tk in tickers]
@@ -517,68 +469,26 @@ if ejecutar:
     except np.linalg.LinAlgError:
         L = np.linalg.cholesky(corr + 1e-8 * np.eye(n_act))
 
-    # --- Simulación en STREAMING (dos pasadas, misma semilla) ---
-    # Nunca se almacena el cubo (M, N+1, n_act): cada motor produce los
-    # retornos diarios paso a paso y se agregan al vuelo. Así 10.000
-    # escenarios caben de sobra en el servidor gratuito de 1 GB.
-    N = int(T * 252)
-    dt = 1 / 252
+    # --- Simulación según el motor elegido ---
     phi = 0.5 if saltos_comunes else 0.0
-    S0 = 100.0
-
-    def pasos_merton(M_, seed_):
-        """Genera, paso a paso, los retornos log diarios (M_, n_act) del motor Merton."""
-        np.random.seed(seed_)
-        drift = ((mu_v - 0.5 * sigma_v**2) * dt).astype(np.float32)
-        vol = (sigma_v * np.sqrt(dt)).astype(np.float32)
-        lam_sys = phi * lam_v.min()
-        lam_idio = lam_v - lam_sys
-        for _ in range(N):
-            Z = np.random.randn(M_, n_act) @ L.T
-            if lam_sys > 0:
-                n_j = (np.random.poisson(lam_idio * dt, size=(M_, n_act))
-                       + np.random.poisson(lam_sys * dt, size=(M_, 1)))
-            else:
-                n_j = np.random.poisson(lam_v * dt, size=(M_, n_act))
-            Zj = np.random.randn(M_, n_act)
-            yield (drift + vol * Z + n_j * mu_J_v + np.sqrt(n_j) * sigma_J_v * Zj).astype(np.float32)
-
-    R_hist = retornos_df.values.astype(np.float32)
-    BLOQUE_BOOT = 21                                # bloques de ~1 mes de días reales
-
-    def pasos_bootstrap(M_, seed_):
-        """Genera retornos remuestreando bloques mensuales de la historia conjunta."""
-        np.random.seed(seed_)
-        D = len(R_hist)
-        n_bloques = N // BLOQUE_BOOT + 1
-        inicios = np.random.randint(0, D - BLOQUE_BOOT + 1, size=(M_, n_bloques))
-        for t in range(N):
-            idx = inicios[:, t // BLOQUE_BOOT] + (t % BLOQUE_BOOT)
-            yield R_hist[idx]
-
-    def motores():
-        """(generador, nº escenarios, semilla) según el motor elegido."""
+    with st.spinner(f"Generando {M:,} escenarios de {T} años…".replace(",", ".")):
         if motor == "Merton con saltos (principal)":
-            return [(pasos_merton, M, int(seed))]
-        if motor == "Bootstrap histórico":
-            return [(pasos_bootstrap, M, int(seed))]
-        M1 = M - M // 2                             # Ensemble 50/50
-        return [(pasos_merton, M1, int(seed)), (pasos_bootstrap, M // 2, int(seed) + 1)]
-
-    # PASADA 1: solo el valor final de cada activo en cada escenario
-    with st.spinner(f"Pasada 1 de 2: generando {M:,} escenarios de {T} años…".replace(",", ".")):
-        partes_finales = []
-        for gen, M_, sd in motores():
-            log_acum = np.zeros((M_, n_act), dtype=np.float32)
-            for r_t in gen(M_, sd):
-                log_acum += r_t
-            partes_finales.append(S0 * np.exp(log_acum))
-        precio_final = np.concatenate(partes_finales, axis=0)
-        del partes_finales, log_acum
+            precio = simular_merton(mu_v, sigma_v, lam_v, mu_J_v, sigma_J_v, L,
+                                    T=T, M=M, seed=int(seed), phi_comun=phi)
+        elif motor == "Bootstrap histórico":
+            precio = simular_bootstrap(retornos_df.values, T=T, M=M, seed=int(seed))
+        else:                                       # Ensemble 50/50
+            M1 = M - M // 2
+            p1 = simular_merton(mu_v, sigma_v, lam_v, mu_J_v, sigma_J_v, L,
+                                T=T, M=M1, seed=int(seed), phi_comun=phi)
+            p2 = simular_bootstrap(retornos_df.values, T=T, M=M // 2, seed=int(seed) + 1)
+            precio = np.concatenate([p1, p2], axis=0)
+            del p1, p2
 
     # --- Optimización de cartera por muestreo Dirichlet, evaluada por bloques ---
     n_carteras = 10000
     pesos = np.random.dirichlet(np.ones(n_act), size=n_carteras)
+    precio_final = precio[:, -1, :]
     vol_cart = np.empty(n_carteras)
     ret_cart = np.empty(n_carteras)
     BLOQUE = 500
@@ -592,79 +502,57 @@ if ejecutar:
     valor_ms = (precio_final @ pesos[idx_ms].astype(np.float32)).astype(np.float64)
     valor_mv = (precio_final @ pesos[idx_mv].astype(np.float32)).astype(np.float64)
 
-    # --- PASADA 2: mismos escenarios (misma semilla), agregando al vuelo ---
-    # Se recorren otra vez los retornos y se calculan, sin matrices gigantes:
-    # plan DCA, drawdowns de ambas carteras, crecimiento lump-sum y los
-    # retornos del primer año para la validación.
+    # --- Plan de aportaciones (DCA): horizonte y validación de aportes --------
     dias_por_mes = 21
+    N = precio.shape[1] - 1
     fechas_aporte = np.arange(dias_por_mes, N + 1, dias_por_mes)
     n_aportes = len(fechas_aporte)
     total_aportado = aporte_inicial + n_aportes * aporte_mensual
     if total_aportado <= 0:
         st.error("Introduzca una aportación inicial o mensual mayor que cero.")
         st.stop()
-    fechas_set = set(fechas_aporte.tolist())
+
+    # Se calculan AQUÍ todas las magnitudes que dependen de 'precio' (el array
+    # más grande) para poder liberarlo de inmediato y rebajar el pico de memoria.
+    w_opt = pesos[idx_ms].astype(np.float32)
+    valor_cartera = precio @ w_opt                       # (M, N+1) mejor equilibrio
+    traj_mv = precio @ pesos[idx_mv].astype(np.float32)  # (M, N+1) conservadora
+    ret_sim_1d = np.log(precio[:, 1:min(253, N + 1), 0] / precio[:, 0:min(252, N), 0]).flatten()
+
+    del precio, precio_final                             # liberar el array grande cuanto antes
+    gc.collect()
+
+    # --- DCA vectorizado (forma cerrada, sin bucle día a día) -----------------
+    # El patrimonio con aportaciones periódicas admite forma cerrada exacta:
+    #   W[t] = V[t] · ( A0/V[0] + Σ_{aportes s≤t} a/V[s] )
+    # con V = valor de la cartera, A0 = aporte inicial neto, a = aporte mensual
+    # neto. Es idéntico al bucle original pero en una sola pasada vectorizada
+    # (se eliminan ~5.000 iteraciones de Python por simulación).
     aporte_neto_mes = aporte_mensual * (1 - comision_aporte)
-    w_ms32 = pesos[idx_ms].astype(np.float32)
-    w_mv32 = pesos[idx_mv].astype(np.float32)
-    salto_paths = max(1, M // 200)                  # ~200 trayectorias para el gráfico
+    coef = np.zeros((M, N + 1), dtype=np.float64)
+    coef[:, 0] = (aporte_inicial * (1 - comision_aporte)) / valor_cartera[:, 0]
+    if n_aportes:
+        coef[:, fechas_aporte] += aporte_neto_mes / valor_cartera[:, fechas_aporte]
+    np.cumsum(coef, axis=1, out=coef)
+    W = (valor_cartera * coef).astype(np.float32)        # patrimonio nominal (M, N+1)
+    del coef
 
-    acum = {k: [] for k in ("dd_ms", "dd_mv", "W_fin", "W_paths", "ret1d", "ls_crec")}
-    with st.spinner("Pasada 2 de 2: evaluando su plan de inversión…"):
-        for gen, M_, sd in motores():
-            P = np.full((M_, n_act), S0, dtype=np.float32)
-            V = P @ w_ms32                          # valor cartera mejor equilibrio
-            V0, V_prev = V.copy(), V.copy()
-            Vmv = P @ w_mv32
-            cmax_ms, dd_ms_p = V.copy(), np.zeros(M_, np.float32)
-            cmax_mv, dd_mv_p = Vmv.copy(), np.zeros(M_, np.float32)
-            Wp = np.full(M_, aporte_inicial * (1 - comision_aporte), dtype=np.float32)
-            idx_paths = np.arange(0, M_, salto_paths)
-            W_path = np.empty((len(idx_paths), N + 1), dtype=np.float32)
-            W_path[:, 0] = Wp[idx_paths]
-            ret1d = []
-            for t, r_t in enumerate(gen(M_, sd), start=1):
-                if t <= 252:
-                    ret1d.append(r_t[:, 0].copy())  # validación: 1er año, 1er activo
-                P *= np.exp(r_t)
-                V = P @ w_ms32
-                Wp *= V / V_prev                    # el patrimonio crece con la cartera
-                if t in fechas_set:
-                    Wp += aporte_neto_mes           # ...y recibe el aporte mensual
-                np.maximum(cmax_ms, V, out=cmax_ms)
-                np.maximum(dd_ms_p, 1.0 - V / cmax_ms, out=dd_ms_p)
-                Vmv = P @ w_mv32
-                np.maximum(cmax_mv, Vmv, out=cmax_mv)
-                np.maximum(dd_mv_p, 1.0 - Vmv / cmax_mv, out=dd_mv_p)
-                V_prev = V
-                W_path[:, t] = Wp[idx_paths]
-            acum["dd_ms"].append(dd_ms_p)
-            acum["dd_mv"].append(dd_mv_p)
-            acum["W_fin"].append(Wp.astype(np.float64))
-            acum["W_paths"].append(W_path)
-            acum["ret1d"].append(np.concatenate(ret1d))
-            acum["ls_crec"].append((V / V0).astype(np.float64))
-
-    dd_ms = np.concatenate(acum["dd_ms"])
-    dd_mv = np.concatenate(acum["dd_mv"])
-    W_nominal = np.concatenate(acum["W_fin"])
-    W_paths_arr = np.concatenate(acum["W_paths"], axis=0).astype(np.float64)
-    ret_sim_1d = np.concatenate(acum["ret1d"])
-    ls_crec = np.concatenate(acum["ls_crec"])
-    del acum
-
+    W_nominal = W[:, -1].astype(np.float64)
     impuesto = np.maximum(0, W_nominal - total_aportado) * tipo_impositivo
     W_real = (W_nominal - impuesto) / (1 + inflacion_anual) ** T
 
-    # Alternativa lump-sum: el mismo capital total invertido íntegro el día 0
-    ls_nominal = total_aportado * (1 - comision_aporte) * ls_crec
+    # --- Alternativa lump-sum (mismo dinero, todo el día 0) ---
+    ls_nominal = (total_aportado * (1 - comision_aporte) * valor_cartera[:, -1] / valor_cartera[:, 0]).astype(np.float64)
     ls_real = (ls_nominal - np.maximum(0, ls_nominal - total_aportado) * tipo_impositivo) / (1 + inflacion_anual) ** T
 
-    # --- Riesgo sobre el valor final (de la pasada 1) ---
+    # --- Riesgo ---
     riesgo_ms = metricas_riesgo(valor_ms)
     riesgo_mv = metricas_riesgo(valor_mv)
+    dd_ms = max_drawdown(valor_cartera)
+    dd_mv = max_drawdown(traj_mv)
 
-    del precio_final                                # liberar memoria del servidor
+    del valor_cartera, traj_mv                      # liberar memoria del servidor
+    gc.collect()
 
     st.session_state["resultados"] = dict(
         tickers=tickers, fuentes=fuentes, motor=motor, parametros=parametros,
@@ -674,22 +562,25 @@ if ejecutar:
         vol_cart=vol_cart, ret_cart=ret_cart, sharpes=sharpes, idx_ms=idx_ms, idx_mv=idx_mv,
         valor_ms=valor_ms, valor_mv=valor_mv,
         riesgo_ms=riesgo_ms, riesgo_mv=riesgo_mv, dd_ms=dd_ms, dd_mv=dd_mv,
-        W_paths=W_paths_arr, W_real=W_real, ls_real=ls_real,
+        W_paths=W[::max(1, M // 200)].astype(np.float64), W_real=W_real, ls_real=ls_real,
         total_aportado=total_aportado, T=T, RF=RF, n_aportes=n_aportes,
         fechas_aporte=fechas_aporte, aporte_inicial=aporte_inicial, aporte_mensual=aporte_mensual,
         rango_datos=(precios_hist.index[0].date(), precios_hist.index[-1].date()),
         n_dias=len(precios_hist), saltos_comunes=saltos_comunes,
+        firma=firma_config,
     )
-
-    # Liberar todo lo grande que queda y compactar memoria antes de pintar:
-    # en un servidor de 1 GB esto evita el cierre silencioso de la app.
-    import gc
-    del W_nominal, W_real, ls_nominal, ls_real, ls_crec, impuesto, W_paths_arr
-    plt.close("all")
-    gc.collect()
 
 r = st.session_state["resultados"]
 tickers, T = r["tickers"], r["T"]
+
+# Aviso de resultados obsoletos: la configuración del panel ya no coincide con
+# la de la última simulación mostrada.
+if not ejecutar and r.get("firma") != firma_config:
+    st.warning(
+        "Has cambiado la configuración (por ejemplo, el modelo de simulación) desde la última "
+        "ejecución. Los resultados que se muestran corresponden a la simulación anterior; "
+        "pulsa **Ejecutar simulación** para recalcular con los nuevos ajustes."
+    )
 
 # ============================================================================
 # RESULTADOS
@@ -755,8 +646,7 @@ with tab_cartera:
     ax.scatter(r["vol_cart"][r["idx_ms"]], r["ret_cart"][r["idx_ms"]], color=AZUL, s=130, zorder=5, label="Cartera de mejor equilibrio")
     ax.set_xlabel("Riesgo (volatilidad anual)"); ax.set_ylabel("Rentabilidad anual esperada (log)")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)
-    st.pyplot(fig, width="stretch")
-    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
+    mostrar_figura(fig)
 
     col_a, col_b = st.columns(2)
     with col_a:
@@ -814,8 +704,7 @@ with tab_riesgo:
         ax.axvline(100, color=DORADO, linestyle="--", lw=2, label="Capital invertido (100 €)")
         ax.set_title(f"{titulo}: valor final de 100 € a {T} años")
         ax.set_xlabel("€ finales"); ax.legend(fontsize=8)
-    st.pyplot(fig, width="stretch")
-    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
+    mostrar_figura(fig)
     st.caption("Cada barra cuenta cuántos escenarios terminan en ese rango. A la izquierda de la línea dorada, pérdidas; "
                "a la derecha, ganancias.")
 
@@ -850,8 +739,7 @@ with tab_plan:
     ax.set_xlabel("Sesiones de mercado"); ax.set_ylabel("Patrimonio (€, nominal)")
     ax.set_title("Evolución del patrimonio (100 escenarios de ejemplo)")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)
-    st.pyplot(fig, width="stretch")
-    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
+    mostrar_figura(fig)
     st.caption("La línea dorada es el dinero aportado. Cuando la nube azul discurre por encima, el plan va en ganancias.")
 
     st.markdown("#### Aportación única frente a aportaciones mensuales")
@@ -863,8 +751,7 @@ with tab_plan:
         ax.axvline(r["total_aportado"], color=DORADO, ls="--", lw=2, label=f"Aportado: {formato_euro(r['total_aportado'])}")
         ax.axvline(np.median(datos), color="black", lw=2, label=f"Típico: {formato_euro(np.median(datos))}")
         ax.set_title(titulo); ax.set_xlabel("Patrimonio final (€ de hoy)"); ax.legend(fontsize=8)
-    st.pyplot(fig, width="stretch")
-    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
+    mostrar_figura(fig)
     st.markdown(
         f"- **Aportación única**: resultado típico {formato_euro(np.median(r['ls_real']))}; "
         f"probabilidad de terminar con menos: {np.mean(r['ls_real'] < r['total_aportado']):.1%}.\n"
@@ -890,8 +777,7 @@ with tab_valida:
     ax.set_yscale("log")
     ax.set_xlabel("Movimiento diario (retorno log)"); ax.set_ylabel("Frecuencia (escala log)")
     ax.legend(); ax.grid(alpha=0.3)
-    st.pyplot(fig, width="stretch")
-    plt.close(fig)                      # liberar la figura: evita fugas de memoria entre interacciones
+    mostrar_figura(fig)
 
     def momentos(x):
         m, s = np.mean(x), np.std(x)
@@ -942,6 +828,8 @@ no constituyen asesoramiento financiero. La fiscalidad depende de la situación 
 
 st.markdown(
     f"<div class='murgi-footer'>© 2026 MurgiCapital · Herramienta educativa · "
-    "Las rentabilidades pasadas no garantizan rentabilidades futuras · v4-form</div>",
+    "Las rentabilidades pasadas no garantizan rentabilidades futuras</div>",
     unsafe_allow_html=True,
 )
+
+# Fin de murgi_app.py
