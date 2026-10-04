@@ -18,5 +18,6 @@ python r16_margins.py                   # census decomposition, composition, reg
 python r17_het_catalonia.py             # pre-specified heterogeneity; Catalan new-contract validation
 python r19_tables.py && Y0=2015 python r19_tables.py   # main table, full and arrival periods
 python r20_figures.py && python r21_tex.py
+python r22_figures_context.py           # Fig. 1 (national context) and maps, from the raw INE/Eurostat/IGN files
 python ../tests/test_revision.py
 cd ../paper && xelatex paper_revised.tex && xelatex paper_revised.tex

@@ -106,7 +106,23 @@ Si quieres incorporar estos datos, se podría hacer desde una sesión en tu orde
 
 ---
 
-## 5. Reproducción
+## 5. Revisión de las figuras
+
+Todas las figuras se generan ahora con el mismo estilo (`code/rev_style.py`). La Fig. 1 y los mapas se reconstruyen desde los ficheros brutos de INE, Eurostat e IGN (`code/r22_figures_context.py`), en lugar de copiarse del paquete original.
+
+| Figura | Problema | Corrección |
+|---|---|---|
+| Fig. 1 (contexto) | En el panel (d) la línea unía 2022 con 2024 como si 2023 existiera. | Eurostat no ha publicado el dato de 2023 para España en `ilc_lvps15`. La serie se corta en ese año, se señala en el gráfico y en la nota. El panel (a) llega ya al censo de 2025. |
+| Fig. 2 (mapas) | Los municipios con entrada neta negativa, los que no tienen dato y el primer tramo se pintaban en blanco y parecían huecos. Además había finas grietas blancas entre polígonos. | Hay una categoría propia para el descenso neto (naranja) y otra para «sin dato / sin índice municipal» (gris). La escala azul empieza en un tono visible. Los bordes de cada municipio se rellenan de su color, con lo que desaparecen las grietas. Se excluye Gibraltar. |
+| Fig. 3 | El título del panel (b) salía cortado, las etiquetas se solapaban y siete estilos de línea casi iguales eran difíciles de distinguir. | Cada línea lleva su nombre al final. Los nueve β fuera de ±3 se dibujan como flechas en el borde (todos con peso menor que 0,01). El título está acortado. |
+| Fig. 4 | Había mucho espacio vacío y etiquetas largas. Los intervalos truncados no se distinguían. | Las filas se agrupan con encabezados y etiquetas cortas. Unas flechas marcan los intervalos que salen del eje y una línea discontinua el conjunto AR no acotado. Una línea punteada marca la estimación central. |
+| Fig. 5 y A1 | El año de referencia no se distinguía. | Se marca con un punto hueco. |
+| Fig. 6 | El bigote de «New dwellings» sin ponderar quedaba cortado. | El eje se ajusta a los intervalos, hay separación entre barras y la leyenda va encima. |
+| Fig. 7 | Las etiquetas se solapaban con los intervalos, y las filas no coincidían con la tabla 7. | Es un único panel con las mismas seis filas y orden que la tabla 7, y el mismo truncamiento en cero. |
+
+---
+
+## 6. Reproducción
 
 ```
 export WORK=/ruta/de/trabajo    # descargas (~2,5 GB) y ficheros intermedios

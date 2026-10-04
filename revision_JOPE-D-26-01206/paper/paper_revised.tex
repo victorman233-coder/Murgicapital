@@ -128,7 +128,7 @@ Figure~\ref{fig:context} summarises the national facts. The foreign-born share r
 \includegraphics[width=0.94\linewidth]{fig/fig1_contexto.pdf}
 \caption{Immigration, rents and housing conditions}\label{fig:context}
 \begin{minipage}{0.94\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: panel (a), foreign-born population on 1 January as a percentage of the population, from the municipal register and the annual population census. Panel (b), national IPVA. Panel (c), percentage of adults living in a dwelling with fewer rooms than required by household size and composition under the Eurostat definition (table ilc\_lvho15). Panel (d), percentage of adults living in rented housing (ilc\_lvps15). Sources: INE and Eurostat (EU-SILC).
+\textit{Notes}: panel (a), foreign-born population on 1 January as a percentage of the population, from the municipal register and the annual population census. Panel (b), national IPVA. Panel (c), percentage of adults living in a dwelling with fewer rooms than required by household size and composition under the Eurostat definition (table ilc\_lvho15). Panel (d), percentage of adults living in rented housing (ilc\_lvps15); Eurostat has not published the 2023 value for Spain, so the series is interrupted in that year. Sources: INE and Eurostat (EU-SILC).
 \end{minipage}
 \end{figure}
 
@@ -136,7 +136,7 @@ Figure~\ref{fig:context} summarises the national facts. The foreign-born share r
 \includegraphics[width=\linewidth]{fig/fig7_mapas.pdf}
 \caption{Territorial distribution of immigration and rents}\label{fig:maps}
 \begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: panel (a), change in the foreign-born population between 1 January 2015 and 1 January 2024 as a percentage of 2015 population, linked through within-source differences. Panel (b), change in the municipal IPVA between 2015 and 2024; municipalities without an index in white. Sources: INE, IGN.
+\textit{Notes}: panel (a), change in the foreign-born population between 1 January 2015 and 1 January 2024 as a percentage of 2015 population, linked through within-source differences. Orange: net decrease; grey: no data (shared territories and municipalities created or merged after 2015). Panel (b), change in the municipal IPVA between 2015 and 2024 for the 701 municipalities with an index in both years; grey: no municipal index (small municipalities and the Basque Country and Navarre, which the IPVA does not cover). Sources: INE, IGN.
 \end{minipage}
 \end{figure}
 
@@ -188,7 +188,7 @@ Table~\ref{tab:design} and figure~\ref{fig:shocks} describe the identifying vari
 \includegraphics[width=\linewidth]{fig/fig3_shocks.pdf}
 \caption{Origin shocks and the Rotemberg decomposition}\label{fig:shocks}
 \begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: panel (a), cumulative national growth since 2012 of the largest origins, relative to each origin's 2003 stock. Panel (b), Rotemberg weights $\hat\alpha_o$ and origin-specific estimates $\hat\beta_o$ (clipped at $\pm3$) for the original specification, population weights; circle size proportional to the origin's 2003 share of the foreign-born population.
+\textit{Notes}: panel (a), cumulative national growth since 2012 of the largest origins, relative to each origin's 2003 stock. Panel (b), Rotemberg weights $\hat\alpha_o$ and origin-specific estimates $\hat\beta_o$ for the original specification, population weights; circle size proportional to the origin's 2003 share of the foreign-born population. The nine estimates beyond $\pm3$, all with $|\hat\alpha_o|<0.01$, are drawn as arrows at the edge of the axis.
 \end{minipage}
 \end{figure}
 
@@ -204,7 +204,7 @@ The full-period estimate averages two different regimes. In 2012--2014 the forei
 \includegraphics[width=\linewidth]{fig/fig4_forest.pdf}
 \caption{Rent elasticity across specifications, weights and exclusions}\label{fig:forest}
 \begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: point estimates and analytical Anderson-Rubin 95\,\% sets (province clusters), 2012--2024, truncated to $[-1,1.5]$. Panel (a): specifications of table~\ref{tab:main} with the three weighting schemes. Panel (b): central specification, population weights, excluding territories, periods or origins (the excluded origin is removed from the instrument and from the exposure control); appendix table~\ref{tab:loo} summarises all leave-one-out estimates.
+\textit{Notes}: point estimates and analytical Anderson-Rubin 95\,\% sets (province clusters), 2012--2024, drawn on $[-0.8,1.0]$; arrowheads mark sets that extend beyond that range and the dashed line an unbounded set. Panel (a): specifications of table~\ref{tab:main} with the three weighting schemes. Panel (b): central specification, population weights, excluding territories, periods or origins (the excluded origin is removed from the instrument and from the exposure control); the dotted vertical line marks the central estimate; appendix table~\ref{tab:loo} summarises all leave-one-out estimates.
 \end{minipage}
 \end{figure}
 
@@ -238,7 +238,7 @@ The Schengen visa requirement for Colombian citizens was lifted in December 2015
 \includegraphics[width=\linewidth]{fig/fig5_event_colper.pdf}
 \caption{The 2016 visa waivers for Colombia and Peru: event study}\label{fig:episode}
 \begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: coefficients on the 2003 share of the population born in Colombia or Peru (pp) interacted with event years, relative to 2015, controlling for the 2003 share born in other American countries interacted with event years, province $\times$ year fixed effects and the central covariates $\times$ year; population weights; 95\,\% intervals with province clusters.
+\textit{Notes}: coefficients on the 2003 share of the population born in Colombia or Peru (pp) interacted with event years, relative to 2015, controlling for the 2003 share born in other American countries interacted with event years, province $\times$ year fixed effects and the central covariates $\times$ year; population weights; 95\,\% intervals with province clusters. Hollow marker: reference year, normalised to zero.
 \end{minipage}
 \end{figure}
 
@@ -288,7 +288,7 @@ Under these assumptions the implied share of national IPVA growth is $\beta\time
 \includegraphics[width=0.85\linewidth]{fig/fig7_magnitude.pdf}
 \caption{Implied contribution of immigration to national rent-index growth}\label{fig:magnitude}
 \begin{minipage}{0.85\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: panel (a), implied share $\beta\times M/G$ under assumptions A1--A4. Panel (b), estimates and robust 95\,\% sets (analytical AR; wild-bootstrap AR for the episode).
+\textit{Notes}: implied share $\beta\times M/G$ under assumptions A1--A4, with $M=6.5$\,\% and $G=20.6$ log points, so that each 0.1 of elasticity corresponds to 3.2 percentage points. Rows, points and horizontal lines reproduce table~\ref{tab:magnitude}: estimates and robust 95\,\% sets rescaled in the same way, with negative values truncated at zero (analytical AR; wild-bootstrap AR for the episode).
 \end{minipage}
 \end{figure}
 
@@ -386,7 +386,7 @@ where $1-\theta_i=a_NN_i/(a_NN_i+a_MM_i)$, $m_i=dM_i/P_i$ and $\kappa=a_M/\bar a
 \includegraphics[width=\linewidth]{fig/figA1_lp.pdf}
 \caption{Local projections identified from innovations in the instrument}\label{fig:lp}
 \begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
-\textit{Notes}: coefficients $\beta_h$ of $\ln R_{i,t+h}-\ln R_{i,t-1}$ on the calendar-year inflow instrumented with its prediction, controlling for three lags of the prediction, province $\times$ year fixed effects and the indicated controls; balanced sample $t\in[2015,2020]$; population weights; 95\,\% intervals with province clusters. The first-stage $F$ in the title shows that innovations in the instrument carry little predictive power.
+\textit{Notes}: coefficients $\beta_h$ of $\ln R_{i,t+h}-\ln R_{i,t-1}$ on the calendar-year inflow instrumented with its prediction, controlling for three lags of the prediction, province $\times$ year fixed effects and the indicated controls; balanced sample $t\in[2015,2020]$; population weights; 95\,\% intervals with province clusters. Hollow marker: $h=-1$, normalised to zero. The first-stage $F$ in the title shows that innovations in the instrument carry little predictive power.
 \end{minipage}
 \end{figure}
 

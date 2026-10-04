@@ -10,5 +10,5 @@
 | `out/` | JSON/CSV results read by the tables and the text |
 | `tests/test_revision.py` | Automatic checks (instrument replication, BHJ equivalence, Rotemberg sum, accounting identity, shares) |
 
-Raw downloads (~2.5 GB) are not stored in the repository; `code/r00_download.sh` fetches them from INE, Eurostat,
+Raw downloads (~2.5 GB) are not stored in the repository; `code/r00_download.sh` fetches them from INE, Eurostat, IGN (es-atlas),
 the Generalitat de Catalunya and Zenodo.
