@@ -1,0 +1,57 @@
+dipasquale1992|DiPasquale|The markets for real estate assets and space: a conceptual framework
+poterba1984|Poterba|Tax subsidies to owner-occupied housing: an asset-market approach
+roback1982|Roback|Wages, rents, and the quality of life
+glaeser2005|Glaeser|Urban decline and durable housing
+saiz2010|Saiz|The geographic determinants of housing supply
+glaeser2018|Glaeser|The economic implications of housing supply
+gyourko2013|Gyourko|Superstar cities
+hilber2016|Hilber|The impact of supply constraints on house prices in England
+himmelberg2005|Himmelberg|Assessing high house prices: bubbles, fundamentals and misperceptions
+sinai2005|Sinai|Owner-occupied housing as a hedge against rent risk
+quigley2004|Quigley|Is housing unaffordable? Why isn't it more affordable?
+genesove2003|Genesove|The nominal rigidity of apartment rents
+ambrose2015|Ambrose|The repeat rent index
+hsieh2019|Hsieh|Housing constraints and spatial misallocation
+favilukis2023|Favilukis|Affordable housing and city welfare
+barron2021|Barron|The effect of home-sharing on house prices and rents: evidence from Airbnb
+garcialopez2020|Garcia-López|Do short-term rental platforms affect housing markets? Evidence from Airbnb in Barcelona
+koster2021|Koster|Short-term rentals and the housing market: quasi-experimental evidence from Airbnb in Los Angeles
+batalha2022|Batalha|The virus that devastated tourism: the impact of covid-19 on the housing market
+duso2024|Duso|Airbnb and rental markets: evidence from Berlin
+franco2021|Franco|The impact of Airbnb on residential property values and rents: evidence from Portugal
+almagro2025|Almagro|Location sorting and endogenous amenities: evidence from Amsterdam
+valentin2021|Valentin|The effects of regulating the housing short-term rental market: evidence from New Orleans
+madridstr2026|Chaves|The effect of short-term rentals on house prices and residential mobility: evidence from Madrid
+perles2026|Perles-Ribes|Short-term rentals and housing prices on the Costa Blanca (Spain): a panel Granger causality analysis
+autor2014|Autor|Housing market spillovers: evidence from the end of rent control in Cambridge, Massachusetts
+diamond2019|Diamond|The effects of rent control expansion on tenants, landlords, and inequality: evidence from San Francisco
+jofre2023|Jofre-Monseny|Effectiveness and supply effects of high-coverage rent control policies
+kholodilin2024|Kholodilin|Rent control effects through the lens of empirical research: an almost complete review of the literature
+mills2019|Mills|Large-scale buy-to-rent investors in the single-family housing market: the emergence of a new asset class
+garriga2023|Garriga|The economic effects of real estate investors
+gurun2023|Gurun|Do Wall Street landlords undermine renters' welfare?
+janoschka2020|Janoschka|Tracing the socio-spatial logics of transnational landlords' real estate investment: Blackstone in Madrid
+cocola2025|Cocola-Gant|The financialisation of short-term rentals in Barcelona: property ownership and the consolidation of a new asset class
+saiz2007|Saiz|Immigration and housing rents in American cities
+sa2015|Sá|Immigration and house prices in the UK
+gonzalez2013|Gonzalez|Immigration and housing booms: evidence from Spain
+sanchis2023|Sanchis-Guarner|Decomposing the impact of immigration on house prices
+borusyak2022|Borusyak|Quasi-experimental shift-share research designs
+goldsmith2020|Goldsmith-Pinkham|Bartik instruments: what, when, why, and how
+adao2019|Adão|Shift-share designs: theory and inference
+callaway2021|Callaway|Difference-in-differences with multiple time periods
+dechaisemartin2020|de Chaisemartin|Two-way fixed effects estimators with heterogeneous treatment effects
+roth2023|Roth|What's trending in difference-in-differences? A synthesis of the recent econometrics literature
+arkhangelsky2021|Arkhangelsky|Synthetic difference-in-differences
+rambachan2023|Rambachan|A more credible approach to parallel trends
+gelbach2016|Gelbach|When do covariates matter? And which ones, and how much?
+shorrocks2013|Shorrocks|Decomposition procedures for distributional analysis: a unified framework based on the Shapley value
+oster2019|Oster|Unobservable selection and coefficient stability: theory and evidence
+mian2014|Mian|What explains the 2007-2009 drop in employment?
+glaeser2008|Glaeser|Housing supply and housing bubbles
+molloy2020|Molloy|The effect of housing supply regulation on housing affordability: a review
+greenaway2020|Greenaway-McGrevy|Can zoning reform reduce housing costs? Evidence from rents in Auckland
+bartik1991|Bartik|Who benefits from state and local economic development policies?
+moretti2011|Moretti|Local labor markets
+howard2020|Howard|The migration accelerator: labor mobility, housing, and demand
+mense2023|Mense|The effects of second-generation rent control on land values

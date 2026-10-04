@@ -1,0 +1,932 @@
+{
+ "dipasquale1992": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The Markets for Real Estate Assets and Space: A Conceptual Framework",
+  "authors": [
+   "DiPasquale, Denise",
+   "Wheaton, William C."
+  ],
+  "journal": "Real Estate Economics",
+  "year": 1992,
+  "volume": "20",
+  "issue": "2",
+  "pages": "181-198",
+  "doi": "10.1111/1540-6229.00579",
+  "type": "journal-article"
+ },
+ "poterba1984": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Tax Subsidies to Owner-Occupied Housing: An Asset-Market Approach",
+  "authors": [
+   "Poterba, James M."
+  ],
+  "journal": "The Quarterly Journal of Economics",
+  "year": 1984,
+  "volume": "99",
+  "issue": "4",
+  "pages": "729",
+  "doi": "10.2307/1883123",
+  "type": "journal-article"
+ },
+ "koster2021": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Short-term rentals and the housing market: Quasi-experimental evidence from Airbnb in Los Angeles",
+  "authors": [
+   "Koster, Hans R.A.",
+   "van Ommeren, Jos",
+   "Volkhausen, Nicolas"
+  ],
+  "journal": "Journal of Urban Economics",
+  "year": 2021,
+  "volume": "124",
+  "issue": null,
+  "pages": "103356",
+  "doi": "10.1016/j.jue.2021.103356",
+  "type": "journal-article"
+ },
+ "batalha2022": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The virus that devastated tourism: The impact of covid-19 on the housing market",
+  "authors": [
+   "Batalha, Mafalda",
+   "Gonçalves, Duarte",
+   "Peralta, Susana",
+   "Pereira dos Santos, João"
+  ],
+  "journal": "Regional Science and Urban Economics",
+  "year": 2022,
+  "volume": "95",
+  "issue": null,
+  "pages": "103774",
+  "doi": "10.1016/j.regsciurbeco.2022.103774",
+  "type": "journal-article"
+ },
+ "franco2021": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The impact of Airbnb on residential property values and rents: Evidence from Portugal",
+  "authors": [
+   "Franco",
+   "Santos"
+  ],
+  "journal": "Regional Science and Urban Economics",
+  "year": 2021,
+  "volume": "88",
+  "issue": null,
+  "pages": "103667",
+  "doi": "10.1016/j.regsciurbeco.2021.103667",
+  "type": "journal-article"
+ },
+ "perles2026": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Short-term rentals and housing prices on the Costa Blanca (Spain): A panel Granger causality analysis",
+  "authors": [
+   "Perles-Ribes, José Francisco",
+   "Romero, Agustina",
+   "Torres-Penalva, Aimée",
+   "Torregrosa-Martí, Teresa"
+  ],
+  "journal": "Tourism Economics",
+  "year": 2026,
+  "volume": null,
+  "issue": null,
+  "pages": null,
+  "doi": "10.1177/13548166261463752",
+  "type": "journal-article"
+ },
+ "garriga2023": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The economic effects of real estate investors",
+  "authors": [
+   "Garriga, Carlos",
+   "Gete, Pedro",
+   "Tsouderou, Athena"
+  ],
+  "journal": "Real Estate Economics",
+  "year": 2023,
+  "volume": "51",
+  "issue": "3",
+  "pages": "655-685",
+  "doi": "10.1111/1540-6229.12427",
+  "type": "journal-article"
+ },
+ "gurun2023": {
+  "ok": true,
+  "sim": 0.981,
+  "title": "Do Wall Street Landlords Undermine Renters’ Welfare?",
+  "authors": [
+   "Gurun, Umit G",
+   "Wu, Jiabin",
+   "Xiao, Steven Chong",
+   "Xiao, Serena Wenjing"
+  ],
+  "journal": "The Review of Financial Studies",
+  "year": 2022,
+  "volume": "36",
+  "issue": "1",
+  "pages": "70-121",
+  "doi": "10.1093/rfs/hhac017",
+  "type": "journal-article"
+ },
+ "janoschka2020": {
+  "ok": true,
+  "sim": 0.99,
+  "title": "Tracing the socio-spatial logics of transnational landlords’ real estate investment: Blackstone in Madrid",
+  "authors": [
+   "Janoschka, Michael",
+   "Alexandri, Georgia",
+   "Ramos, Hernán Orozco",
+   "Vives-Miró, Sonia"
+  ],
+  "journal": "European Urban and Regional Studies",
+  "year": 2019,
+  "volume": "27",
+  "issue": "2",
+  "pages": "125-141",
+  "doi": "10.1177/0969776418822061",
+  "type": "journal-article"
+ },
+ "cocola2025": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The financialisation of short-term rentals in Barcelona: Property ownership and the consolidation of a new asset class",
+  "authors": [
+   "Cocola-Gant, Agustín",
+   "Hodkinson, Stuart N",
+   "Janoschka, Michael"
+  ],
+  "journal": "European Urban and Regional Studies",
+  "year": 2025,
+  "volume": "33",
+  "issue": "3",
+  "pages": "300-317",
+  "doi": "10.1177/09697764251361724",
+  "type": "journal-article"
+ },
+ "sa2015": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Immigration and House Prices in the UK",
+  "authors": [
+   "Sá, Filipa"
+  ],
+  "journal": "The Economic Journal",
+  "year": 2014,
+  "volume": "125",
+  "issue": "587",
+  "pages": "1393-1424",
+  "doi": "10.1111/ecoj.12158",
+  "type": "journal-article"
+ },
+ "roback1982": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Wages, Rents, and the Quality of Life",
+  "authors": [
+   "Roback, Jennifer"
+  ],
+  "journal": "Journal of Political Economy",
+  "year": 1982,
+  "volume": "90",
+  "issue": "6",
+  "pages": "1257-1278",
+  "doi": "10.1086/261120",
+  "type": "journal-article"
+ },
+ "glaeser2005": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Urban Decline and Durable Housing",
+  "authors": [
+   "Glaeser, Edward L.",
+   "Gyourko, Joseph"
+  ],
+  "journal": "Journal of Political Economy",
+  "year": 2005,
+  "volume": "113",
+  "issue": "2",
+  "pages": "345-375",
+  "doi": "10.1086/427465",
+  "type": "journal-article"
+ },
+ "saiz2010": {
+  "ok": true,
+  "sim": 0.854,
+  "title": "The Geographic Determinants of Housing Supply\n                    *",
+  "authors": [
+   "Saiz, Albert"
+  ],
+  "journal": "Quarterly Journal of Economics",
+  "year": 2010,
+  "volume": "125",
+  "issue": "3",
+  "pages": "1253-1296",
+  "doi": "10.1162/qjec.2010.125.3.1253",
+  "type": "journal-article"
+ },
+ "glaeser2018": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The Economic Implications of Housing Supply",
+  "authors": [
+   "Glaeser, Edward",
+   "Gyourko, Joseph"
+  ],
+  "journal": "Journal of Economic Perspectives",
+  "year": 2018,
+  "volume": "32",
+  "issue": "1",
+  "pages": "3-30",
+  "doi": "10.1257/jep.32.1.3",
+  "type": "journal-article"
+ },
+ "gyourko2013": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Superstar Cities",
+  "authors": [
+   "Gyourko, Joseph",
+   "Mayer, Christopher",
+   "Sinai, Todd"
+  ],
+  "journal": "American Economic Journal: Economic Policy",
+  "year": 2013,
+  "volume": "5",
+  "issue": "4",
+  "pages": "167-199",
+  "doi": "10.1257/pol.5.4.167",
+  "type": "journal-article"
+ },
+ "hilber2016": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The Impact of Supply Constraints on House Prices in England",
+  "authors": [
+   "Hilber",
+   "Vermeulen"
+  ],
+  "journal": "The Economic Journal",
+  "year": 2015,
+  "volume": "126",
+  "issue": "591",
+  "pages": "358-405",
+  "doi": "10.1111/ecoj.12213",
+  "type": "journal-article"
+ },
+ "himmelberg2005": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Assessing High House Prices: Bubbles, Fundamentals and Misperceptions",
+  "authors": [
+   "Himmelberg, Charles",
+   "Mayer, Christopher",
+   "Sinai, Todd"
+  ],
+  "journal": "Journal of Economic Perspectives",
+  "year": 2005,
+  "volume": "19",
+  "issue": "4",
+  "pages": "67-92",
+  "doi": "10.1257/089533005775196769",
+  "type": "journal-article"
+ },
+ "sinai2005": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Owner-Occupied Housing as a Hedge Against Rent Risk",
+  "authors": [
+   "Sinai, T.",
+   "Souleles, N. S."
+  ],
+  "journal": "The Quarterly Journal of Economics",
+  "year": 2005,
+  "volume": "120",
+  "issue": "2",
+  "pages": "763-789",
+  "doi": "10.1093/qje/120.2.763",
+  "type": "journal-article"
+ },
+ "quigley2004": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Is Housing Unaffordable? Why Isn't It More Affordable?",
+  "authors": [
+   "Quigley, John M",
+   "Raphael, Steven"
+  ],
+  "journal": "Journal of Economic Perspectives",
+  "year": 2004,
+  "volume": "18",
+  "issue": "1",
+  "pages": "191-214",
+  "doi": "10.1257/089533004773563494",
+  "type": "journal-article"
+ },
+ "genesove2003": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The Nominal Rigidity of Apartment Rents",
+  "authors": [
+   "Genesove, David"
+  ],
+  "journal": "Review of Economics and Statistics",
+  "year": 2003,
+  "volume": "85",
+  "issue": "4",
+  "pages": "844-853",
+  "doi": "10.1162/003465303772815763",
+  "type": "journal-article"
+ },
+ "ambrose2015": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "The Repeat Rent Index",
+  "authors": [
+   "Ambrose",
+   "Coulson",
+   "Yoshida"
+  ],
+  "journal": "Review of Economics and Statistics",
+  "year": 2015,
+  "volume": "97",
+  "issue": "5",
+  "pages": "939-950",
+  "doi": "10.1162/rest_a_00500",
+  "type": "journal-article"
+ },
+ "hsieh2019": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Housing Constraints and Spatial Misallocation",
+  "authors": [
+   "Hsieh, Chang-Tai",
+   "Moretti, Enrico"
+  ],
+  "journal": "American Economic Journal: Macroeconomics",
+  "year": 2019,
+  "volume": "11",
+  "issue": "2",
+  "pages": "1-39",
+  "doi": "10.1257/mac.20170388",
+  "type": "journal-article"
+ },
+ "favilukis2023": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Affordable Housing and City Welfare",
+  "authors": [
+   "Favilukis",
+   "Mabille",
+   "Van Nieuwerburgh"
+  ],
+  "journal": "The Review of Economic Studies",
+  "year": 2022,
+  "volume": "90",
+  "issue": "1",
+  "pages": "293-330",
+  "doi": "10.1093/restud/rdac024",
+  "type": "journal-article"
+ },
+ "barron2021": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The Effect of Home-Sharing on House Prices and Rents: Evidence from Airbnb",
+  "authors": [
+   "Barron, Kyle",
+   "Kung, Edward",
+   "Proserpio, Davide"
+  ],
+  "journal": "Marketing Science",
+  "year": 2021,
+  "volume": "40",
+  "issue": "1",
+  "pages": "23-47",
+  "doi": "10.1287/mksc.2020.1227",
+  "type": "journal-article"
+ },
+ "garcialopez2020": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Do short-term rental platforms affect housing markets? Evidence from Airbnb in Barcelona",
+  "authors": [
+   "Garcia-López, Miquel-Àngel",
+   "Jofre-Monseny, Jordi",
+   "Martínez-Mazza, Rodrigo",
+   "Segú, Mariona"
+  ],
+  "journal": "Journal of Urban Economics",
+  "year": 2020,
+  "volume": "119",
+  "issue": null,
+  "pages": "103278",
+  "doi": "10.1016/j.jue.2020.103278",
+  "type": "journal-article"
+ },
+ "duso2024": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Airbnb and rental markets: Evidence from Berlin",
+  "authors": [
+   "Duso, Tomaso",
+   "Michelsen, Claus",
+   "Schaefer, Maximilian",
+   "Tran, Kevin Ducbao"
+  ],
+  "journal": "Regional Science and Urban Economics",
+  "year": 2024,
+  "volume": "106",
+  "issue": null,
+  "pages": "104007",
+  "doi": "10.1016/j.regsciurbeco.2024.104007",
+  "type": "journal-article"
+ },
+ "almagro2025": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Location Sorting and Endogenous Amenities: Evidence From Amsterdam",
+  "authors": [
+   "Almagro, Milena",
+   "Domínguez-Iino, Tomás"
+  ],
+  "journal": "Econometrica",
+  "year": 2025,
+  "volume": "93",
+  "issue": "3",
+  "pages": "1031-1071",
+  "doi": "10.3982/ecta21394",
+  "type": "journal-article"
+ },
+ "valentin2021": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Regulating short‐term rental housing: Evidence from New Orleans",
+  "authors": [
+   "Valentin, Maxence"
+  ],
+  "journal": "Real Estate Economics",
+  "year": 2020,
+  "volume": "49",
+  "issue": "1",
+  "pages": "152-186",
+  "doi": "10.1111/1540-6229.12330",
+  "type": "journal-article"
+ },
+ "madridstr2026": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The effect of short-term rentals on house prices and residential mobility: evidence from Madrid",
+  "authors": [
+   "Chaves-Fonseca, Cayrua"
+  ],
+  "journal": "SERIEs",
+  "year": 2026,
+  "volume": null,
+  "issue": null,
+  "pages": null,
+  "doi": "10.1007/s13209-026-00335-2",
+  "type": "journal-article"
+ },
+ "autor2014": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Housing Market Spillovers: Evidence from the End of Rent Control in Cambridge, Massachusetts",
+  "authors": [
+   "Autor, David H.",
+   "Palmer, Christopher J.",
+   "Pathak, Parag A."
+  ],
+  "journal": "Journal of Political Economy",
+  "year": 2014,
+  "volume": "122",
+  "issue": "3",
+  "pages": "661-717",
+  "doi": "10.1086/675536",
+  "type": "journal-article"
+ },
+ "diamond2019": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco",
+  "authors": [
+   "Diamond, Rebecca",
+   "McQuade, Tim",
+   "Qian, Franklin"
+  ],
+  "journal": "American Economic Review",
+  "year": 2019,
+  "volume": "109",
+  "issue": "9",
+  "pages": "3365-3394",
+  "doi": "10.1257/aer.20181289",
+  "type": "journal-article"
+ },
+ "jofre2023": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Effectiveness and supply effects of high-coverage rent control policies",
+  "authors": [
+   "Jofre-Monseny, Jordi",
+   "Martínez-Mazza, Rodrigo",
+   "Segú, Mariona"
+  ],
+  "journal": "Regional Science and Urban Economics",
+  "year": 2023,
+  "volume": "101",
+  "issue": null,
+  "pages": "103916",
+  "doi": "10.1016/j.regsciurbeco.2023.103916",
+  "type": "journal-article"
+ },
+ "kholodilin2024": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Rent control effects through the lens of empirical research: An almost complete review of the literature",
+  "authors": [
+   "Kholodilin, Konstantin A."
+  ],
+  "journal": "Journal of Housing Economics",
+  "year": 2024,
+  "volume": "63",
+  "issue": null,
+  "pages": "101983",
+  "doi": "10.1016/j.jhe.2024.101983",
+  "type": "journal-article"
+ },
+ "mills2019": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Large‐Scale Buy‐to‐Rent Investors in the Single‐Family Housing Market: The Emergence of a New Asset Class",
+  "authors": [
+   "Mills, James",
+   "Molloy, Raven",
+   "Zarutskie, Rebecca"
+  ],
+  "journal": "Real Estate Economics",
+  "year": 2017,
+  "volume": "47",
+  "issue": "2",
+  "pages": "399-430",
+  "doi": "10.1111/1540-6229.12189",
+  "type": "journal-article"
+ },
+ "saiz2007": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Immigration and housing rents in American cities",
+  "authors": [
+   "Saiz, Albert"
+  ],
+  "journal": "Journal of Urban Economics",
+  "year": 2007,
+  "volume": "61",
+  "issue": "2",
+  "pages": "345-371",
+  "doi": "10.1016/j.jue.2006.07.004",
+  "type": "journal-article"
+ },
+ "gonzalez2013": {
+  "ok": true,
+  "sim": 1.04,
+  "title": "IMMIGRATION AND HOUSING BOOMS: EVIDENCE FROM SPAIN*",
+  "authors": [
+   "Gonzalez, Libertad",
+   "Ortega, Francesc"
+  ],
+  "journal": "Journal of Regional Science",
+  "year": 2012,
+  "volume": "53",
+  "issue": "1",
+  "pages": "37-59",
+  "doi": "10.1111/jors.12010",
+  "type": "journal-article"
+ },
+ "sanchis2023": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Decomposing the impact of immigration on house prices",
+  "authors": [
+   "Sanchis-Guarner, Rosa"
+  ],
+  "journal": "Regional Science and Urban Economics",
+  "year": 2023,
+  "volume": "100",
+  "issue": null,
+  "pages": "103893",
+  "doi": "10.1016/j.regsciurbeco.2023.103893",
+  "type": "journal-article"
+ },
+ "borusyak2022": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Quasi-Experimental Shift-Share Research Designs",
+  "authors": [
+   "Borusyak, Kirill",
+   "Hull, Peter",
+   "Jaravel, Xavier"
+  ],
+  "journal": "The Review of Economic Studies",
+  "year": 2021,
+  "volume": "89",
+  "issue": "1",
+  "pages": "181-213",
+  "doi": "10.1093/restud/rdab030",
+  "type": "journal-article"
+ },
+ "goldsmith2020": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Bartik Instruments: What, When, Why, and How",
+  "authors": [
+   "Goldsmith-Pinkham, Paul",
+   "Sorkin, Isaac",
+   "Swift, Henry"
+  ],
+  "journal": "American Economic Review",
+  "year": 2020,
+  "volume": "110",
+  "issue": "8",
+  "pages": "2586-2624",
+  "doi": "10.1257/aer.20181047",
+  "type": "journal-article"
+ },
+ "adao2019": {
+  "ok": true,
+  "sim": 1.038,
+  "title": "Shift-Share Designs: Theory and Inference*",
+  "authors": [
+   "Adão, Rodrigo",
+   "Kolesár, Michal",
+   "Morales, Eduardo"
+  ],
+  "journal": "The Quarterly Journal of Economics",
+  "year": 2019,
+  "volume": "134",
+  "issue": "4",
+  "pages": "1949-2010",
+  "doi": "10.1093/qje/qjz025",
+  "type": "journal-article"
+ },
+ "callaway2021": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Difference-in-Differences with multiple time periods",
+  "authors": [
+   "Callaway, Brantly",
+   "Sant’Anna, Pedro H.C."
+  ],
+  "journal": "Journal of Econometrics",
+  "year": 2021,
+  "volume": "225",
+  "issue": "2",
+  "pages": "200-230",
+  "doi": "10.1016/j.jeconom.2020.12.001",
+  "type": "journal-article"
+ },
+ "dechaisemartin2020": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects",
+  "authors": [
+   "de Chaisemartin, Clément",
+   "D’Haultfœuille, Xavier"
+  ],
+  "journal": "American Economic Review",
+  "year": 2020,
+  "volume": "110",
+  "issue": "9",
+  "pages": "2964-2996",
+  "doi": "10.1257/aer.20181169",
+  "type": "journal-article"
+ },
+ "roth2023": {
+  "ok": true,
+  "sim": 1.039,
+  "title": "What’s trending in difference-in-differences? A synthesis of the recent econometrics literature",
+  "authors": [
+   "Roth, Jonathan",
+   "Sant’Anna, Pedro H.C.",
+   "Bilinski, Alyssa",
+   "Poe, John"
+  ],
+  "journal": "Journal of Econometrics",
+  "year": 2023,
+  "volume": "235",
+  "issue": "2",
+  "pages": "2218-2244",
+  "doi": "10.1016/j.jeconom.2023.03.008",
+  "type": "journal-article"
+ },
+ "arkhangelsky2021": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Synthetic Difference-in-Differences",
+  "authors": [
+   "Arkhangelsky, Dmitry",
+   "Athey, Susan",
+   "Hirshberg, David A.",
+   "Imbens, Guido W.",
+   "Wager, Stefan"
+  ],
+  "journal": "American Economic Review",
+  "year": 2021,
+  "volume": "111",
+  "issue": "12",
+  "pages": "4088-4118",
+  "doi": "10.1257/aer.20190159",
+  "type": "journal-article"
+ },
+ "rambachan2023": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "A More Credible Approach to Parallel Trends",
+  "authors": [
+   "Rambachan, Ashesh",
+   "Roth, Jonathan"
+  ],
+  "journal": "Review of Economic Studies",
+  "year": 2023,
+  "volume": "90",
+  "issue": "5",
+  "pages": "2555-2591",
+  "doi": "10.1093/restud/rdad018",
+  "type": "journal-article"
+ },
+ "gelbach2016": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "When Do Covariates Matter? And Which Ones, and How Much?",
+  "authors": [
+   "Gelbach, Jonah B."
+  ],
+  "journal": "Journal of Labor Economics",
+  "year": 2016,
+  "volume": "34",
+  "issue": "2",
+  "pages": "509-543",
+  "doi": "10.1086/683668",
+  "type": "journal-article"
+ },
+ "shorrocks2013": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Decomposition procedures for distributional analysis: a unified framework based on the Shapley value",
+  "authors": [
+   "Shorrocks, Anthony F."
+  ],
+  "journal": "The Journal of Economic Inequality",
+  "year": 2012,
+  "volume": "11",
+  "issue": "1",
+  "pages": "99-126",
+  "doi": "10.1007/s10888-011-9214-z",
+  "type": "journal-article"
+ },
+ "oster2019": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Unobservable Selection and Coefficient Stability: Theory and Evidence",
+  "authors": [
+   "Oster, Emily"
+  ],
+  "journal": "Journal of Business &amp; Economic Statistics",
+  "year": 2017,
+  "volume": "37",
+  "issue": "2",
+  "pages": "187-204",
+  "doi": "10.1080/07350015.2016.1227711",
+  "type": "journal-article"
+ },
+ "mian2014": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "What Explains the 2007-2009 Drop in Employment?",
+  "authors": [
+   "Mian, Atif",
+   "Sufi, Amir"
+  ],
+  "journal": "Econometrica",
+  "year": 2014,
+  "volume": "82",
+  "issue": "6",
+  "pages": "2197-2223",
+  "doi": "10.3982/ecta10451",
+  "type": "journal-article"
+ },
+ "glaeser2008": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Housing supply and housing bubbles",
+  "authors": [
+   "Glaeser, Edward L.",
+   "Gyourko, Joseph",
+   "Saiz, Albert"
+  ],
+  "journal": "Journal of Urban Economics",
+  "year": 2008,
+  "volume": "64",
+  "issue": "2",
+  "pages": "198-217",
+  "doi": "10.1016/j.jue.2008.07.007",
+  "type": "journal-article"
+ },
+ "molloy2020": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The effect of housing supply regulation on housing affordability: A review",
+  "authors": [
+   "Molloy, Raven"
+  ],
+  "journal": "Regional Science and Urban Economics",
+  "year": 2020,
+  "volume": "80",
+  "issue": null,
+  "pages": "103350",
+  "doi": "10.1016/j.regsciurbeco.2018.03.007",
+  "type": "journal-article"
+ },
+ "greenaway2020": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Can zoning reform reduce housing costs? Evidence from rents in Auckland",
+  "authors": [
+   "Greenaway‐McGrevy, Ryan",
+   "So, Yun"
+  ],
+  "journal": "Economic Inquiry",
+  "year": 2026,
+  "volume": null,
+  "issue": null,
+  "pages": null,
+  "doi": "10.1111/ecin.70075",
+  "type": "journal-article"
+ },
+ "bartik1991": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "Who Benefits from State and Local Economic Development Policies?",
+  "authors": [
+   "Jr., Henry W. Herzog",
+   "Bartik, Timothy J."
+  ],
+  "journal": "Economic Geography",
+  "year": 1992,
+  "volume": "68",
+  "issue": "2",
+  "pages": "214",
+  "doi": "10.2307/144206",
+  "type": "journal-article"
+ },
+ "moretti2011": {
+  "ok": true,
+  "sim": 1.0,
+  "title": "Local Labor Markets",
+  "authors": [
+   "Enrico"
+  ],
+  "journal": "Handbook of Labor Economics",
+  "year": 2011,
+  "volume": null,
+  "issue": null,
+  "pages": "1237-1313",
+  "doi": "10.1016/s0169-7218(11)02412-9",
+  "type": "journal-article"
+ },
+ "howard2020": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The Migration Accelerator: Labor Mobility, Housing, and Demand",
+  "authors": [
+   "Howard, Greg"
+  ],
+  "journal": "American Economic Journal: Macroeconomics",
+  "year": 2020,
+  "volume": "12",
+  "issue": "4",
+  "pages": "147-179",
+  "doi": "10.1257/mac.20180363",
+  "type": "journal-article"
+ },
+ "mense2023": {
+  "ok": true,
+  "sim": 1.05,
+  "title": "The Effects of Second-Generation Rent Control on Land Values",
+  "authors": [
+   "Mense, Andreas",
+   "Michelsen, Claus",
+   "Kholodilin, Konstantin A."
+  ],
+  "journal": "AEA Papers and Proceedings",
+  "year": 2019,
+  "volume": "109",
+  "issue": null,
+  "pages": "385-388",
+  "doi": "10.1257/pandp.20191023",
+  "type": "journal-article"
+ }
+}

@@ -1,0 +1,229 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[no-math]{fontspec}
+\usepackage{mathptmx}
+\setmainfont{TeX Gyre Termes}
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=british]{english}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,array,adjustbox}
+\usepackage{graphicx}
+\usepackage[labelfont=bf,labelsep=space,font=small,justification=centering]{caption}
+\captionsetup[figure]{name=Fig.}\captionsetup[table]{name=Table}
+\usepackage{lineno}
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage{setspace}
+\usepackage[authoryear,round]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[section]{placeins}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\bfseries\itshape}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{2.2ex plus 1ex}{1.2ex}
+\titlespacing*{\subsection}{0pt}{1.8ex plus 0.8ex}{0.8ex}
+\setstretch{1.5}
+\setlength{\parindent}{1.4em}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.08}
+\setlist{nosep,leftmargin=1.6em}
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.12}
+\input{tab/numbers}
+
+\title{\bfseries What Drives Rents in Spain? Demand, Supply, Tourism and Regulation across Municipalities}
+\author{Víctor M. Fernández-Aguilera\\[4pt]
+{\small University of Almería, Almería, Spain}\\
+{\small Corresponding author. E-mail: vfa084@ual.es}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}\noindent
+The rise of rents is one of Spain's main economic and political concerns, but the official index of rents on all leases in force grew by \ipvaGrowth\,\% between 2015 and 2024, as much as consumer prices. This paper asks which forces raised rents, in what order of importance, and where. A stock-flow model of the local rental market organises the candidate determinants and maps market rents into an index of all leases. Using tax-based rent indices for about 700 municipalities, the Catalan register of new leases, the INE count of tourist dwellings and four research designs, the paper finds, first, that the rise is a phenomenon of new contracts: in Catalonia, rents on new leases rose by \catNew\,\% between 2015 and 2024, against \catStock\,\% for all leases. Second, \vsLdProv\,\% of the variation in municipal rent growth is common within provinces, and cannot be attributed to local factors. Third, among local factors, population growth driven by immigration is the largest identified driver: a cumulative inflow of 1\,\% of the population raises the index by \bPop\,\%, and the housing stock does not respond. Fourth, tourist dwellings reallocate housing away from residents: when tourism collapsed in 2020--21, rents on new leases fell and more leases were signed where tourist dwellings were common, and the pattern reversed with the recovery; the effect is small on average and concentrated in tourist municipalities. Fifth, caps lowered measured rents: the 2024 Catalan cap reduced new-lease rents by about 5\,\%, and in its first wave the number of new leases fell by about 18\,\%. Associations with proxies for large owners are absent, and the roles of interest rates and credit are not identified.
+
+\medskip\noindent\textbf{Keywords} Housing rents $\cdot$ Immigration $\cdot$ Tourist dwellings $\cdot$ Rent control $\cdot$ Housing supply $\cdot$ Spain\\
+\textbf{JEL Classification} R21 $\cdot$ R31 $\cdot$ R38 $\cdot$ J61 $\cdot$ Z30
+\end{abstract}
+\clearpage
+\linenumbers
+
+\section{Introduction}\label{sec:intro}
+
+Rents are at the centre of Spanish economic policy. Since 2019 governments have lengthened the minimum duration of leases, capped annual updates, allowed regions to cap rents in tensioned markets and restricted tourist dwellings, while public debate attributes the rise in rents to immigration, tourism, investment funds, interest rates or the lack of construction. Yet the official index of rents on all leases in force, the INE IPVA, rose by \ipvaGrowth\,\% between 2015 and 2024, while consumer prices rose by \cpiGrowth\,\%: measured in real terms, the average rent paid by Spanish tenants did not increase. This paper asks three questions. Which forces raised rents? In what order of importance? And where, by size of municipality and exposure to tourism, did each of them matter?
+
+Answering them requires three things that are rarely combined. The first is a framework that says how each determinant should affect rents and what an index of all leases measures. Section~\ref{sec:theory} sets out a stock-flow model of the local market for long-term rentals in which population, income, tourist demand, supply, the user cost of owning and regulation enter through a single equilibrium condition. The model delivers five predictions and an identity linking market rents to the index of all leases: because only a small share of leases is renewed each year and the rest are indexed to inflation, the index of all leases moves slowly and follows inflation.
+
+The second is a design for each determinant. Section~\ref{sec:data} combines tax-based rent indices for about 700 municipalities (2011--2024), the register of new-lease deposits in Catalonia by municipality and quarter (2019--2025), the INE count of tourist dwellings by municipality (2020--2026), cadastral dwelling counts, household income from the INE income atlas and population registers by country of birth. Population growth is instrumented with a shift-share prediction of immigrant arrivals; the effect of tourist dwellings is identified from the collapse of tourism in 2020--21 and the recovery that followed; the Catalan tensioned-zone cap is evaluated with stacked difference-in-differences; and the cap on annual updates is quantified with the accounting identity of the index.
+
+The third is a clear separation between what the designs identify and what they do not. Designs that compare municipalities absorb shocks that are common to all of them, such as interest rates, national legislation and inflation. Ownership by large investors cannot be measured by municipality with public data. The paper therefore ranks determinants at three levels: the growth of the national index of all leases, the differences in rent growth across municipalities within provinces, and the growth of rents on new leases where they are observed.
+
+The results are as follows. First, the rise in rents is concentrated in new contracts. Between 2021 and 2024, the INE index for new leases rose by \newGrowth\,\%, against \existGrowth\,\% for existing leases and \cpiTwoOne\,\% for consumer prices; in Catalonia, rents on new leases rose by \catNew\,\% between 2015 and 2024, against \catStock\,\% for all leases in the same municipalities (figure~\ref{fig:index}). Second, most of the variation in municipal rent growth is shared within provinces: province fixed effects account for \vsLdProv\,\% of the variance of growth between 2015 and 2024, and the year alone for \vsYear\,\% of the variance of annual growth. Third, the largest identified local driver is population growth driven by immigration: a cumulative foreign-born inflow equal to 1\,\% of the population raised the index of all leases by \bPop\,\% (Anderson-Rubin set \bPopAR), with no pre-trend and no response of the housing stock. Applied to the average inflow, it accounts for \cPop{} log points of the index's growth (range \cPopLo{} to \cPopHi). Fourth, tourist dwellings reallocate housing from residents to visitors: when tourism collapsed in 2020--21, rents on new leases fell by \tRCovid\,\% per percentage point of dwellings in tourist use relative to 2019, and the number of leases signed rose; with the recovery, rents rose by \tRRecov\,\% per point and the number of leases fell. Because tourist dwellings are a small share of the stock in most municipalities, this channel adds little to the national index but matters in tourist municipalities. Fifth, caps lowered measured rents. The cap on updates of existing leases held the index of all leases up to \capGap\,\% below the level it would have reached had leases followed consumer prices in 2022--2023. The Catalan tensioned-zone cap reduced rents on new leases by about 5\,\%, and in the first wave the number of new leases fell by about 18\,\%.
+
+The paper contributes to three literatures. It adds to the work on the determinants of rents and house prices by estimating several channels within one framework and for a whole country, rather than one channel in one city \citep{saiz2007,garcialopez2020,barron2021}. It contributes to the measurement of rents by showing, with the index identity and new-lease data, that an index of all leases is a lagged and policy-distorted measure of market rents \citep{genesove2003,ambrose2015}. And it adds to the evaluation of Spanish housing policy, extending the evidence on the Catalan caps to 2025 and quantifying the cap on updates \citep{jofre2023,perez2026}. It builds on a companion paper on immigration and housing occupancy \citep{fernandez2026}, from which it takes the population instrument.
+
+Section~\ref{sec:institutions} describes the institutional setting and the measurement of rents. Sections~\ref{sec:lit} and~\ref{sec:theory} review the literature and set out the framework. Section~\ref{sec:data} describes the data, section~\ref{sec:facts} the facts, and section~\ref{sec:determinants} the estimates for each determinant. Section~\ref{sec:ranking} ranks them, section~\ref{sec:discussion} discusses what the evidence does and does not support, and section~\ref{sec:conclusion} concludes.
+
+\section{Institutional setting and measurement}\label{sec:institutions}
+
+\textit{Leases.} Residential leases are governed by the 1994 Urban Leases Act. Royal Decree-law 7/2019, in force since 6 March 2019, extended the minimum duration of leases to five years when the landlord is a natural person and seven years when it is a company, and annual updates are typically tied to the consumer price index. Royal Decree-law 6/2022 of 29 March 2022 limited annual updates of existing leases to 2\,\%, a limit later extended to the end of 2023; the Housing Act (Law 12/2023 of 24 May) set a 3\,\% limit for 2024 and replaced the consumer price index with a new INE reference index from 2025. In the framework of section~\ref{sec:theory}, these measures act on the update rule $u_t$ and on the share of leases renewed each year, $\lambda_t$.
+
+\textit{Rent caps in tensioned markets.} The Housing Act allows regions to declare tensioned residential markets, where rents on new leases are capped with reference to the rent of the previous lease and to a reference price index. Catalonia was the first region to apply it: 140 municipalities from 16 March 2024 and a further 131 from October 2024. A previous Catalan law (11/2020) had capped rents in 60 municipalities between September 2020 and March 2022, when the Constitutional Court annulled most of it \citep{jofre2023}.
+
+\textit{Tourist dwellings.} Regions and municipalities regulate tourist dwellings through registers and licences. The INE experimental statistic counts dwellings advertised on the main platforms by municipality since August 2020; there were \vutTwenty{} in August 2020, \vutTwentyFour{} in August 2024 and \vutTwentySix{} in May 2026.
+
+\textit{Measuring rents.} The IPVA is computed by INE from rents declared in personal income-tax returns. It covers all leases in force, not only new ones, and excludes the Basque Country and Navarre, which have their own tax administrations. It is published for municipalities with more than 10,000 inhabitants, with base 2015. Since 2021, INE also publishes separate indices for new and existing leases with their weights: new leases accounted for \wNewtwotwo\,\% of the index in 2022 and \wNewtwofour\,\% in 2024. Rents on new leases are observed by municipality only in Catalonia, where landlords must deposit the tenant's guarantee with the regional housing agency.
+
+\input{sec_lit}
+
+\input{sec_theory}
+
+\section{Data}\label{sec:data}
+
+\textit{Rents.} INE IPVA by municipality (table 59060; 718 municipalities, 2011--2024), by province and type of contract (table 59005, 2021--2024) and nationally with the weights of new and existing leases (tables 59004 and 59008). In Catalonia, new leases signed and their average rent by municipality and quarter, from the deposit register published on the Generalitat's open-data portal (quarterly since 2019, annual before).
+
+\textit{Population and the instrument.} Municipal register (2003--2022) and annual census (2021--2025) by country of birth. The foreign-born net inflow and its shift-share prediction are those of the companion paper: 33 origin groups, 2003 settlement shares and national growth excluding the own province, for 699 municipalities.
+
+\textit{Tourism.} INE experimental statistic of tourist dwellings by municipality, August 2020 to May 2026 (tables 39363 and 39366), measured as a share of all dwellings. In Catalonia, the register of tourist establishments (104,548 active tourist dwellings, identifying whether the owner is a company) and the tourist-stay tax paid by tourist dwellings by municipality and semester, from 2017.
+
+\textit{Supply, income and other inputs.} Cadastral dwellings by municipality (2013--2025), compiled from the Cadastre in the companion paper's replication package; net income per person from the INE household income atlas (2015--2023); foreclosures on dwellings by province and type of owner (INE, 2014--2025); the 12-month Euribor (ECB) and the average rate on new mortgages (INE); consumer prices (INE); and the Catalan designation of tensioned residential markets. Every file is downloaded by the replication code from the public source.
+
+\section{What rose: new leases, cities and common shocks}\label{sec:facts}
+
+Figure~\ref{fig:index} contrasts three measures. Nationally, the index of all leases fell until 2014, grew faster than consumer prices until 2021 and was overtaken by them in 2022--2024; over 2015--2024 the real change is \realIpva\,\%. The index for new leases, available from 2021, rose by \newGrowth\,\% to 2024, against \existGrowth\,\% for existing leases. In Catalonia, where new-lease rents are observed by municipality for a long period, they rose by \catNew\,\% between 2015 and 2024, more than twice the growth of the index of all leases in the same municipalities.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig1_index.pdf}
+\caption{Rents on all leases, rents on new leases and consumer prices}\label{fig:index}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: panel (a), INE IPVA for all leases and for new leases (the latter chained to the former in 2021), and the consumer price index (annual averages). Panel (b), Catalan municipalities with both series in every year 2013--2024: average rent of new leases deposited with the regional housing agency and IPVA, means weighted by 2015 population. Sources: INE, Generalitat de Catalunya.
+\end{minipage}
+\end{figure}
+
+The identity \eqref{eq:index} accounts for the gap. In 2024, new leases grew by \gNewtwofour\,\% and existing leases by \gExisttwofour\,\%; with a weight of \wNewtwofour\,\%, new leases contributed \cNewtwofour{} percentage points of the \gTottwofour\,\% growth of the index, and existing leases \cExisttwofour. In 2022, existing leases grew by \gExisttwotwo\,\% while consumer prices rose by \cpiYtwotwo\,\%: the cap on updates was binding. The weight of new leases fell from \wNewtwotwo\,\% in 2022 to \wNewtwofour\,\% in 2024, so that the index of all leases became even less sensitive to market rents.
+
+Table~\ref{tab:facts} describes the geography of growth. Over 2015--2024 the index of all leases rose by \gSmall\,\% in municipalities of 10,000--20,000 inhabitants and by \gBig\,\% in the six largest cities, and slightly more on the coast and in the tercile with most tourist dwellings. The dispersion within each group is larger than the differences between them. Most of the variation is shared: province $\times$ year effects account for \vsProv\,\% of the variance of annual rent growth across municipalities, year effects alone for \vsYear\,\%, and province effects for \vsLdProv\,\% of the variance of growth over 2015--2024. Prediction P4 implies that the shared component includes the user cost of owning, credit standards, national legislation and inflation; designs that compare municipalities can only explain the remainder.
+
+\input{tab/t1_facts}
+
+\section{Estimates by determinant}\label{sec:determinants}
+
+\subsection{Population and supply}
+
+Prediction P1 states that a population shock raises rents by $1/\Psi_i$ and that the effect is larger where supply is less elastic. Population growth is endogenous to rents, so the paper uses the predicted inflow of foreign-born residents, whose arrivals are driven by conditions in origin countries and by earlier settlement \citep{saiz2007,goldsmith2020,borusyak2022}. For each municipality, the long difference of the log rent index between 2015 and 2024 is regressed on the cumulative foreign-born net inflow over 2016--2024 relative to population, instrumented with the cumulative shift-share prediction, within provinces and with the predetermined controls of the companion paper. Long differences match the question of the paper, the determinants of the rise over the period, and are robust to the timing problems of annual shift-share regressions \citep{goldsmith2020}.
+
+Table~\ref{tab:local} reports the results. A cumulative inflow equal to 1\,\% of the population raised the index of all leases by \bPop\,\% (standard error \bPopSe; first-stage $F$ \bPopF; Anderson-Rubin set \bPopAR). Population grew by \bPopP{} per unit of inflow (\bPopPAR): the arrival of immigrants did not displace natives on net. Per log point of total population, rents rose by \bRentP\,\%. The falsification test is passed: the inflow of 2016--2024 does not predict rent growth in 2012--2015 (\bPre, \bPreAR). The cadastral dwelling stock did not respond (\bViv, \bVivAR): over nine years, the additional population was housed in the existing stock, consistent with the absorption through higher occupancy documented in the companion paper. Without population weights the first stage is weak ($F$ = \bPopUnwF), so the estimate applies to the larger municipalities that carry most of the population.
+
+The evidence on heterogeneity is imprecise. The elasticity is \bBig{} in municipalities of 50,000 inhabitants or more (\bBigAR) and \bSmall{} in smaller ones, where the first stage is weak and the Anderson-Rubin set is unbounded; coastal and inland municipalities give similar estimates. The data are consistent with prediction P1 but do not establish it.
+
+\input{tab/t2_local}
+
+\subsection{Income}
+
+Rents should also capitalise local income (equation~\ref{eq:equilibrium}). Income growth is not identified here: rising rents change who lives in a municipality, and no credible instrument for local income is available at this scale. In the descriptive regression of panel D, a one-standard-deviation increase in the growth of net income per person between 2015 and 2023 is associated with \bInc{} percentage points higher rent growth ($p$ = \bIncP), conditional on the inflow, the stock of dwellings and tourist exposure. This is an association; it may reflect income effects, gentrification or both.
+
+\subsection{Tourist dwellings}
+
+Prediction P2 states that tourist demand raises long-term rents by moving dwellings to tourist use, in proportion to the share of the stock in that use, and that a fall in tourist demand reverses the effect. The collapse of tourism in 2020--21 provides such a fall: in Catalonia, the tourist-stay tax paid by tourist dwellings fell to \ieetTwenty\,\% of its 2019 level in 2020 and was still at \ieetTwentyOne\,\% in 2021. The exposure of each municipality is the share of its dwellings in tourist use in August 2020 (mean \expMean\,\%, standard deviation \expSd{} points). This exposure is not random; the design compares the evolution of rents in more and less exposed municipalities around a shock that hit tourism and not, directly, the demand of residents, and examines its timing.
+
+Figure~\ref{fig:tourism}(a) shows the index of all leases. Before 2019 the index grew faster in more exposed municipalities: relative to 2019, each point of exposure is associated with a level \ipvaEvTwelve\,\% lower in 2012. In 2020 the index fell by \ipvaEvTwenty\,\% per point relative to 2019 and remained below that level until 2024. The pre-2019 differential is consistent with tourist letting raising rents, as in the literature, but cannot be separated from other trends of tourist municipalities, so the paper does not use it as an estimate of the effect.
+
+The Catalan data on new leases allow a sharper test, because they record new contracts only and the number of leases signed. Table~\ref{tab:tourism} and figure~\ref{fig:tourism}(b)--(c) report regressions with municipality and quarter fixed effects and a seasonal profile specific to exposure, since tourist municipalities sign fewer leases in summer. In the first quarter of 2020, before the pandemic, there is no differential (\tRPlacebo, $p$ = \tRPlaceboP). During the collapse, from 2020Q2 to 2021Q2, rents on new leases fell by \tRCovid\,\% per point of exposure ($p<0.001$), and the number of leases signed rose by \tNCovid\,\% per point ($p$ = \tNCovidP). With the recovery in 2022--2023 the pattern reversed: rents rose by \tRRecov\,\% per point ($p$ = \tRRecovP) and the number of leases fell by \tNRecov\,\% ($p$ = \tNRecovP). Prices and quantities moved in opposite directions, as a shift in the supply of dwellings to residents predicts; a fall in residents' demand in tourist municipalities, the main alternative explanation, would have lowered both. The size of the effect is modest: in a municipality with the mean Catalan exposure of \catExpMean\,\%, the collapse lowered new-lease rents by about 0.4\,\%; in one with 10\,\% of dwellings in tourist use, by about 3\,\%, close to the 3.5\,\% fall estimated for central Lisbon by \citet{batalha2022}.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig2_tourism.pdf}
+\caption{Tourist dwellings and long-term rents around the collapse of tourism}\label{fig:tourism}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: coefficients, multiplied by 100, on the share of dwellings in tourist use in August 2020 interacted with year (a) or quarter (b, c). Panel (a): IPVA, 2012--2024, municipality and province $\times$ year fixed effects, predetermined characteristics $\times$ year, population weights, clusters by province, reference 2019. Panels (b) and (c): Catalan municipalities, municipality and quarter fixed effects, exposure $\times$ calendar quarter, log population $\times$ quarter, population weights, clusters by municipality, reference 2019.
+\end{minipage}
+\end{figure}
+
+\input{tab/t3_tourism}
+
+\subsection{Regulation}\label{sec:regulation}
+
+\textit{The cap on updates, 2022--2023.} Under the index identity \eqref{eq:index}, a cap on updates lowers the growth of the index of all leases by $(1-\lambda_t)(\pi_t-u_t)$, whatever happens to market rents. In 2022, existing leases grew by \gExisttwotwo\,\% against consumer price inflation of \cpiYtwotwo\,\%; in 2023, by \gExisttwothree\,\% against \cpiYtwothree\,\%. Had existing leases followed consumer prices, the index of all leases would have been \capGap\,\% higher by 2023 (table~\ref{tab:regulation}, panel C). This is an upper bound, since not all leases are indexed to the CPI; it shows that part of the slow growth of the index of all leases is a direct effect of legislation and not a sign of a calm market.
+
+\textit{The Catalan tensioned-zone cap, 2024--2025.} Prediction P3 states that a binding cap on new contracts lowers their rents and the number of leases signed. The designation was not random: it followed criteria of rent burden and rent growth, and the first wave included the largest municipalities. The paper therefore compares each wave with clean controls: the first wave with municipalities not yet or never designated until the second wave took effect, and each wave with never-designated municipalities to the end of 2025, controlling for tourist exposure and its seasonality \citep{callaway2021,roth2023}. Figure~\ref{fig:cap} shows the event studies. Rents on new leases fell by \capROne\,\% in the first wave relative to not-yet-designated municipalities, by \capROneNever\,\% relative to never-designated municipalities, and by \capRTwo\,\% in the second wave. The number of new leases fell by \capNOne\,\% in the first wave; in the second wave the fall is smaller and not robust. The joint test of pre-period coefficients rejects in the first-wave comparisons: pre-period coefficients fluctuate around zero, in particular in 2021, without a trend, whereas all post-period coefficients for rents are negative. Removing a linear pre-trend estimated on the pre-period leaves the rent estimates between \capRdOne{} and \capRdTwo\,\%. In the sample, the number of new leases signed in Catalonia fell from \catLeasesTwentyThree{} in 2023 to \catLeasesTwentyFive{} in 2025. At the provincial level, the INE index of new leases grew by \provNew{} percentage points less in Catalan provinces in 2024 than elsewhere.
+
+These estimates agree with those of \citet{jofre2023} for the 2020 law and of \citet{perez2026} for the first months of the 2024 cap, and extend them to the end of 2025. The design measures new-lease rents and the number of leases deposited; it cannot say whether the leases not signed became seasonal or room rentals, sales or vacant dwellings, nor whether they moved to the informal market. Fewer deposited leases do not necessarily mean fewer dwellings available to residents.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=0.95\linewidth]{fig/fig3_cap.pdf}
+\caption{Catalan tensioned-zone cap: new-lease rents and leases signed}\label{fig:cap}
+\begin{minipage}{0.92\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: event-study coefficients and 95\,\% intervals, quarters relative to the first full quarter of the cap (2024Q2 for wave 1, 2024Q4 for wave 2), relative to the quarter before. Controls: Catalan municipalities never designated. Municipality and quarter fixed effects, tourist exposure $\times$ calendar quarter and $\times$ period; clusters by municipality.
+\end{minipage}
+\end{figure}
+
+\input{tab/t4_regulation}
+
+\subsection{Large owners and credit}
+
+\textit{Large owners.} Public data do not identify the owners of rented dwellings by municipality. Two proxies are available. The first is the number of foreclosures on dwellings owned by companies in 2014--2016 per thousand dwellings, a measure of the stock repossessed by banks after the crisis and later sold, often to investment funds; companies accounted for \fjShare\,\% of foreclosures on dwellings in those years. Across 48 provinces, it is not associated with rent growth in 2015--2024 once population growth is controlled for (\fjB{} percentage points per standard deviation, interval \fjLo{} to \fjHi), while population growth is (\provPopB). The second is the share of registered tourist dwellings in Catalonia held by companies, \corpShare\,\% on average. Across municipalities with more than 5,000 inhabitants, it is not associated with the growth of new-lease rents between 2019 and 2025 (\corpB, interval \corpLo{} to \corpHi), whereas the number of tourist dwellings per inhabitant is. Neither result identifies the effect of large owners; together with the small share of companies among landlords documented by \citet{khametshin2024}, they give no support to the view that investment funds drove the rise in rents across municipalities, but they cannot rule out effects in particular neighbourhoods or segments.
+
+\textit{Credit and interest rates.} The 12-month Euribor rose from \eurTwentyOne\,\% in 2021 to \eurTwentyThree\,\% in 2023, and the average rate on new mortgages from \mrTwentyOne\,\% to \mrTwentyThree\,\%. New-lease rents accelerated over the same period, consistent with a shift from buying to renting \citep{khametshin2024}. This is a common shock (P4): with one country and few years, its effect is not identified, and the paper attributes none of the rise to it.
+
+\section{Ranking the determinants}\label{sec:ranking}
+
+Table~\ref{tab:ranking} and figure~\ref{fig:ranking} bring the estimates together for the index of all leases between 2015 and 2024, which grew by \cTotal{} log points. Contributions of different nature are kept apart. Inflation and the cap on updates are accounting contributions, exact under the index identity but not causal. The contributions of local channels are causal within provinces, aggregated under two assumptions that cannot be tested: that there are no spillovers between municipalities and that the national elasticity equals the local one.
+
+\begin{enumerate}
+\item \textit{Inflation} accounts for the whole nominal growth of the index of all leases (\cCpi{} log points), through the indexation of existing leases and the nominal rents of new ones.
+\item \textit{Legislation on updates} subtracted up to \capGap\,\% (\cCap{} log points) in 2022--2023.
+\item \textit{Population growth driven by immigration} is the largest identified local driver: \cPop{} log points (\cPopLo{} to \cPopHi), given an average cumulative inflow of \cPopM\,\% of the population. In the cross-section it accounts for \shPop\,\% of the variance of rent growth within provinces.
+\item \textit{Income} is associated with \cInc{} log points (\cIncLo{} to \cIncHi), given mean real income growth of \incReal{} log points in 2015--2023; this contribution is not identified.
+\item \textit{Tourist dwellings} contributed \cTourA{} log points in 2015--2019 and \cTourB{} in 2019--2024 at the national level: little on average, because tourist dwellings are a small share of the stock in most municipalities.
+\item \textit{Supply} did not respond to demand: the dwelling stock grew by \dlnviv\,\% on average, independently of population inflows. Supply is not a driver of the rise but the reason demand turned into rents.
+\item \textit{Rent caps on new contracts} lowered new-lease rents by about 5\,\% in covered Catalan municipalities (\capShare\,\% of the population of the sample), with a negligible effect on the national index so far.
+\item \textit{Large owners} and \textit{credit conditions}: no association is found for the former, and the latter are not identified.
+\end{enumerate}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=0.98\linewidth]{fig/fig4_ranking.pdf}
+\caption{Contributions to the growth of the rent index for all leases, 2015--2024}\label{fig:ranking}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: log points. Panel (a), accounting contributions. Panel (b), local channels aggregated with the mean exposure; horizontal lines are Anderson-Rubin (population) or confidence (income) ranges. Filled markers: identified within provinces; hollow marker: association. See table~\ref{tab:ranking}.
+\end{minipage}
+\end{figure}
+
+\input{tab/t5_ranking}
+
+\textit{By size of municipality.} Figure~\ref{fig:size} applies the common elasticities to the exposure of each size class. The largest cities combine the highest rent growth (\szER{} log points) with the largest foreign-born inflows (\szEInfl\,\% of the population, an implied contribution of \szEPop{} log points against \szAPop{} in municipalities of 10,000--20,000 inhabitants), while the dwelling stock grew at a similar rate, about 4\,\%, in every size class. Tourist dwellings are, on average, a larger share of the stock in small and medium municipalities (\szAVut\,\% and \szBVut\,\% in 2020) than in cities of 100,000--500,000 inhabitants (\szDVut\,\%), and the tail matters: in the 10\,\% most touristic municipalities of 10,000--50,000 inhabitants, \szAVutNinety\,\% or more of dwellings were in tourist use, and in the top 5\,\% of the sample at least 8\,\% (up to 23\,\%). Applying the estimates of section~\ref{sec:determinants}, in a municipality with 13\,\% of dwellings in tourist use the tourism channel moves new-lease rents by 4--6\,\%, of the same order as the population channel; at the median exposure (0.3\,\%) it is negligible. In the large cities, population dominates. The tensioned-zone cap applies mainly to large and medium Catalan municipalities.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig5_size.pdf}
+\caption{Rent growth and exposure to each channel by size of municipality}\label{fig:size}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: IPVA municipalities by 2015 population. (a) Growth of the log index of all leases, 2015--2024. (b) Cumulative foreign-born net inflow, 2016--2024. (c) Share of dwellings in tourist use, August 2020: mean and 90th percentile. Means weighted by population.
+\end{minipage}
+\end{figure}
+
+\section{Discussion}\label{sec:discussion}
+
+\textit{What the evidence supports.} The rise in rents that drives the public debate is a rise in new-lease rents in large cities and tourist areas, not in the average rent paid by Spanish tenants. Most of it is common to municipalities within provinces. Among local factors, immigration-driven population growth against an unresponsive housing stock is the most important identified driver. Tourist dwellings displace residents where they are common, and the effect is reversible. Caps on rents lower measured rents, and the cap on new contracts also reduces the number of leases signed.
+
+\textit{What is compatible but not demonstrated.} The common component may reflect national population growth, the user cost of owning, credit standards, construction costs and the expectations of landlords; none of them is identified here. The faster growth of new-lease rents may partly be a response of landlords to longer leases and capped updates, which make the first rent of a lease more important; the falling share of new leases in the index is consistent with lower mobility of tenants, but the paper does not test either mechanism. Income growth is associated with rent growth, but the direction of causality is not established.
+
+\textit{What is not supported.} The data give no support to the view that investment funds or large owners drove the rise across municipalities, and no support to the view that the stock of dwellings expanded in response to demand. The absence of a statistically significant association is not evidence of no effect: the intervals for large owners are wide and the proxies are coarse.
+
+\textit{Prices are not welfare.} Higher rents transfer income from tenants to landlords and lower the welfare of tenants who pay them, but they also reflect the value of locations and the absorption of population. The companion paper shows that much of the population growth was housed through higher occupancy of existing dwellings; higher occupancy is not the same as overcrowding, and neither paper measures the welfare of the households concerned. Caps lower measured rents for those who sign a lease but reduce the number of leases; their net effect on welfare depends on who obtains and who loses access, which the data do not show.
+
+\textit{Limitations.} The index of all leases excludes the Basque Country, Navarre and municipalities with fewer than 10,000 inhabitants. New-lease rents are observed only in Catalonia. Tourist-dwelling counts start in August 2020, during the shock used for identification, so exposure is measured in the first months of the collapse; listings that disappeared before August 2020 are not counted, which would bias the exposure measure towards zero in the most affected places. The aggregation of local elasticities to the national level assumes away spillovers and general-equilibrium effects. Ownership data by municipality would be needed to study large owners, and comparable new-lease data for all regions to study rent caps and tourism outside Catalonia; the Ministry of Housing's rent reference system (SERPAVI) and the deposit registers of other regions are natural candidates if they become accessible.
+
+\section{Conclusion}\label{sec:conclusion}
+
+Spanish rents rose because demand grew in places where the housing stock did not respond, and because tourist letting removed dwellings from residents where it was common; inflation and the indexation of leases account for the nominal growth of the average rent, while caps held it down. The policy implications follow from the ranking. Measures that expand the supply of dwellings available to residents in large cities address the main identified local driver; restrictions on tourist dwellings matter in tourist municipalities; caps lower measured rents at the cost of fewer leases. Monitoring the market requires new-lease data for all regions: an index of all leases moves too slowly, and is too affected by legislation, to describe what new tenants face.
+
+\section*{Declarations}
+\noindent\textbf{Funding} No funding was received for this work.\\
+\textbf{Competing interests} The author declares no competing interests.\\
+\textbf{Data and code availability} All data are public and are downloaded by the replication code from INE, the Generalitat de Catalunya, the ECB and the companion paper's replication package; the code is available from the author.\\
+\textbf{Use of generative AI} Claude (Anthropic) was used to retrieve the data and to assist with the code, the drafting and the English translation. The author verified all results and text and is fully responsible for the article.
+
+\input{refs}
+
+\end{document}

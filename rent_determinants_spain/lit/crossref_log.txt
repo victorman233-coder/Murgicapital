@@ -1,0 +1,58 @@
+OK  dipasquale1992: DiPasquale; Wheaton (1992) The Markets for Real Estate Assets and Space: A Conceptual Framework | Real Estate Economics 20(2):181-198 doi:10.1111/1540-6229.00579
+OK  poterba1984: Poterba (1984) Tax Subsidies to Owner-Occupied Housing: An Asset-Market Approach | The Quarterly Journal of Economics 99(4):729 doi:10.2307/1883123
+OK  koster2021: Koster; van Ommeren; Volkhausen (2021) Short-term rentals and the housing market: Quasi-experimental evidence from Airb | Journal of Urban Economics 124(None):103356 doi:10.1016/j.jue.2021.103356
+OK  batalha2022: Batalha; Gonçalves; Peralta; Pereira dos Santos (2022) The virus that devastated tourism: The impact of covid-19 on the housing market | Regional Science and Urban Economics 95(None):103774 doi:10.1016/j.regsciurbeco.2022.103774
+OK  franco2021: Franco; Santos; Longo (2019) The Impact of Airbnb on Residential Property Values and Rents: Evidence from Por | SSRN Electronic Journal None(None):None doi:10.2139/ssrn.3387341
+OK  perles2026: Perles-Ribes; Romero; Torres-Penalva; Torregrosa-Martí (2026) Short-term rentals and housing prices on the Costa Blanca (Spain): A panel Grang | Tourism Economics None(None):None doi:10.1177/13548166261463752
+OK  garriga2023: Garriga; Gete; Tsouderou (2023) The economic effects of real estate investors | Real Estate Economics 51(3):655-685 doi:10.1111/1540-6229.12427
+OK  gurun2023: Gurun; Wu; Xiao; Xiao (2022) Do Wall Street Landlords Undermine Renters’ Welfare? | The Review of Financial Studies 36(1):70-121 doi:10.1093/rfs/hhac017
+OK  janoschka2020: Janoschka; Alexandri; Ramos; Vives-Miró (2019) Tracing the socio-spatial logics of transnational landlords’ real estate investm | European Urban and Regional Studies 27(2):125-141 doi:10.1177/0969776418822061
+OK  cocola2025: Cocola-Gant; Hodkinson; Janoschka (2025) The financialisation of short-term rentals in Barcelona: Property ownership and  | European Urban and Regional Studies 33(3):300-317 doi:10.1177/09697764251361724
+OK  sa2015: Sá (2014) Immigration and House Prices in the UK | The Economic Journal 125(587):1393-1424 doi:10.1111/ecoj.12158
+OK  roback1982: Roback (1982) Wages, Rents, and the Quality of Life | Journal of Political Economy 90(6):1257-1278 doi:10.1086/261120
+OK  glaeser2005: Glaeser; Gyourko (2005) Urban Decline and Durable Housing | Journal of Political Economy 113(2):345-375 doi:10.1086/427465
+OK  saiz2010: Saiz (2010) The Geographic Determinants of Housing Supply
+                    * | Quarterly Journal of Economics 125(3):1253-1296 doi:10.1162/qjec.2010.125.3.1253
+OK  glaeser2018: Glaeser; Gyourko (2018) The Economic Implications of Housing Supply | Journal of Economic Perspectives 32(1):3-30 doi:10.1257/jep.32.1.3
+OK  gyourko2013: Gyourko; Mayer; Sinai (2013) Superstar Cities | American Economic Journal: Economic Policy 5(4):167-199 doi:10.1257/pol.5.4.167
+OK  hilber2016: Hilber; Vermeulen (2013) The Impact of Supply Constraints on House Prices in England | SSRN Electronic Journal None(None):None doi:10.2139/ssrn.2340421
+OK  himmelberg2005: Himmelberg; Mayer; Sinai (2005) Assessing High House Prices: Bubbles, Fundamentals and Misperceptions | Journal of Economic Perspectives 19(4):67-92 doi:10.1257/089533005775196769
+OK  sinai2005: Sinai; Souleles (2005) Owner-Occupied Housing as a Hedge Against Rent Risk | The Quarterly Journal of Economics 120(2):763-789 doi:10.1093/qje/120.2.763
+OK  quigley2004: Quigley; Raphael (2004) Is Housing Unaffordable? Why Isn't It More Affordable? | Journal of Economic Perspectives 18(1):191-214 doi:10.1257/089533004773563494
+OK  genesove2003: Genesove (2003) The Nominal Rigidity of Apartment Rents | Review of Economics and Statistics 85(4):844-853 doi:10.1162/003465303772815763
+OK  ambrose2015: Ambrose; Coulson; Yoshida (2013) The Repeat Rent Index | SSRN Electronic Journal None(None):None doi:10.2139/ssrn.2218814
+OK  hsieh2019: Hsieh; Moretti (2019) Housing Constraints and Spatial Misallocation | American Economic Journal: Macroeconomics 11(2):1-39 doi:10.1257/mac.20170388
+OK  favilukis2023: Favilukis; Mabille; Van Nieuwerburgh (2018) Affordable Housing and City Welfare | SSRN Electronic Journal None(None):None doi:10.2139/ssrn.3265918
+OK  barron2021: Barron; Kung; Proserpio (2021) The Effect of Home-Sharing on House Prices and Rents: Evidence from Airbnb | Marketing Science 40(1):23-47 doi:10.1287/mksc.2020.1227
+OK  garcialopez2020: Garcia-López; Jofre-Monseny; Martínez-Mazza; Segú (2020) Do short-term rental platforms affect housing markets? Evidence from Airbnb in B | Journal of Urban Economics 119(None):103278 doi:10.1016/j.jue.2020.103278
+OK  duso2024: Duso; Michelsen; Schaefer; Tran (2024) Airbnb and rental markets: Evidence from Berlin | Regional Science and Urban Economics 106(None):104007 doi:10.1016/j.regsciurbeco.2024.104007
+OK  almagro2025: Almagro; Domínguez-Iino (2025) Location Sorting and Endogenous Amenities: Evidence From Amsterdam | Econometrica 93(3):1031-1071 doi:10.3982/ecta21394
+OK  valentin2021: Valentin (2019) The Effects of Regulating the Housing Short-Term Rental Market: Evidence From Ne | SSRN Electronic Journal None(None):None doi:10.2139/ssrn.3329964
+OK  madridstr2026: Chaves-Fonseca (2026) The effect of short-term rentals on house prices and residential mobility: evide | SERIEs None(None):None doi:10.1007/s13209-026-00335-2
+OK  autor2014: Autor; Palmer; Pathak (2014) Housing Market Spillovers: Evidence from the End of Rent Control in Cambridge, M | Journal of Political Economy 122(3):661-717 doi:10.1086/675536
+OK  diamond2019: Diamond; McQuade; Qian (2019) The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evi | American Economic Review 109(9):3365-3394 doi:10.1257/aer.20181289
+OK  jofre2023: Jofre-Monseny; Martínez-Mazza; Segú (2023) Effectiveness and supply effects of high-coverage rent control policies | Regional Science and Urban Economics 101(None):103916 doi:10.1016/j.regsciurbeco.2023.103916
+OK  kholodilin2024: Kholodilin (2024) Rent control effects through the lens of empirical research: An almost complete  | Journal of Housing Economics 63(None):101983 doi:10.1016/j.jhe.2024.101983
+OK  mills2019: Mills; Molloy; Zarutskie (2015) Large-Scale Buy-to-Rent Investors in the Single-Family Housing Market: The Emerg | Finance and Economics Discussion Series 2015.0(84):1-58 doi:10.17016/feds.2015.084
+OK  saiz2007: Saiz (2007) Immigration and housing rents in American cities | Journal of Urban Economics 61(2):345-371 doi:10.1016/j.jue.2006.07.004
+OK  gonzalez2013: Gonzalez; Ortega (2012) IMMIGRATION AND HOUSING BOOMS: EVIDENCE FROM SPAIN* | Journal of Regional Science 53(1):37-59 doi:10.1111/jors.12010
+OK  sanchis2023: Sanchis-Guarner (2023) Decomposing the impact of immigration on house prices | Regional Science and Urban Economics 100(None):103893 doi:10.1016/j.regsciurbeco.2023.103893
+OK  borusyak2022: Borusyak; Hull; Jaravel (2021) Quasi-Experimental Shift-Share Research Designs | The Review of Economic Studies 89(1):181-213 doi:10.1093/restud/rdab030
+OK  goldsmith2020: Goldsmith-Pinkham; Sorkin; Swift (2020) Bartik Instruments: What, When, Why, and How | American Economic Review 110(8):2586-2624 doi:10.1257/aer.20181047
+OK  adao2019: Adão; Kolesár; Morales (2019) Shift-Share Designs: Theory and Inference* | The Quarterly Journal of Economics 134(4):1949-2010 doi:10.1093/qje/qjz025
+OK  callaway2021: Callaway; Sant’Anna (2021) Difference-in-Differences with multiple time periods | Journal of Econometrics 225(2):200-230 doi:10.1016/j.jeconom.2020.12.001
+OK  dechaisemartin2020: de Chaisemartin; D’Haultfœuille (2020) Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects | American Economic Review 110(9):2964-2996 doi:10.1257/aer.20181169
+OK  roth2023: Roth; Sant’Anna; Bilinski; Poe (2023) What’s trending in difference-in-differences? A synthesis of the recent economet | Journal of Econometrics 235(2):2218-2244 doi:10.1016/j.jeconom.2023.03.008
+OK  arkhangelsky2021: Arkhangelsky; Athey; Hirshberg; Imbens (2021) Synthetic Difference-in-Differences | American Economic Review 111(12):4088-4118 doi:10.1257/aer.20190159
+OK  rambachan2023: Rambachan; Roth (2023) A More Credible Approach to Parallel Trends | Review of Economic Studies 90(5):2555-2591 doi:10.1093/restud/rdad018
+OK  gelbach2016: Gelbach (2016) When Do Covariates Matter? And Which Ones, and How Much? | Journal of Labor Economics 34(2):509-543 doi:10.1086/683668
+OK  shorrocks2013: Shorrocks (2012) Decomposition procedures for distributional analysis: a unified framework based  | The Journal of Economic Inequality 11(1):99-126 doi:10.1007/s10888-011-9214-z
+OK  oster2019: Oster (2017) Unobservable Selection and Coefficient Stability: Theory and Evidence | Journal of Business &amp; Economic Statistics 37(2):187-204 doi:10.1080/07350015.2016.1227711
+OK  mian2014: Mian; Sufi (2014) What Explains the 2007-2009 Drop in Employment? | Econometrica 82(6):2197-2223 doi:10.3982/ecta10451
+OK  glaeser2008: Glaeser; Gyourko; Saiz (2008) Housing supply and housing bubbles | Journal of Urban Economics 64(2):198-217 doi:10.1016/j.jue.2008.07.007
+OK  molloy2020: Molloy (2020) The effect of housing supply regulation on housing affordability: A review | Regional Science and Urban Economics 80(None):103350 doi:10.1016/j.regsciurbeco.2018.03.007
+OK  greenaway2020: Greenaway‐McGrevy; So (2026) Can zoning reform reduce housing costs? Evidence from rents in Auckland | Economic Inquiry None(None):None doi:10.1111/ecin.70075
+OK  bartik1991: Jr.; Bartik (1992) Who Benefits from State and Local Economic Development Policies? | Economic Geography 68(2):214 doi:10.2307/144206
+OK  moretti2011: Moretti (2010) Local Labor Markets |  None(None):None doi:10.3386/w15947
+OK  howard2020: Howard (2020) The Migration Accelerator: Labor Mobility, Housing, and Demand | American Economic Journal: Macroeconomics 12(4):147-179 doi:10.1257/mac.20180363
+OK  mense2023: Mense; Michelsen; Kholodilin (2019) The Effects of Second-Generation Rent Control on Land Values | AEA Papers and Proceedings 109(None):385-388 doi:10.1257/pandp.20191023
