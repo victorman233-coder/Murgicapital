@@ -1,0 +1,34 @@
+\begin{table}[!htbp]\centering\small
+\caption{Falsification, dynamics and stability}\label{tab:falsification}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lcc}\toprule
+ & Population weights & Unweighted \\ \midrule
+\multicolumn{3}{l}{\textit{A. Pre-period and placebo outcomes (cross-section of municipalities)}}\\
+Rent growth 2011--2014 on predicted 2015--2024 inflow (original controls) & $-$0.124 (0.070) & $-$0.089 (0.052)\\
+Rent growth 2011--2014 on predicted 2015--2024 inflow (central controls) & $-$0.085 (0.046) & $-$0.056 (0.046)\\
+\quad Reference: rent growth 2015--2024 on the same instrument (central controls) & 0.102 (0.043) & 0.067 (0.050)\\
+Spain-born growth 2003--2008 (original controls) & 0.408 (0.135) & 0.754 (0.325)\\
+Spain-born growth 2003--2008 (central controls) & $-$0.011 (0.081) & 0.109 (0.192)\\
+Spain-born growth 2008--2011 (central controls) & $-$0.006 (0.032) & $-$0.061 (0.081)\\
+Reduced form with permuted share vectors (province $\times$ size cells): $p$-value of observed & 0.35 & --\\
+Reduced form with pseudo-shares predicted from observables vs observed & 0.050 vs 0.054 & --\\
+\midrule\multicolumn{3}{l}{\textit{B. Dynamics and persistence of the instrument (original covariates, population weights)}}\\
+Correlation of predicted inflows: 2003--2008 with 2015--2024 & 0.74 & 0.58\\
+2SLS adding predicted 2003--08 and 2008--12 inflows $\times$ year & 0.29 (0.14), $F$ 11.9 & --\\
+Local projections, balanced 2015--2020: joint test of leads, $p$ (original / minimal) & 0.65 / 0.62 & 0.85 / 0.70\\
+\quad First-stage $F$ of the instrument innovation (original / minimal) & 2.8 / 6.8 & 0.5 / 0.8\\
+Two-instrument model: current / previous calendar-year inflow & $-$0.00 / 0.09 & --\\
+\quad Sanderson-Windmeijer $F$ & 8.7 / 34.1 & --\\
+Same sample 2013--2024: centred / calendar-year / calendar with lagged instrument & 0.31 / 0.05 / $-$0.03 & --\\
+\quad with municipality fixed effects (centred) & 0.48 ($F$ 4.7) & --\\
+\midrule\multicolumn{3}{l}{\textit{C. Stability and symmetry (original covariates, all year interactions, population weights)}}\\
+Window 2012--2014 (net outflows) & $-$0.01 (0.26), AR [$-$0.49, 0.57] & --\\
+Window 2015--2024 (arrivals) & 0.45 (0.16), AR [0.21, 0.99] & --\\
+Window 2012--2019 & 0.30 (0.15), AR [$-$0.02, 0.59] & --\\
+Window 2020--2024 & 0.31 (0.19), AR [0.05, 2.28] & --\\
+2020--2024 omitting the first-year interaction (as in the original manuscript) & $-$0.46 (0.29) & --\\
+Observations with positive / non-positive predicted inflow & 0.53 (0.23) / 0.04 (0.20) & --\\
+Controlling for Catalan rent-control and tensioned-zone municipalities $\times$ year & 0.30 (0.13) & --\\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: panel A regresses the indicated outcome on the predicted 2015--2024 inflow (2003 shares, leave-province-out national growth), with province fixed effects, the 2003 foreign-born share and the indicated controls; the 2011--2014 regressions also control for the predicted 2011--2014 inflow. Permuted shares: 300 reassignments of the 2003 share vectors across municipalities within province $\times$ size cells (central specification). Pseudo-shares: origin shares predicted from the central covariates with province fixed effects. Panel B: local projections of $\ln R_{t+h}-\ln R_{t-1}$ on the calendar-year inflow instrumented with its prediction, controlling for three lags of the prediction, balanced sample $t\in[2015,2020]$, $h\in\{-4,\dots,4\}$; the joint test covers $h\in\{-4,-3,-2\}$. Panel C: subsample estimates with every year interaction of the controls. Standard errors clustered by province.
+\end{minipage}\end{table}

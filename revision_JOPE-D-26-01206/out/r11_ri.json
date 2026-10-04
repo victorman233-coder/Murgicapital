@@ -1,0 +1,536 @@
+{
+ "min_w": {
+  "all": {
+   "fs_p_coef": 0.0,
+   "fs_p_t": 0.0015,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    0.37,
+    0.74
+   ],
+   "ci_t": [
+    0.36,
+    0.76
+   ],
+   "p0": {
+    "sum": 0.307,
+    "coef": 0.001,
+    "t": 0.004
+   },
+   "b": 0.5322889445514365,
+   "se": 0.11303887400453434,
+   "F": 45.38831321685188
+  },
+  "continent": {
+   "fs_p_coef": 0.14,
+   "fs_p_t": 0.0655,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.551,
+    "coef": 0.1515,
+    "t": 0.1325
+   },
+   "b": 0.5271913710360396,
+   "se": 0.23401876479204117,
+   "F": 9.28309456120921
+  },
+  "size_tercile": {
+   "fs_p_coef": 0.0005,
+   "fs_p_t": 0.002,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    0.25,
+    0.79
+   ],
+   "ci_t": [
+    0.23,
+    0.81
+   ],
+   "p0": {
+    "sum": 0.2185,
+    "coef": 0.0085,
+    "t": 0.014
+   },
+   "b": 0.47447413749223305,
+   "se": 0.13215888830379954,
+   "F": 47.014811706886086
+  },
+  "continent_x_size": {
+   "fs_p_coef": 0.131,
+   "fs_p_t": 0.234,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.0845,
+    "coef": 0.1975,
+    "t": 0.2965
+   },
+   "b": 0.400549736395792,
+   "se": 0.12653878055262743,
+   "F": 12.571873604611994
+  }
+ },
+ "min_u": {
+  "all": {
+   "fs_p_coef": 0.0015,
+   "fs_p_t": 0.008,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    0.11,
+    0.86
+   ],
+   "ci_t": [
+    0.12,
+    0.91
+   ],
+   "p0": {
+    "sum": 0.452,
+    "coef": 0.02,
+    "t": 0.0225
+   },
+   "b": 0.39212137364667665,
+   "se": 0.16801511308030032,
+   "F": 12.155058243837706
+  },
+  "continent": {
+   "fs_p_coef": 0.2245,
+   "fs_p_t": 0.1655,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.6225,
+    "coef": 0.1995,
+    "t": 0.135
+   },
+   "b": 0.5565513292097287,
+   "se": 0.29247213996432203,
+   "F": 3.5601159840653556
+  },
+  "size_tercile": {
+   "fs_p_coef": 0.0005,
+   "fs_p_t": 0.0095,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    0.0,
+    0.78
+   ],
+   "ci_t": [
+    -0.04,
+    0.89
+   ],
+   "p0": {
+    "sum": 0.367,
+    "coef": 0.0545,
+    "t": 0.0615
+   },
+   "b": 0.28069054573803015,
+   "se": 0.16890523758658182,
+   "F": 16.720460190820297
+  },
+  "continent_x_size": {
+   "fs_p_coef": 0.1455,
+   "fs_p_t": 0.1945,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.5225,
+    "coef": 0.558,
+    "t": 0.5545
+   },
+   "b": 0.16120503122132937,
+   "se": 0.14046737432314188,
+   "F": 9.693909538023396
+  }
+ },
+ "cov_w": {
+  "all": {
+   "fs_p_coef": 0.0,
+   "fs_p_t": 0.0,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    0.12,
+    0.53
+   ],
+   "ci_t": [
+    0.17,
+    0.45
+   ],
+   "p0": {
+    "sum": 0.4315,
+    "coef": 0.0095,
+    "t": 0.007
+   },
+   "b": 0.29049198595590653,
+   "se": 0.10372712417713775,
+   "F": 39.21361368860148
+  },
+  "continent": {
+   "fs_p_coef": 0.292,
+   "fs_p_t": 0.173,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.705,
+    "coef": 0.3445,
+    "t": 0.3305
+   },
+   "b": 0.47438386812964956,
+   "se": 0.37747019561025436,
+   "F": 4.1928771347886284
+  },
+  "size_tercile": {
+   "fs_p_coef": 0.0,
+   "fs_p_t": 0.0,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    0.06,
+    0.56
+   ],
+   "ci_t": [
+    0.09,
+    0.5
+   ],
+   "p0": {
+    "sum": 0.2275,
+    "coef": 0.021,
+    "t": 0.0185
+   },
+   "b": 0.2586494937718568,
+   "se": 0.11347155761060243,
+   "F": 51.906588214154354
+  },
+  "continent_x_size": {
+   "fs_p_coef": 0.2525,
+   "fs_p_t": 0.231,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.6265,
+    "coef": 0.6525,
+    "t": 0.676
+   },
+   "b": 0.143287661439963,
+   "se": 0.19656402969274556,
+   "F": 10.861647750403435
+  }
+ },
+ "cov_u": {
+  "all": {
+   "fs_p_coef": 0.001,
+   "fs_p_t": 0.003,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -0.05,
+    0.7
+   ],
+   "ci_t": [
+    0.01,
+    0.61
+   ],
+   "p0": {
+    "sum": 0.669,
+    "coef": 0.0925,
+    "t": 0.047
+   },
+   "b": 0.24987189769792323,
+   "se": 0.1590647216120961,
+   "F": 15.692953488094172
+  },
+  "continent": {
+   "fs_p_coef": 0.2575,
+   "fs_p_t": 0.233,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.588,
+    "coef": 0.238,
+    "t": 0.136
+   },
+   "b": 0.603776276102114,
+   "se": 0.39436273956543727,
+   "F": 1.8146043669463359
+  },
+  "size_tercile": {
+   "fs_p_coef": 0.001,
+   "fs_p_t": 0.0045,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -0.14,
+    0.6
+   ],
+   "ci_t": [
+    -0.12,
+    0.53
+   ],
+   "p0": {
+    "sum": 0.6645,
+    "coef": 0.2725,
+    "t": 0.1775
+   },
+   "b": 0.15015907718727148,
+   "se": 0.16014773740311822,
+   "F": 20.86589192357322
+  },
+  "continent_x_size": {
+   "fs_p_coef": 0.2165,
+   "fs_p_t": 0.2675,
+   "ci_sum": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_coef": [
+    -Infinity,
+    Infinity
+   ],
+   "ci_t": [
+    -Infinity,
+    Infinity
+   ],
+   "p0": {
+    "sum": 0.804,
+    "coef": 0.8195,
+    "t": 0.799
+   },
+   "b": 0.07869694516247355,
+   "se": 0.19660588011764918,
+   "F": 5.661686998383779
+  }
+ },
+ "strata_definition": {
+  "all": {
+   "Alemania": "all",
+   "Bulgaria": "all",
+   "Francia": "all",
+   "Italia": "all",
+   "Polonia": "all",
+   "Portugal": "all",
+   "Ruman\u00eda": "all",
+   "Reino Unido": "all",
+   "Rusia": "all",
+   "Ucrania": "all",
+   "Argelia": "all",
+   "Marruecos": "all",
+   "Nigeria": "all",
+   "Senegal": "all",
+   "Argentina": "all",
+   "Bolivia": "all",
+   "Brasil": "all",
+   "Chile": "all",
+   "Colombia": "all",
+   "Cuba": "all",
+   "Ecuador": "all",
+   "Paraguay": "all",
+   "Per\u00fa": "all",
+   "Rep\u00fablica Dominicana": "all",
+   "Uruguay": "all",
+   "Venezuela": "all",
+   "China": "all",
+   "Pakist\u00e1n": "all",
+   "Resto_Europa": "all",
+   "Resto_Africa": "all",
+   "Resto_America": "all",
+   "Resto_Asia": "all",
+   "Oceania_otros": "all"
+  },
+  "continent": {
+   "Alemania": "Europa",
+   "Bulgaria": "Europa",
+   "Francia": "Europa",
+   "Italia": "Europa",
+   "Polonia": "Europa",
+   "Portugal": "Europa",
+   "Ruman\u00eda": "Europa",
+   "Reino Unido": "Europa",
+   "Rusia": "Europa",
+   "Ucrania": "Europa",
+   "Argelia": "Africa",
+   "Marruecos": "Africa",
+   "Nigeria": "Africa",
+   "Senegal": "Africa",
+   "Argentina": "America",
+   "Bolivia": "America",
+   "Brasil": "America",
+   "Chile": "America",
+   "Colombia": "America",
+   "Cuba": "America",
+   "Ecuador": "America",
+   "Paraguay": "America",
+   "Per\u00fa": "America",
+   "Rep\u00fablica Dominicana": "America",
+   "Uruguay": "America",
+   "Venezuela": "America",
+   "China": "Asia",
+   "Pakist\u00e1n": "Asia",
+   "Resto_Europa": "Europa",
+   "Resto_Africa": "Africa",
+   "Resto_America": "America",
+   "Resto_Asia": "Asia",
+   "Oceania_otros": "Otros"
+  },
+  "size_tercile": {
+   "Alemania": "large",
+   "Bulgaria": "mid",
+   "Francia": "large",
+   "Italia": "small",
+   "Polonia": "small",
+   "Portugal": "mid",
+   "Ruman\u00eda": "large",
+   "Reino Unido": "large",
+   "Rusia": "small",
+   "Ucrania": "mid",
+   "Argelia": "mid",
+   "Marruecos": "large",
+   "Nigeria": "small",
+   "Senegal": "small",
+   "Argentina": "large",
+   "Bolivia": "small",
+   "Brasil": "mid",
+   "Chile": "small",
+   "Colombia": "large",
+   "Cuba": "mid",
+   "Ecuador": "large",
+   "Paraguay": "small",
+   "Per\u00fa": "mid",
+   "Rep\u00fablica Dominicana": "mid",
+   "Uruguay": "small",
+   "Venezuela": "mid",
+   "China": "mid",
+   "Pakist\u00e1n": "small",
+   "Resto_Europa": "large",
+   "Resto_Africa": "large",
+   "Resto_America": "large",
+   "Resto_Asia": "mid",
+   "Oceania_otros": "small"
+  },
+  "continent_x_size": {
+   "Alemania": "Europa_L",
+   "Bulgaria": "Europa_S",
+   "Francia": "Europa_L",
+   "Italia": "Europa_S",
+   "Polonia": "Europa_S",
+   "Portugal": "Europa_L",
+   "Ruman\u00eda": "Europa_L",
+   "Reino Unido": "Europa_L",
+   "Rusia": "Europa_S",
+   "Ucrania": "Europa_S",
+   "Argelia": "Africa_L",
+   "Marruecos": "Africa_L",
+   "Nigeria": "Africa_S",
+   "Senegal": "Africa_S",
+   "Argentina": "America_L",
+   "Bolivia": "America_S",
+   "Brasil": "America_S",
+   "Chile": "America_S",
+   "Colombia": "America_L",
+   "Cuba": "America_L",
+   "Ecuador": "America_L",
+   "Paraguay": "America_S",
+   "Per\u00fa": "America_L",
+   "Rep\u00fablica Dominicana": "America_S",
+   "Uruguay": "America_S",
+   "Venezuela": "America_L",
+   "China": "Asia_L",
+   "Pakist\u00e1n": "Asia_S",
+   "Resto_Europa": "Europa_L",
+   "Resto_Africa": "Africa_L",
+   "Resto_America": "America_L",
+   "Resto_Asia": "Asia_L",
+   "Oceania_otros": "Otros_L"
+  }
+ }
+}

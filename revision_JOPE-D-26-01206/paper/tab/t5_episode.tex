@@ -1,0 +1,21 @@
+\begin{table}[!htbp]\centering\small
+\caption{A sharper episode: the 2016 Schengen visa waivers for Colombia and Peru}\label{tab:episode}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccc}\toprule
+ & Population weights & Renter weights & Unweighted\\\midrule
+\multicolumn{4}{l}{\textit{A. Difference-in-differences IV, 2011--2024 (exposure: 2003 Colombian and Peruvian share, pp)}}\\
+First stage: foreign-born stock (pp) on exposure $\times$ post & 0.90 (0.29) & 1.05 (0.34) & 0.90 (0.43)\\
+First-stage $F$ & 9.4 & 9.4 & 4.3\\
+Rent (\%) per pp of inflow & 0.64 (0.20) & 0.68 (0.18) & 0.27 (0.24)\\
+AR 95\% set, province clusters & [0.22, 1.27] & [0.31, 1.25] & [$-$1.68, 1.27]\\
+AR 95\% set, wild bootstrap & [0.04, 1.80] & [0.10, 1.92] & $(-\infty,\infty)$\\
+\midrule\multicolumn{4}{l}{\textit{B. Event-study averages (coefficients per pp of exposure; pre: $k\le-2$, post: $k\ge0$)}}\\
+Colombia and Peru, 2016: inflow pre / post & $-$0.26 / 0.90 & -- & $-$0.06 / 0.90\\
+\quad rent (log points) pre / post & 0.0007 / 0.0058 & -- & $-$0.0007 / 0.0025\\
+Venezuela, 2017: inflow pre / post & $-$0.07 / 0.19 & -- & $-$0.12 / 0.14\\
+\quad rent (log points) pre / post & 0.0035 / 0.0032 & -- & 0.0054 / 0.0049\\
+Ukraine, 2022: inflow pre / post & 1.45 / 0.33 & -- & 0.57 / 0.36\\
+\quad rent (log points) pre / post & 0.0050 / 0.0005 & -- & 0.0059 / $-$0.0018\\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: the exposure is the 2003 share of the population born in the episode countries (pp); all regressions control for the 2003 share born in other countries of the same continent interacted with every event year, so that identification compares municipalities with similar continental exposure. All include province $\times$ year fixed effects and the central covariates $\times$ year. Panel A: outcome $100(\ln R_{it}-\ln R_{i,2015})$, endogenous variable the change in the foreign-born stock since 2015 in pp of 2003 population, instrument exposure $\times$ 1[$t\ge2016$]; exposure is interacted with pre-2016 years so that pre-trends are absorbed. Panel B: averages of event-time coefficients (base year $t_X-1$). Standard errors clustered by province.
+\end{minipage}\end{table}

@@ -1,0 +1,36 @@
+\begin{table}[!htbp]\centering\small
+\caption{Where newcomers are housed: margins of adjustment}\label{tab:margins}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lcccc}\toprule
+ & \multicolumn{2}{c}{Original covariates} & \multicolumn{2}{c}{Central covariates}\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & Weighted & Unweighted & Weighted & Unweighted\\\midrule
+\multicolumn{5}{l}{\textit{A. Census long differences 2011--2021 (municipalities above 5,000 inhabitants; persons per immigrant)}}\\
+Net residents & 0.80 (0.21) & 1.21 (0.28) & 0.70 (0.24) & 0.61 (0.30)\\
+Born in Spain & $-$0.20 (0.21) & 0.21 (0.28) & $-$0.30 (0.24) & $-$0.39 (0.30)\\
+New dwellings & $-$0.47 (0.50) & $-$0.80 (0.94) & $-$0.74 (0.55) & $-$1.13 (1.12)\\
+Non-primary dwellings brought into use & 0.82 (0.54) & 1.56 (0.90) & 1.00 (0.50) & 1.38 (1.04)\\
+Higher persons per primary dwelling & 0.45 (0.15) & 0.45 (0.16) & 0.45 (0.15) & 0.37 (0.18)\\
+Persons in dwellings switched to renting & 0.22 (0.08) & 0.41 (0.08) & 0.19 (0.09) & 0.38 (0.10)\\
+$\Delta\ln$ persons per primary dwelling & 0.46 (0.15) & 0.46 (0.16) & 0.46 (0.15) & 0.38 (0.18)\\
+First-stage $F$ & 38.0 & 14.6 & 30.4 & 11.3\\
+Share of net residents absorbed by occupancy & 0.56 & 0.37 & 0.64 & 0.60\\
+\quad Fieller 95\% interval & [0.23, 1.02] & [0.14, 0.65] & [0.34, 1.19] & [0.04, 7.95]\\
+\quad Province bootstrap 95\% interval & [0.14, 1.20] & [0.18, 0.79] & [$-$0.53, 1.73] & [$-$1.26, 2.83]\\
+$\Delta\ln$ persons per dwelling predicted by continental composition & $-$0.08 (0.01) & $-$0.09 (0.02) & $-$0.08 (0.01) & $-$0.09 (0.03)\\
+Within-group change (observed minus composition) & 0.54 (0.16) & 0.55 (0.17) & 0.54 (0.16) & 0.47 (0.19)\\
+Census minus register-cadastre occupancy, 2021 & -- & -- & $-$0.20 (0.49) & $-$0.74 (0.76)\\
+\midrule\multicolumn{5}{l}{\textit{B. Annual register and cadastre, 2015--2023 (central covariates; per unit of calendar-year inflow)}}\\
+ & Population weights & Renter weights & Unweighted & \\
+$\Delta\ln$ registered population & 0.72 (0.16) & 0.73 (0.17) & 0.38 (0.55) & \\
+$\Delta\ln$ cadastral dwellings & $-$0.24 (0.16) & $-$0.26 (0.18) & $-$0.59 (0.50) & \\
+$\Delta\ln$ population per cadastral dwelling & 0.96 (0.12) & 0.99 (0.15) & 0.97 (0.32) & \\
+First-stage $F$ & 4.9 & 7.2 & 1.5 & \\
+\midrule\multicolumn{5}{l}{\textit{C. Spain-born intermunicipal migration, 2021--2024 (INE EMCR; per unit of calendar-year inflow)}}\\
+ & Population weights & Unweighted & & \\
+Out-migration rate of the Spain-born & $-$0.05 (0.19) & $-$0.43 (0.35) & & \\
+In-migration rate of the Spain-born & $-$0.54 (0.41) & $-$1.30 (0.90) & & \\
+Net rate & $-$0.49 (0.29) & $-$0.88 (0.68) & & \\
+First-stage $F$ & 3.5 & 1.7 & & \\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: panel A: each row is a 2SLS regression, estimated jointly across rows (stacked influence functions, province clusters), of the indicated component of identity \eqref{eq:identity} (persons per 2011 inhabitant) on the change in the foreign-born population 2011--2021 per 2011 inhabitant, instrumented with the predicted 2012--2021 inflow; province fixed effects. Rows 1 and 3--5 add up to row 1 by construction. The share is the ratio of rows 5 and 1 with a Fieller interval and a 999-draw province pairs bootstrap. The composition-predicted change holds group-specific dwellings per person fixed at the 2011 ecological estimates (census tracts with municipality fixed effects, table~\ref{tab:kappa}) for Spain-born, European, African, American, Asian and Oceanian residents and applies the 2011 (register) and 2021 (annual census) population shares. Panel B: annual changes on the January-to-January foreign-born inflow instrumented with its prediction, province $\times$ year fixed effects. Panel C: INE Statistics on Migrations and Changes of Residence, municipal tables 69744 and 69746, rates over the Spain-born population on 1 January.
+\end{minipage}\end{table}
