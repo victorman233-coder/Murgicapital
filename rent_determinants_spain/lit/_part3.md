@@ -29,9 +29,16 @@ La variable dependiente ΔY se estima para cinco resultados con la misma primera
 
 **Interacción (mecanismo M2):** ΔY_i = β ΔPob_i + θ (ΔPob_i × Rig_i) + κ Rig_i + …, con los instrumentos Ẑ_i y Ẑ_i × Rig_i. Rig_i debe ser predeterminada y geográfica o de planeamiento, no la densidad, que es endógena a la demanda histórica (F6).
 
-**Unidad geográfica y datos:**
-- **Fase 1:** Cataluña (fianzas con superficie, si el inventario lo confirma) y las comunidades con fianzas comparables (sección 13), complementadas con SERPAVI para los niveles.
-- **Fase 2:** las 48 provincias con la brecha del INE (59005), para validación externa con un diseño de exposición.
+**Unidad geográfica y datos (en orden de prioridad):**
+1. **Corte transversal nacional, AEAT 2024** (402 municipios de régimen común con más de 20.000 habitantes): G^VR (ajustada por calidad) y G^m² sobre la llegada acumulada 2016–2024 instrumentada.
+   - Resultado preliminar [N] (F11): brecha bruta 0,57 (AR [0,15; 1,40]); ajustada 0,43 (AR [−0,04; 1,27]).
+   - Ampliar a códigos postales (la AEAT los publica cuando superan las 200 viviendas) mejora la potencia y permite efectos fijos de municipio con variación entre barrios.
+2. **Paneles de fianzas armonizados** para la dinámica (λ, persistencia, eventos):
+   - Cataluña 2005–2026 (municipio × trimestre; €/m² y superficie en barrios de Barcelona, AMB y municipios de más de 100.000 habitantes);
+   - País Vasco 2016–2025 (EMAL, municipios de más de 5.000 habitantes, €/m²);
+   - C. Valenciana 2020–2026 (microdatos de fianzas; la fianza aproxima un mes de renta);
+   - Aragón 1996–2025 (microdatos con renta).
+3. **Las 48 provincias con la brecha del INE (59005, 2021–2024)**, como validación externa y para el diseño del tope del 2%.
 
 ## 16. Diseños alternativos
 
@@ -180,6 +187,7 @@ Alternativa: «The Rising Cost of Entering the Rental Market: Evidence from Spai
 2. [D] En Cataluña, la ratio alquiler-de-entrada/renta (por unidad de consumo) subió unos 13 puntos (2015–2023) y la de stock/renta bajó unos 9; la brecha de entrada se abrió unos 22 puntos [N].
 3. [D] La brecha nuevo/existente se abrió en todas las provincias entre 2021 y 2024 (media simple 9,4 puntos, ponderada 10,2; rango 3,6–14,6) [N].
 4. [C] El shock migratorio eleva el alquiler de stock (0,41–0,50) sin respuesta del stock de vivienda [P][N].
+4b. [C, preliminar] El mismo shock abre la brecha de entrada de 2024 (bruta 0,57, AR [0,15; 1,40]); la versión ajustada por calidad es del mismo orden (0,43), pero todavía no excluye el cero [N].
 5. [C] El turismo actúa en el margen de entrada: el colapso bajó el alquiler de entrada y subió el número de contratos; la recuperación los revirtió [P].
 6. [C] El tope de la ZMRT redujo el alquiler de entrada (≈5%) y el número de contratos firmados (≈18% en la primera oleada) [P].
 7. [D] El tope del 2% mantuvo el índice de stock por debajo del IPC (cota superior del 6%) [P].

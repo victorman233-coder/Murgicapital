@@ -26,12 +26,17 @@
 | F7 | Shock de demanda sobre el alquiler de nuevos contratos en Cataluña | **Negativo** (−1,14; AR [−2,76; −0,40]; n = 123). La fianza media no está ajustada por calidad ni tamaño: la llegada de hogares de menor renta desplaza la composición hacia viviendas más baratas. No es un test válido sin ajuste por composición. | [N]; amenaza de composición |
 | F8 | Tipos hipotecarios: shock 2022–23 × proporción de propietarios con hipoteca en 2011 | IPVA: sin ruptura (2022–24 ≈ 0). Nuevos contratos en Cataluña: −1,1% por d.t. (signo contrario al previsto), y el número de contratos tiene tendencia previa (−4,8%, p < 0,001). **La exposición no identifica el canal.** | [N]; diseño fallido |
 | F9 | Provincias: la brecha de entrada (nuevo − existente) 2021–2024 frente a la entrada de nacidos en el extranjero 2021–2024 | La brecha media es de 10,2 puntos (rango 3,6–14,6) y se asocia con la llegada de población (0,78; p = 0,005; MCO, 48 provincias). | [N][D] |
+| F10 | Brecha de entrada en niveles, 2024 (AEAT, estadística de viviendas declaradas en el IRPF: nuevos contratos frente al total, 402 municipios de más de 20.000 habitantes) | En España, 816 €/mes en contratos nuevos frente a 729 € en el total; rentabilidad bruta del 6,8% frente al 5,7%. Brecha media ponderada: bruta 13,9 log-puntos (positiva en el 100% de municipios); por m² 16,3 (98,8%); **ajustada por calidad** (alquiler por euro de valor de referencia catastral) 15,9 (99,5%). Las viviendas que entran tienen menor valor de referencia (145.067 € frente a 154.022 €): la composición juega en contra de la brecha, no a favor. | [N][D] |
+| F11 | Shock de demanda (IV shift-share, 2016–2024) sobre la brecha de entrada de 2024 (AEAT) | Brecha bruta **0,57** (AR [0,15; 1,40]); por m² 0,26 (AR [−0,19; 1,12]); ajustada por calidad **0,43** (AR [−0,04; 1,27]); alquiler de stock 0,46 (AR [0,10; 0,80]). F = 20,0; n = 402. El alquiler de entrada responde aproximadamente el doble que el de stock (0,46 + 0,43 frente a 0,46), aunque la versión ajustada por calidad aún no excluye el cero. | [N][C], preliminar |
+| F12 | Correlatos de la brecha ajustada (MCO, dentro de provincia) | Municipios de la primera oleada ZMRT: −4,3 puntos (p = 0,008); dentro de Cataluña −3,5 (p = 0,09). Exposición turística +0,27 por punto (n.s.). Densidad n.s. | [N][D] |
 
 **Conclusión de las pruebas [I]:**
 1. **No existe una divergencia generalizada alquiler–renta.** Para los inquilinos que ya están dentro, el alquiler creció menos que la renta local en todos los municipios.
 2. **La divergencia existe en la entrada.** Es grande, se amplía con el tamaño de la ciudad y se abre sobre todo desde 2022.
 3. **El denominador importa.** Con la renta por hogar, un shock migratorio parece *mejorar* la asequibilidad: con más adultos por hogar sube la renta del hogar sin que suba la de cada persona. Es el mismo margen de hacinamiento que documenta el artículo compañero.
 4. **Con los proxies disponibles no se ve amplificación por rigidez de oferta.** Hacen falta medidas de rigidez mejores (sección 13).
+
+5. **Con datos nacionales (AEAT 2024), el shock de demanda abre la brecha de entrada** (F11): es la primera prueba causal a favor del mecanismo, aún imprecisa una vez se ajusta por calidad. La regulación del reset (ZMRT) se asocia con una brecha menor (F12).
 
 Por tanto, la hipótesis del encargo se sostiene **solo para los hogares que entran**, y sobre esa base se construye la propuesta.
 
@@ -173,7 +178,7 @@ Se evaluaron las seis candidatas del encargo:
 | A. log(R/Y) con el stock | Bajo para la pregunta: mide a los insiders | IPVA (índice) + ADRH | El IPVA es un índice, no un nivel. Las ratios en niveles requieren SERPAVI o fianzas | Comparación (insiders) |
 | B. Δlog(R/IPC) | Solo deflacta | Sí | No incorpora la capacidad de pago | Descriptiva |
 | C. Δlog(R/Y) | Asequibilidad media | Sí | Mezcla insiders y outsiders; el denominador cambia por composición | Secundaria |
-| **D. Brecha de entrada: log R_nuevo − log R_existente** | **Alto:** mide directamente el reset y el reparto del ajuste. **Se cancelan los shocks comunes y la renta** | INE por provincia (2021–2024); fianzas (Cataluña y otras comunidades por confirmar) | Composición de lo que se alquila (tamaño, calidad) | **Principal para la causalidad** |
+| **D. Brecha de entrada: log R_nuevo − log R_existente** | **Alto:** mide directamente el reset y el reparto del ajuste. **Se cancelan los shocks comunes y la renta** | **AEAT 2024** (402 municipios de más de 20.000 habitantes, con m² y valor catastral: ajuste por calidad); INE por provincia (2021–2024); fianzas (Cataluña, País Vasco, C. Valenciana, Aragón) | Composición; en la AEAT, un solo corte transversal | **Principal para la causalidad** |
 | **E. Brecha real de asequibilidad de entrada: [log R_nuevo − log Y] − [log R_existente − log Y]** | Idéntica a D si Y es común a ambos grupos. Gana contenido solo con ingresos distintos para entrantes e incumbentes (Y^E, Y^I) | Requiere microdatos (ECV/EPF) por comunidad | Tamaño muestral | **Principal para el titular**: A^E − A^I |
 | F. Reset en la misma vivienda | El más limpio: elimina la calidad | No hay datos abiertos de pares de contratos por vivienda. En las fianzas catalanas no se enlazan contratos | No disponible en abierto | Solo con acceso administrativo (sección 12) |
 
@@ -197,6 +202,9 @@ Para cada mercado i (municipio o área urbana funcional) y año t:
 - **G_it = ln R*_it − ln R̄_it**, en el mismo mercado y periodo y con la misma metodología.
   - Fuente coherente: el INE publica índices de contratos nuevos y existentes por provincia (tabla 59005, 2021–2024) con pesos (59008/59009/59010).
   - El cambio ΔG_it = Δln Índice_nuevo − Δln Índice_existente es metodológicamente homogéneo [N]: 10,2 puntos de media provincial entre 2021 y 2024.
+- **En niveles y ajustada por calidad, para toda España de régimen común:** con la estadística de viviendas declaradas en el IRPF de la AEAT, 2024 (municipios de más de 20.000 habitantes y códigos postales):
+  - G^VR_i = ln(R_nuevo/VR_nuevo) − ln(R_total/VR_total) = ln(rentabilidad_nuevo/rentabilidad_total), donde VR es el valor de referencia catastral.
+  - Mide cuánto más se paga por euro de vivienda al entrar [N]: 15,9 log-puntos de media.
 - **A escala municipal y con horizonte largo:** fianzas (nuevos contratos) frente a IPVA municipal (stock). Las metodologías difieren (media de contratos frente a índice), así que el nivel de G no es interpretable, pero su cambio sí, con ajuste por composición.
 - **Reset en sentido estricto:** ln R_nuevo(v) − ln R_anterior(v) para la misma vivienda v. No es observable en abierto; sería la versión del paper con datos administrativos de fianzas enlazados por vivienda (INCASÒL, AVS, Agencia de Vivienda Social de Madrid…).
 
