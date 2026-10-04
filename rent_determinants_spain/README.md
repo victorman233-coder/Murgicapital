@@ -3,6 +3,7 @@
 | File / folder | Content |
 |---|---|
 | `paper/paper.pdf`, `paper/paper.tex` | Manuscript. Sections: `sec_lit.tex` (literature) and `sec_theory.tex` (framework); tables in `paper/tab`; figures in `paper/fig`; number macros in `paper/tab/numbers.tex` |
+| `Propuesta_rediseno_asequibilidad.md` | Redesign proposal (Spanish): insiders vs outsiders and the entry-rent gap, falsification tests, verified open-data inventory, designs, and target journals |
 | `Resumen_y_notas.md` | Summary in Spanish: results by determinant, what is identified and what is not, data obtained and not obtained, points for the author to check |
 | `code/` | Downloads, data building, analyses, tables and figures (`run_all.sh` runs everything in order) |
 | `lit/` | Candidate references and their verification against Crossref (`crossref_verified.json`) |
