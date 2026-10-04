@@ -100,7 +100,7 @@ Si quieres incorporar estos datos, se podría hacer desde una sesión en tu orde
    - RDL 7/2019, RDL 6/2022 y Ley 12/2023.
    - La aproximación de los 61 municipios de la Ley catalana 11/2020: áreas de demanda fuerte con más de 20.000 habitantes. Reproduce exactamente 61 municipios, pero conviene contrastarlo con la lista oficial.
 3. **Referencias añadidas, cuyos datos bibliográficos debes comprobar:** Benjamini y Hochberg (1995), Chodorow-Reich (2020), Fieller (1954), Lee et al. (2022), Sanderson y Windmeijer (2016), Solon et al. (2015) y Wolf (2023). Les he quitado los DOI que no podía verificar.
-4. **La declaración sobre IA generativa:** está redactada en primera persona del autor, así que debes confirmarla.
+4. **La declaración sobre IA generativa:** ya lleva el texto que has indicado tú.
 5. **El paquete de Zenodo:** habría que actualizarlo con el código de la revisión (`code/`, `config/`, `tests/`).
 6. **La carta de respuesta a los referees:** si llega a haberla, este documento sirve de base, pero tendría que redactarse en inglés.
 
