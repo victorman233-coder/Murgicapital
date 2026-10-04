@@ -1,0 +1,89 @@
+{
+ "size:10-20k": {
+  "n": 324,
+  "dR": 14.7,
+  "inc_uc": 34.2,
+  "inc_hh": 31.5,
+  "gap_uc": -19.5,
+  "share_gap_pos": 0.0
+ },
+ "size:20-50k": {
+  "n": 241,
+  "dR": 16.1,
+  "inc_uc": 34.3,
+  "inc_hh": 32.2,
+  "gap_uc": -18.2,
+  "share_gap_pos": 0.0
+ },
+ "size:50-100k": {
+  "n": 81,
+  "dR": 16.2,
+  "inc_uc": 31.7,
+  "inc_hh": 29.6,
+  "gap_uc": -15.4,
+  "share_gap_pos": 0.0
+ },
+ "size:100-500k": {
+  "n": 51,
+  "dR": 16.4,
+  "inc_uc": 30.2,
+  "inc_hh": 27.7,
+  "gap_uc": -13.8,
+  "share_gap_pos": 0.0
+ },
+ "size:>500k": {
+  "n": 6,
+  "dR": 18.4,
+  "inc_uc": 26.3,
+  "inc_hh": 26.8,
+  "gap_uc": -7.9,
+  "share_gap_pos": 0.0
+ },
+ "vt:low": {
+  "n": 234,
+  "dR": 15.9,
+  "inc_uc": 32.1,
+  "inc_hh": 29.5,
+  "gap_uc": -16.1,
+  "share_gap_pos": 0.0
+ },
+ "vt:mid": {
+  "n": 234,
+  "dR": 15.3,
+  "inc_uc": 30.2,
+  "inc_hh": 27.6,
+  "gap_uc": -14.9,
+  "share_gap_pos": 0.0
+ },
+ "vt:high": {
+  "n": 235,
+  "dR": 17.7,
+  "inc_uc": 30.9,
+  "inc_hh": 30.3,
+  "gap_uc": -13.3,
+  "share_gap_pos": 0.0
+ },
+ "coastal:0.0": {
+  "n": 405,
+  "dR": 15.8,
+  "inc_uc": 30.0,
+  "inc_hh": 27.8,
+  "gap_uc": -14.2,
+  "share_gap_pos": 0.0
+ },
+ "coastal:1.0": {
+  "n": 292,
+  "dR": 17.5,
+  "inc_uc": 32.2,
+  "inc_hh": 31.1,
+  "gap_uc": -14.6,
+  "share_gap_pos": 0.0
+ },
+ "all": {
+  "n": 703,
+  "dR": 16.5,
+  "inc_uc": 31.0,
+  "gap_uc": -14.4,
+  "share_gap_pos": 0.0
+ }
+}
