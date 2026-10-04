@@ -1,0 +1,393 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[no-math]{fontspec}
+\usepackage{mathptmx}
+\setmainfont{TeX Gyre Termes}
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=british]{english}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{booktabs,array,threeparttable,adjustbox}
+\usepackage{graphicx}
+\usepackage[labelfont=bf,labelsep=space,font=small,justification=centering]{caption}
+\captionsetup[figure]{name=Fig.}\captionsetup[table]{name=Table}
+\usepackage{lineno}
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage{setspace}
+\usepackage[authoryear,round]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[section]{placeins}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\bfseries\itshape}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{2.2ex plus 1ex}{1.2ex}
+\titlespacing*{\subsection}{0pt}{1.8ex plus 0.8ex}{0.8ex}
+\setstretch{1.5}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{1.4em}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.08}
+\setlist{nosep,leftmargin=1.6em}
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.12}
+\newtheorem{proposicion}{Proposition}
+\input{tab/numbers_rev}
+\newcommand{\E}{\mathbb{E}}
+
+\title{\bfseries Immigration, Rents and Housing Occupancy in Spain}
+\author{Víctor M. Fernández-Aguilera\\[4pt]
+{\small University of Almería, Almería, Spain}\\
+{\small Corresponding author. E-mail: vfa084@ual.es}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}\noindent
+Spain's foreign-born population grew by more than three million between 2015 and 2025 while the official rent index rose by about a fifth. Using tax-based rent indices for 699 municipalities, population registers by country of birth, census tracts and the cadastre, this paper studies how local rents and the use of the housing stock responded to immigrant inflows predicted from the 2003 settlement of 33 origin groups. Origin shocks are few in effective number and strongly correlated, so the design is assessed with shock-level diagnostics, falsification tests and inference robust to weak instruments and to exposure-induced correlation. Additional population was housed within the existing stock: registered population per cadastral dwelling rose with inflows, the stock did not respond detectably in the short run, and persons per primary dwelling rose between the 2011 and 2021 censuses. Within provinces, in the arrival years 2015--2024 an inflow equal to 1\,\% of the population is associated with a rise of about \cenArrB\,\% in the average rent of declared contracts in force (95\,\% Anderson-Rubin set \cenArrAR), once municipalities may follow trends that differ by predetermined demographic and economic structure. This estimate is smaller than in specifications with fewer controls and is not robust to exposure-robust inference that clusters shocks by origin or to identification from within-continent variation. A sharper episode, the 2016 Schengen visa waivers for Colombia and Peru, yields a larger relative effect in large municipalities. Under explicit assumptions, immigration accounts for a minority of national rent-index growth in 2015--2024.
+
+\medskip\noindent\textbf{Keywords} Immigration $\cdot$ Housing rents $\cdot$ Housing occupancy $\cdot$ Shift-share instruments $\cdot$ Spain\\
+\textbf{JEL Classification} J61 $\cdot$ R21 $\cdot$ R31
+\end{abstract}
+\clearpage
+\linenumbers
+
+\section{Introduction}\label{sec:intro}
+
+Spain's foreign-born population fell from 6.68 to 6.16 million between 2011 and 2015, as emigration followed the financial crisis, and has since grown to 9.46 million, 19.3\,\% of residents on 1 January 2025. Over the same period the official rent index rose by more than 20\,\%, and housing became a main economic concern of young households and of those who arrive. The coincidence has made immigration a leading explanation for rising rents in public debate. Credible estimates with recent Spanish data are scarce, and so is an account of how newcomers were housed.
+
+How newcomers are housed matters for the size of any price effect. A person who moves into a room in a shared flat or into a relative's household adds population but not demand for an additional dwelling; if vacant or second homes are brought back into use, the occupied stock grows without construction; and if residents move to another municipality within the same market, the pressure of a localised inflow spreads. Each margin dampens the local rent response. Measuring rents without measuring how intensively the stock is used gives an incomplete picture of the adjustment.
+
+The paper combines the rental housing price index (IPVA) that the Spanish Statistical Office (INE) builds from personal income tax returns, available for 699 municipalities with more than 10,000 inhabitants between 2011 and 2024, with the municipal population register and the annual population census by country of birth for 33 origins, tract-level indicators from the 2011 and 2021 censuses, the cadastral housing stock, the firm directory, the deposit register of new rental contracts in Catalonia and Eurostat migration statistics. The empirical strategy compares municipalities within the same province and year and instruments immigrant inflows with the prediction obtained by combining each origin's 2003 settlement pattern with its subsequent national growth.
+
+The first contribution is a careful evaluation of what this design can identify in the Spanish case. The origin shocks are few in effective number (\effN) and strongly correlated with each other (mean pairwise correlation \corrAll), and identification relies heavily on two origins, Romania, whose national stock fell continuously after 2012, and Colombia. Predicted inflows are correlated with predetermined municipal characteristics, and national origin growth is correlated with the construction intensity of the municipalities exposed to each origin. The paper therefore reports shock-level diagnostics, falsification tests with genuine pre-periods, and four layers of inference: Anderson-Rubin sets with province clusters and with a restricted wild bootstrap, randomisation inference with recentred instruments under explicitly stated assignment strata \citep{borusyak2023}, and the null-imposed exposure-robust test of \citet{adao2019}.
+
+The second contribution concerns rents, and the estimates call for caution. In the original specification of this paper, which controlled for 2015 income per person and three other characteristics, the within-province elasticity was \origFullB{} over 2012--2024. That control is measured inside the sample period, and the estimate is sensitive to how municipal trends are modelled: allowing trends to differ by predetermined 2011 education and age structure and by 2012 economic structure, the central specification of this revision, gives \cenFullB{} over 2012--2024 (Anderson-Rubin set \cenFullAR) and \cenArrB{} in the arrival years 2015--2024 (\cenArrAR). The response is absent in 2012--2014, when the foreign-born population fell. The arrival-period estimate excludes zero under province-clustered and wild-bootstrap inference and under randomisation across all origins, but not under exposure-robust inference that clusters shocks by origin (\cenArrAKM) or when identification is restricted to the composition of immigration within continents. A sharper source of variation, the 2016 Schengen visa waivers for Colombia and Peru, which compares municipalities with similar Latin American exposure and shows no pre-trends in rents, yields a larger relative effect in population-weighted estimates, \epBW{} per percentage point of inflow (wild-bootstrap Anderson-Rubin set \epWCRW), and an imprecise one without weights.
+
+The third contribution documents the quantity side. Between the 2011 and 2021 censuses, each additional immigrant is associated with \crowdC{} more persons housed through higher occupancy of primary dwellings, while the cadastral stock did not grow faster where more immigrants arrived. The share of net population growth absorbed by higher occupancy is imprecisely estimated (\shareC, Fieller interval \shareCfi), and, at the level of continental groups, the change is not explained by the composition of residents. Higher occupancy is not the same as overcrowding, and the paper does not observe rooms or welfare; it documents that the existing stock was used more intensively, not that living conditions worsened.
+
+These findings qualify the existing evidence for Spain, which mostly concerns sale prices in the 2000s \citep{gonzalez2013,sanchis2023}, and the international evidence that rent effects are smaller at finer spatial scales \citep{saiz2011,accetturo2014}. Methodologically, the paper shows in a policy-relevant application how conclusions from a shift-share design depend on the control for predetermined trends, on the separation of inflow and outflow years, and on the assignment process assumed for the shocks.
+
+Section~\ref{sec:lit} reviews the evidence and section~\ref{sec:model} presents a conceptual framework. Section~\ref{sec:data} describes the institutional setting, data and measurement, and section~\ref{sec:empirics} the empirical design and its diagnostics. Section~\ref{sec:rents} reports the effects on rents and section~\ref{sec:validity} the validity checks and the visa-waiver episode. Section~\ref{sec:margins} studies the margins of adjustment, section~\ref{sec:magnitude} the aggregate magnitudes, section~\ref{sec:discussion} discusses interpretation and policy, and section~\ref{sec:conclusion} concludes.
+
+\section{Previous evidence}\label{sec:lit}
+
+\subsection{Immigration, prices and rents}
+
+The classic references are \citet{saiz2003}, who documents a rise in Miami rents after the Mariel boatlift, and \citet{saiz2007}, who estimates for US metropolitan areas that an inflow equal to 1\,\% of the population raises rents and prices by about 1\,\%. European estimates tend to be larger for sale prices: \citet{degen2017} find 2.7\,\% for Swiss single-family homes and \citet{unal2026}, for 382 German districts, up to 3\,\% for flat prices and about 1\,\% for flat rents; \citet{akbari2012} find positive effects in Canada. The sign changes when comparisons are made at fine scales or when residents move. \citet{sa2015} obtains negative effects in the United Kingdom driven by the outflow of high-income residents, \citet{saiz2011} document slower price growth in US neighbourhoods where immigrants settle and \citet{accetturo2014} show for Italy that the effect is positive across cities and negative across neighbourhoods. In sudden-arrival episodes, \citet{balkan2018} find rent increases after the arrival of Syrian refugees in Turkey, an episode whose effects on employment and consumer prices are analysed by \citet{tumen2016} and \citet{balkan2016}, and \citet{mussa2017} stress spatial spillovers.
+
+For Spain, \citet{gonzalez2013} attribute a substantial part of the price and construction boom of 2000--2010 to immigration, and \citet{sanchis2023} estimates with 2001--2012 data that one percentage point of immigration raises sale prices by 3.3\,\%, a figure that depends on native relocation. \citet{fernandez2019} use geocoded addresses to show that immigrant inflows between 1998 and 2008 caused a mild outflow of natives from dense, established neighbourhoods, offset by suburban development. Work at the Banco de España describes the expansion of renting and the rising burden on households \citep{lopez2019,khametshin2024} and lists demographic growth among the recent drivers of demand \citep{bde2024,lajer2024}. \citet{garcia2020} estimate the effect of short-term rentals in Barcelona and \citet{monras2023} that of rent controls in Catalonia. None of these studies covers the post-2015 migration wave with tax-based rents or measures the margins through which newcomers are housed.
+
+\subsection{Occupancy, mobility, supply and shift-share designs}
+
+\citet{myers1996} and \citet{myerslee1996} document high overcrowding among recent immigrant cohorts that declines with length of residence. The response of natives has been studied mostly in the labour market \citep{card2000,card2001,mocetti2010}, but it is also a margin of housing market adjustment \citep{sa2015,sanchis2023}. Supply elasticities depend on geography and regulation \citep{saiz2010,glaeser2018}, and \citet{howard2020} shows that population inflows stimulate construction. Rental supply also includes the conversion of owner-occupied or vacant units \citep{monras2023}. The instrument follows \citet{altonji1991} and \citet{card2001}. Its interpretation rests either on the exogeneity of the initial shares \citep{goldsmith2020} or on that of the shocks \citep{borusyak2022,adao2019}, with recentring when exposure is not random \citep{borusyak2023}; \citet{jaeger2018} show that persistent migration flows conflate short- and long-run responses, and \citet{borusyak2025} summarise recommended practice.
+
+\section{Conceptual framework}\label{sec:model}
+
+A housing market $j$, a province, consists of locations $i$. Each location hosts $N_i$ natives and $M_i$ immigrants, with $P_i=N_i+M_i$. Occupied dwellings are $H_i$ and average occupancy is $s_i=P_i/H_i$ persons per dwelling. Each group $g\in\{N,M\}$ demands $h_g(R_i)=a_gR_i^{-\eta}$ dwellings per person, where $R_i$ is the market rent and $\eta\ge 0$ the price elasticity of housing consumption per person; $a_M<a_N$ captures that recent immigrants share dwellings more often \citep{myerslee1996}. Housing demand is $H_i^d=(a_NN_i+a_MM_i)R_i^{-\eta}$. The supply of occupied dwellings, including construction and the conversion of vacant or second homes, is $H_i^s=\bar H_iR_i^{\varepsilon}$, and natives relocate within the market according to relative rents, $N_i=\bar N_i(R_i/R_j)^{-\delta}$, with lower mobility across markets, $\delta_J<\delta$.
+
+Let $m_i=dM_i/P_i$ be the immigrant inflow relative to population, $\theta_i$ the share of occupied dwellings used by immigrants, $\delta'=(1-\theta)\delta$ and $\kappa=a_M/\bar a$, with $\bar a=(a_NN+a_MM)/P$, the housing consumption of a newcomer relative to the average resident. Log-differentiating the equilibrium gives (appendix~B)
+\begin{equation}\label{eq:eq}
+\kappa\, m_i-\delta'\,(\hat R_i-\hat R_j)-\eta\,\hat R_i=\varepsilon\,\hat R_i ,
+\end{equation}
+with $\hat x=d\ln x$.
+
+\begin{proposicion}[Attenuation with scale]\label{prop:scale}
+Within the model, the elasticity of the market rent and that of the relative rent of a location within its market are $\beta_J=\kappa/(\varepsilon+\eta+\delta'_J)$ and $\beta_L=\kappa/(\varepsilon+\eta+\delta')$, so that $\beta_L<\beta_J$ when $\delta'>\delta'_J$.
+\end{proposicion}
+
+A regression of municipal rent growth on inflows with province-by-year fixed effects targets $\beta_L$. The ordering $\beta_L<\beta_J$ holds only within the model, with common parameters across scales and no aggregate effects of immigration on supply or incomes; outside it, the relation between local and national effects is not identified by the design (section~\ref{sec:magnitude}).
+
+\subsection{Where each immigrant is housed}
+
+The identity $P_i=s_iH_i$ implies, for discrete changes and using averages of both periods,
+\begin{equation}\label{eq:identity}
+\frac{\Delta P_i}{P_{i0}}=\underbrace{\frac{\bar s_i\,\Delta H_i^{\text{total}}}{P_{i0}}}_{\text{new housing}}\;\underbrace{-\;\frac{\bar s_i\,\Delta H_i^{\text{non-primary}}}{P_{i0}}}_{\text{non-primary into use}}\;+\;\underbrace{\frac{\bar H_i\,\Delta s_i}{P_{i0}}}_{\text{higher occupancy}},
+\end{equation}
+where $H^{\text{total}}$ is the total stock and $H^{\text{non-primary}}$ vacant or second homes. Regressing each component on the inflow with the same instrument splits each arrival across the three channels. In the model, the change in occupancy per unit of inflow is $c=1-\kappa+\eta\beta_L$: a composition term, $1-\kappa$, because newcomers live in denser households than the average resident, and a price term, $\eta\beta_L$, because higher rents lead all households to consume less space. Both terms describe how intensively dwellings are used; neither measures overcrowding relative to a norm, nor welfare. Section~\ref{sec:margins} confronts the composition term with group-specific occupancy rates measured in the 2011 census.
+
+The framework yields three predictions that the data can address: the relative rent effect is smaller at finer scales; an index of contracts in force responds less and later than entry rents; and, when newcomers live in dense households, the occupancy margin absorbs a large part of the inflow even if supply is rigid. The mapping from estimated moments into structural elasticities ($\varepsilon$, $\delta'$) requires a precise and positive $\beta_L$; with the robust sets reported below, these elasticities are not bounded and the paper does not report point values for them (appendix~B).
+
+\section{Institutional setting, data and measurement}\label{sec:data}
+
+\subsection{Rents: what the IPVA measures}
+
+The IPVA is built from real-estate income declared in personal income tax returns together with cadastral information on the rented dwellings. It measures the evolution of rent per square metre of contracts in force at constant composition and is published annually since 2011 for municipalities above 10,000 inhabitants, districts of provincial capitals and provinces. Four features shape interpretation. First, it covers the declared market: room subletting and informal renting, common among newcomers, are excluded, and, because the source is the personal income tax, dwellings let by companies are outside the index. Second, it measures the stock of contracts in force. A stock index moves with entry rents only as contracts turn over: if a share $\lambda$ of contracts is renewed in a year, $\Delta\ln R^{\text{stock}}_t\approx\lambda(\ln r^{\text{new}}_t-\ln r^{\text{replaced}}_t)+(1-\lambda)u_t$, where $u_t$ is the update of sitting contracts, so that in the short run the elasticity of the stock index is roughly $\lambda$ times that of entry rents. The minimum duration of contracts was extended in 2019 (Royal Decree-law 7/2019) and annual updates were capped from 2022 (Royal Decree-law 6/2022, Law 12/2023), so $\lambda$ and the behaviour of $u_t$ change inside the sample. Third, policies varied within provinces: rent containment applied in a subset of Catalan municipalities in 2020--2022 and tensioned residential market zones were declared in Catalonia from 2024. Fourth, the index excludes the Basque Country and Navarre.
+
+The paper therefore interprets the estimated elasticity as the response of the average rent per square metre of declared contracts in force, not as the price faced by newcomers. Catalonia offers a partial check. The Incasòl register of rental deposits records every new contract, with its rent, by municipality. In the \catN{} Catalan municipalities of the sample, the median number of new contracts per rented main dwelling is \turnover{} a year, and the growth of the IPVA responds to the growth of mean new-contract rents slowly and partially: the coefficients on current, lagged and twice-lagged new-contract rent growth are \passT, \passLOne{} and \passLTwo{} (appendix table~\ref{tab:catalonia}). The stock index attenuates and delays movements in entry rents. The shift-share instrument is too weak within Catalonia ($F$ of \catF) to estimate the response of entry rents directly.
+
+\subsection{Population by country of birth}
+
+Immigration is measured by the stock of foreign-born residents, which, unlike citizenship, does not change with naturalisation. For 2003--2022 the source is the municipal population register (Padrón) by country of birth and for 2021--2025 the annual population census, both downloaded from INE (tables 33573 and 66322) and harmonised into 33 mutually exclusive origin groups: 28 countries available in both sources and five continental residuals. Annual flows are always computed within a single source. Registration practices affect measured flows: the register drops non-EU residents without permanent residence who do not renew their registration, municipalities check the residence of EU citizens, and registration can occur where people do not live. Section~\ref{sec:margins} checks whether register-based and census-based occupancy diverge with immigrant exposure.
+
+Figure~\ref{fig:context} summarises the national facts. The foreign-born share rises from 14.2\,\% of residents in 2011 to 19.3\,\% in 2025, with a dip between 2012 and 2015 and an acceleration from 2017. The IPVA falls until 2014 and rises thereafter. EU-SILC shows that the overcrowding rate of foreign adults rises after 2015 and that two in three foreigners rent; these national series are context, not evidence on the local effects of inflows.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=0.94\linewidth]{fig/fig1_contexto.pdf}
+\caption{Immigration, rents and housing conditions}\label{fig:context}
+\begin{minipage}{0.94\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: panel (a), foreign-born population on 1 January as a percentage of the population, from the municipal register and the annual population census. Panel (b), national IPVA. Panel (c), percentage of adults living in a dwelling with fewer rooms than required by household size and composition under the Eurostat definition (table ilc\_lvho15). Panel (d), percentage of adults living in rented housing (ilc\_lvps15). Sources: INE and Eurostat (EU-SILC).
+\end{minipage}
+\end{figure}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig7_mapas.pdf}
+\caption{Territorial distribution of immigration and rents}\label{fig:maps}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: panel (a), change in the foreign-born population between 1 January 2015 and 1 January 2024 as a percentage of 2015 population, linked through within-source differences. Panel (b), change in the municipal IPVA between 2015 and 2024; municipalities without an index in white. Sources: INE, IGN.
+\end{minipage}
+\end{figure}
+
+\subsection{Occupancy is not overcrowding}
+
+Tract-level indicators from the 2011 and 2021 censuses measure, for each municipality, population, foreign-born population, primary and non-primary dwellings, households and tenure; the 2011 census adds population by region of birth, rooms and floor area of primary dwellings. The paper measures \emph{occupancy}, persons per primary dwelling, and, with the annual register and the cadastre, registered population per cadastral dwelling. Neither is a measure of \emph{overcrowding}, which requires rooms relative to household composition; the 2021 census does not report rooms in its tract indicators. The two censuses also define households differently: in 2021 households are built from register entries at each dwelling, and in the tract data the number of households equals the number of primary dwellings in every municipality, so sharing between households cannot be observed in 2021. These differences are a reason to prefer the annual register-cadastre series where possible and to test whether the census measures diverge from it with immigrant exposure.
+
+\subsection{Other data and sample}
+
+Predetermined municipal characteristics come from the 2011 census (population, renting share, non-primary dwellings, share of adults with tertiary education, share aged 65 or more, rooms per dwelling) and from the 2012 INE firm directory (shares of construction, industry and trade-transport-hospitality firms and firms per inhabitant). Eurostat's correspondence of local administrative units provides the coastal indicator and the functional urban area (FUA) and core city of each municipality. Income per person comes from the INE household income atlas, which starts in 2015. The Generalitat de Catalunya publishes the municipalities in tensioned residential market zones and in areas of strong demand; the latter, restricted to municipalities above 20,000 inhabitants, reproduces the 61 municipalities covered by the 2020--2022 rent containment regime. Municipal intermunicipal migration of the Spain-born for 2021--2024 comes from the INE statistics on migrations and changes of residence. Eurostat provides immigration by country of birth into other European countries (appendix A lists all sources, including those that could not be used).
+
+The main sample is a panel of 699 municipalities with an IPVA in 42 provinces with at least two sample municipalities, 9,060 municipality-years between 2012 and 2024 (appendix table~\ref{tab:flow}). Table~\ref{tab:desc} summarises the variables.
+
+\input{tab/t1_desc}
+
+\section{Empirical design}\label{sec:empirics}
+
+\subsection{Specification}
+
+The estimating equation is
+\begin{equation}\label{eq:main}
+\Delta\ln R_{it}=\beta\, m_{it}+\lambda_{p(i)t}+\sum_{\tau}\mathbf{1}[t=\tau]\big(\phi_\tau S_i+\mathbf{x}_i'\boldsymbol\gamma_\tau\big)+u_{it},
+\end{equation}
+where $\Delta\ln R_{it}$ is the growth of municipality $i$'s IPVA in year $t$, $m_{it}$ the change in the foreign-born population between mid-year $t-1$ and mid-year $t$ divided by population in January of $t-1$, and $\lambda_{p(i)t}$ province-by-year fixed effects, so that $\beta$ compares municipalities in the same province and year. $S_i$ is the 2003 foreign-born share and $\mathbf{x}_i$ a vector of predetermined characteristics; both are interacted with every year of the sample.\footnote{An earlier version of this paper omitted the interaction for the first year of each estimation sample. This restriction is innocuous in the full sample but not in subsamples: for 2020--2024 it produced an estimate of \wTwoZeroTwoFourold{} instead of \wTwoZeroTwoFour{} (table~\ref{tab:falsification}).}
+
+Four sets of controls are reported. The \emph{minimal} specification includes only $S_i\times$ year. The \emph{original} specification adds log income per person in 2015, log population in 2011 and the 2011 shares of renting households and non-primary dwellings. The \emph{central} specification, defined before estimation in the revision plan, replaces 2015 income, which is measured inside the sample period, by predetermined variables chosen for their link with local housing-demand trends: log population, renting share, non-primary share, tertiary-education share and share aged 65+ in 2011; the 2012 shares of construction, industry and trade-transport-hospitality firms and firms per inhabitant; and coastal and FUA-core indicators, all interacted with year. The fourth adds province $\times$ size class $\times$ year fixed effects, which remove comparisons between the main city of a province and smaller municipalities. Contemporaneous variables such as employment, construction or tourist dwellings are not controlled for because they respond to immigration.
+
+Weights change the estimand. Weighting by 2003 population gives the effect for the typical resident; weighting by rented main dwellings in 2011 gives the effect for the typical renter, the natural estimand for a rent index; unweighted estimates give the effect in the typical municipality. All three are reported, and differences between them are read as heterogeneity rather than resolved by choosing one \citep{solon2015}. Standard errors are clustered by province.
+
+\subsection{Instrument and identifying assumptions}\label{sec:instrument}
+
+The instrument is the inflow predicted by origin networks:
+\begin{equation}\label{eq:z}
+z_{it}=\sum_{o=1}^{33}s_{io}\,g^{(-p)}_{ot},\qquad s_{io}=\frac{F_{io,2003}}{P_{i,2003}},\qquad g^{(-p)}_{ot}=\frac{\Delta F^{(-p)}_{ot}}{F_{o,2003}},
+\end{equation}
+where $F_{io,2003}$ is the population born in origin $o$ living in $i$ in 2003 and $\Delta F^{(-p)}_{ot}$ the national change for that origin excluding $i$'s province, with the same timing as the treatment. Its validity can rest on the exogeneity of the shares \citep{goldsmith2020} or on that of the shocks \citep{borusyak2022}. The 2003 shares are correlated with municipal characteristics, which rules out the first reading without further conditioning. The second requires that origin growth be as good as randomly assigned with respect to the exposure-weighted unobserved determinants of rents, $\bar u_{ot}=\sum_i\omega_is_{io}u_{it}/\sum_i\omega_is_{io}$, and that there be many shocks with small weights. Leaving out the own province removes mechanical endogeneity but not pull factors common to many provinces, such as service-sector demand in large cities or the construction cycle. Recentring the instrument by its expectation under permutations of the growth paths across origins \citep{borusyak2023} delivers exact inference if the permutation strata reflect the true assignment process; exchangeability is more plausible within continents and within origins of similar size than across all origins.
+
+\subsection{Inference}
+
+Inference has four layers, each addressing a different threat. Anderson-Rubin (AR) sets with province clusters, analytical and with 4,999 restricted wild-bootstrap draws with Webb weights \citep{davidson2010,roodman2019,webb2023}, are robust to weak instruments and to few clusters of unequal size \citep{mackinnon2023}; with a first-stage $F$ around 30, the conventional $t$-test is not exactly sized \citep{lee2022}, so AR sets are the main inferential object. These sets assume independence across provinces, which shift-share designs violate when municipalities in different provinces share origin compositions. Randomisation inference permutes the growth paths of origins 2,000 times within strata (all origins, terciles of origin size, continents), recentres the instrument and inverts the studentised reduced-form test; it is exact under exchangeability within the strata. Finally, the null-imposed exposure-robust test of \citet{adao2019}, AKM0, treats origin-year shocks as the source of randomness and clusters them by origin, allowing for the serial correlation of each origin's growth; it is computed for the instrument with national shocks, whose 2SLS coefficient equals exactly the shock-level estimate of \citet{borusyak2022}.\footnote{With national shocks the 2SLS coefficient is \natIV{} in the original specification and the exact shock-level equivalent \bhjEq. The shock-level regression reported in the earlier version of the paper (0.23) added year fixed effects at the shock level (\bhjYfe) and used national rather than leave-out shocks, which explains its difference from the leave-out estimate of 0.30.} Multiple endogenous variables are evaluated with \citet{sanderson2016} $F$ statistics.
+
+\subsection{Design diagnostics}
+
+Table~\ref{tab:design} and figure~\ref{fig:shocks} describe the identifying variation. The effective number of origins is \effN, the mean first-order autocorrelation of each origin's annual growth is \autoc{} and the mean pairwise correlation of growth paths is \corrAll{} across all origins (\corrAme{} among American origins, \corrEur{} among European ones): the shocks do not behave as many independent experiments. The Rotemberg decomposition of \citet{goldsmith2020} assigns weights of \rotRom{} to Romania and \rotCol{} to Colombia. Romania's national stock fell by \gRom{} times its 2003 level between 2012 and 2024, so a large part of the identifying variation comes from the departure of Romanians from the municipalities where they had settled during the construction boom; the sum of negative weights is \rotNeg. Using the 33 origin components as separate instruments, the overidentification test rejects ($J$ of \Jstat) and LIML gives \limlB{} (\limlSe), signalling heterogeneous origin-specific effects or invalid components. At the shock level, origins that grew more in 2015--2024 were those whose exposed municipalities had higher renting and tertiary-education shares and, most clearly, a lower share of construction firms (standardised coefficient \balConstr, $p$ = \balConstrP; within continents \balConstrW, $p$ = \balConstrWP). The national shocks are thus related to the economic structure of the municipalities exposed to them, which motivates the central controls.
+
+\input{tab/t2_design}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig3_shocks.pdf}
+\caption{Origin shocks and the Rotemberg decomposition}\label{fig:shocks}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: panel (a), cumulative national growth since 2012 of the largest origins, relative to each origin's 2003 stock. Panel (b), Rotemberg weights $\hat\alpha_o$ and origin-specific estimates $\hat\beta_o$ (clipped at $\pm3$) for the original specification, population weights; circle size proportional to the origin's 2003 share of the foreign-born population.
+\end{minipage}
+\end{figure}
+
+\section{Effects on rents}\label{sec:rents}
+
+Table~\ref{tab:main} reports the estimates with population weights for the full period and for the arrival period 2015--2024; appendix tables~\ref{tab:main_rent} and \ref{tab:main_unw} report renter-weighted and unweighted estimates, and figure~\ref{fig:forest} summarises them. With minimal controls, an inflow equal to 1\,\% of the population is associated with \minFullB\,\% higher rent growth relative to the province over 2012--2024 (AR set \minFullAR). The original covariates halve the estimate to \origFullB{} (\origFullAR), and the central predetermined controls reduce it further to \cenFullB{} (\cenFullAR). Adding the 2011 tertiary-education and elderly shares to the original covariates is enough to reach a similar value: the original estimate partly reflected trends that differ across municipalities with different education and age structure. Within province $\times$ size cells the estimate is \sizeFullB{} (\sizeFullAR).
+
+\input{tab/t3_main_w}
+
+The full-period estimate averages two different regimes. In 2012--2014 the foreign-born population fell, and the predicted outflows are not associated with rent changes (table~\ref{tab:falsification}); in the arrival years 2015--2024 the central specification gives \cenArrB{} (standard error \cenArrSe, first-stage $F$ \cenArrF), with an AR set of \cenArrAR{} and a wild-bootstrap AR set of \cenArrWCR. With renter weights the estimate is \cenArrRB{} (\cenArrRAR), and unweighted \cenArrUB{} with an uninformative set (\cenArrUAR). Within province $\times$ size cells it falls to \sizeArrB{} (\sizeArrAR). The arrival-period estimate of the central specification excludes zero under province-clustered AR and wild-bootstrap inference and under randomisation across all origins (\cenArrRI, $p$ = \cenArrRIp{} for $\beta=0$), but not under randomisation within continents (\cenArrRIcont) or under the AKM0 test with shocks clustered by origin (\cenArrAKM). Which of these is appropriate depends on whether the growth paths of Latin American, African and European origins can be treated as exchangeable; the diagnostics in table~\ref{tab:design} make that assumption hard to defend, and within-continent variation alone does not bound the effect.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig4_forest.pdf}
+\caption{Rent elasticity across specifications, weights and exclusions}\label{fig:forest}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: point estimates and analytical Anderson-Rubin 95\,\% sets (province clusters), 2012--2024, truncated to $[-1,1.5]$. Panel (a): specifications of table~\ref{tab:main} with the three weighting schemes. Panel (b): central specification, population weights, excluding territories, periods or origins (the excluded origin is removed from the instrument and from the exposure control); appendix table~\ref{tab:loo} summarises all leave-one-out estimates.
+\end{minipage}
+\end{figure}
+
+The OLS coefficient is smaller than the 2SLS estimate in most columns. A smaller OLS coefficient is consistent with newcomers choosing municipalities where rents would otherwise grow less, but also with measurement error in registered inflows; it does not by itself validate the instrument.
+
+The exclusions in figure~\ref{fig:forest} show that the central estimate is not driven by a single province, autonomous community or origin (appendix table~\ref{tab:loo}), but that it is smaller, and close to zero, without FUA core cities, without coastal municipalities or without the largest municipality of each province: the comparisons between main cities and their surroundings carry much of the identifying variation. Spatial spillovers to contiguous municipalities or distance rings are small and imprecise (appendix table~\ref{tab:altspatial}): for contiguous municipalities, \spContig{} (standard error \spContigSe). The design does not detect spillovers, but their confidence intervals do not exclude effects of the order of the own effect.
+
+\section{Validity}\label{sec:validity}
+
+\subsection{Pre-periods and placebo outcomes}
+
+The IPVA starts in 2011, so there is no rent pre-period before the sample. Table~\ref{tab:falsification} uses three alternatives. First, rent growth in 2011--2014 is regressed on the inflow predicted for 2015--2024, controlling for the inflow predicted for 2011--2014. With the central controls the coefficient is \preW{} (standard error \preWse, $p$ = \preWp): municipalities more exposed to the later shocks had, if anything, slower rent growth before them. The 2015--2024 reduced form with the same controls is \rfLDW{} (\rfLDWse). The pre-period coefficient is not significant at 5\,\%, but its magnitude is comparable to that of the reduced form and of opposite sign, a pattern consistent with a post-crisis recovery in the more exposed municipalities that would bias the arrival-period estimate upwards. This threat cannot be ruled out with the available data. Second, with the original covariates the predicted 2015--2024 inflow also predicts faster growth of the Spain-born population in 2003--2008 (coefficient \natPreOrig, $p$ = \natPreOrigP), a sign of pre-existing differences in demographic dynamics; the central controls remove it (\natPreCen, $p$ = \natPreCenP). Third, reassigning the 2003 share vectors at random across municipalities of the same province and size class produces reduced forms as large as the observed one in a large fraction of draws ($p$ = \permP), and origin shares predicted from observable characteristics reproduce the observed reduced form. Under the central specification, the variation that the instrument adds to municipal characteristics is therefore modest.
+
+\input{tab/t4_falsification}
+
+\subsection{Dynamics and the persistence of migration flows}
+
+The 2003 shares predict both the boom-era inflows and the post-2015 inflows: the correlation of the predicted inflows of 2003--2008 and 2015--2024 across sample municipalities is \boomCorr. Controlling for the boom and bust predictions interacted with year leaves the original estimate little changed but weakens the first stage. Separating short- and long-run responses as proposed by \citet{jaeger2018} requires variation in the instrument's innovations, and there is little: in a balanced sample of 2015--2020, controlling for three lags of the prediction, the first-stage $F$ of the innovation is \lpFcov{} with the original covariates and \lpFmin{} with minimal controls (appendix figure~\ref{fig:lp}). Joint tests of the leads do not reject, but with such weak first stages they have little power and do not validate the design. The two-instrument model gives a Sanderson-Windmeijer $F$ of \swFOne{} for the current inflow and does not separate the current and lagged responses. The timing of the treatment also matters: in the same sample, the centred inflow, which averages arrivals registered by January of $t$ and during $t$, gives \cenB, while the inflow registered during calendar year $t$ gives \calB. Declared rents in year $t$ are associated with arrivals registered by the beginning of the year, not with those of the same calendar year. The paper therefore makes no claim on whether the relative effect persists or dissipates.
+
+\subsection{Stability, symmetry and policy}
+
+The response differs between periods of outflows and of arrivals (panel C of table~\ref{tab:falsification}). With the original covariates and every year interaction, the estimate is \wOut{} (\wOutSe) in 2012--2014, when the predicted inflow was mostly negative, and \wIn{} (\wInAR) in 2015--2024; observations with positive predicted inflows drive the estimate. An index of contracts in force with nominal rigidity can plausibly respond more to arrivals than to departures, and pooling both regimes understates the response to arrivals. The estimate for 2020--2024 is positive (\wTwoZeroTwoFour, AR set \wTwoZeroTwoFourAR) once every year interaction is included; the negative estimate reported in an earlier version of this paper reflected the omission of the 2020 interactions. Controlling for the Catalan municipalities under rent containment in 2020--2022 and in tensioned zones from 2024, or excluding them, does not reduce the estimates.
+
+\subsection{A sharper episode: the 2016 visa waivers for Colombia and Peru}
+
+The Schengen visa requirement for Colombian citizens was lifted in December 2015 and that for Peruvian citizens in March 2016, after which arrivals from both countries accelerated. The episode offers variation with a known date that is driven by policy in the origin countries rather than by Spanish demand, and it can be exploited within a continent: the regressions compare municipalities with the same 2003 exposure to other American origins, removing the contrast between Latin American, African and European settlement that drives the full instrument. Table~\ref{tab:episode} and figure~\ref{fig:episode} show the results. The foreign-born stock rises from 2017 in municipalities more exposed to Colombian and Peruvian settlement, with no pre-trend, and rents follow with no pre-trend. With population weights the implied elasticity is \epBW{} (standard error \epSeW, first-stage $F$ \epFW), with an AR set of \epARW{} and a wild-bootstrap set of \epWCRW; with renter weights it is \epBR{} (\epWCRR). Without weights the first stage is weak ($F$ \epFU) and the estimate, \epBU, is uninformative. The episode supports a positive relative effect of arrivals on rents in the large municipalities where Colombian and Peruvian immigrants settled, of a size comparable to or larger than the shift-share estimates, but it rests on a moderately weak first stage and on a single pair of origins. Episodes for Venezuela and Ukraine do not provide a usable design: the Venezuelan first stage is weak and Ukrainian exposure shows strong pre-trends.
+
+\input{tab/t5_episode}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/fig5_event_colper.pdf}
+\caption{The 2016 visa waivers for Colombia and Peru: event study}\label{fig:episode}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: coefficients on the 2003 share of the population born in Colombia or Peru (pp) interacted with event years, relative to 2015, controlling for the 2003 share born in other American countries interacted with event years, province $\times$ year fixed effects and the central covariates $\times$ year; population weights; 95\,\% intervals with province clusters.
+\end{minipage}
+\end{figure}
+
+\subsection{Alternative push shocks}
+
+Replacing the Spanish national growth of each origin by its inflows into twelve other European countries, which reflect push factors common to destinations, would remove Spanish pull factors from the shocks. The resulting instrument has no predictive power for municipal inflows in Spain once exposure and covariates are controlled for (first-stage $F$ of \altF; appendix table~\ref{tab:altspatial}), so this design cannot be used.
+
+\section{Where newcomers are housed}\label{sec:margins}
+
+\subsection{Census decomposition}
+
+Table~\ref{tab:margins} and figure~\ref{fig:margins} estimate identity \eqref{eq:identity} between the 2011 and 2021 censuses, with all components estimated jointly. In the central specification each additional immigrant is associated with \popC{} additional net residents (standard error \popCse) and with \crowdC{} persons housed through higher occupancy of primary dwellings (\crowdCse); the log of persons per primary dwelling rises by \dlnsC{} per unit of inflow. Non-primary dwellings brought into use contribute \vacC{} (\vacCse) and new dwellings \newC{} (\newCse): both supply components are imprecise because the 2011 and 2021 censuses count dwellings differently. The occupancy coefficient is stable across specifications and weights, but the share of net population growth that it represents is not: \shareC{} in the central weighted specification, with a Fieller interval \citep{fieller1954} of \shareCfi{} and a province-bootstrap interval of \shareCbo; \shareA{} with the original covariates (\shareAfi); \shareAU{} and \shareCU{} without weights; and above one with minimal controls, because net residents then barely respond. The data support a substantial role for higher occupancy, not a precise share.
+
+\input{tab/t6_margins}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=0.9\linewidth]{fig/fig6_margins.pdf}
+\caption{Where each immigrant is housed: decomposition 2011--2021}\label{fig:margins}
+\begin{minipage}{0.9\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: 2SLS coefficients of table~\ref{tab:margins}, panel A, with 95\,\% intervals (province clusters). New dwellings, non-primary dwellings and higher occupancy add up to net residents.
+\end{minipage}
+\end{figure}
+
+\subsection{Composition or more intensive use?}
+
+Higher average occupancy can arise because newcomers live in larger households than the residents they join (composition) or because households of a given group become denser. The 2011 census tracts give dwellings per person by region of birth (appendix table~\ref{tab:kappa}): relative to the average resident, the African-born occupy \kapAfr{} times as many dwellings per person, the Asian-born \kapAsi, the American-born \kapAme{} and the European-born \kapEur. Holding these rates fixed and applying the 2011 and 2021 population shares by region of birth, the change in composition associated with the predicted inflow would \emph{lower} occupancy slightly (\compC), because the identifying variation includes the departure of European-born residents, who occupy more dwellings per person, and the arrival of Latin Americans, whose 2011 rate is close to the average. The observed rise in occupancy is therefore not explained by composition across continental groups. Two caveats apply: the group rates are ecological estimates, and they describe the 2011 stock; recent arrivals of the same continent are likely to live in denser households than settled immigrants \citep{myerslee1996}, a composition effect within groups that these data cannot separate from a denser use of dwellings by all households.
+
+\subsection{Register, cadastre and natives}
+
+With consistent annual sources, registered population per cadastral dwelling rises by \ratioP{} per unit of calendar-year inflow (standard error \ratioPse) and the cadastral stock does not respond (\stockP, \stockPse), in the central specification with population weights (panel B); the first stage of the calendar-year inflow is weak in this specification ($F$ \panelF), so these coefficients are indicative. The ratio of population to the total stock rises when population grows and the stock does not, whether newcomers fill previously vacant dwellings or crowd into occupied ones; it confirms absorption within the registered stock, not higher occupancy as such. The difference between census and register-cadastre occupancy in 2021 is not related to the predicted inflow (panel A, last row), which suggests that the change in census methodology does not drive the occupancy results.
+
+The response of the Spain-born population in the census decomposition is \natC{} per immigrant and not significant. The change in the Spain-born population includes births to immigrant parents and deaths, which the municipal data available for this paper do not separate. Municipal flows of intermunicipal migration for 2021--2024 (panel C) give an out-migration response of the Spain-born of \outES{} (\outESse), with a weak first stage ($F$ \outESF): the data do not identify whether natives relocate.
+
+\subsection{Occupancy and welfare}
+
+Higher occupancy is an adjustment margin that rent indices do not capture. It is not, by itself, evidence of a welfare loss. Occupying previously vacant dwellings uses an idle stock; denser households may reflect preferences, networks, temporary stays or saving, as well as affordability constraints, documentation barriers or discrimination in access to rentals. Distinguishing these requires rooms, household composition, income and, ideally, outcomes such as health or schooling at the local level, which the available data do not provide. National EU-SILC data show that overcrowding among foreign adults rose after 2015 (figure~\ref{fig:context}), but they cannot be linked to local inflows.
+
+\section{Magnitudes: from local to aggregate}\label{sec:magnitude}
+
+The design identifies the effect of an inflow into a municipality relative to its province. Translating it into a national counterfactual requires four assumptions that the design does not test: (A1) that the national elasticity equals the within-province one, which holds in the model of section~\ref{sec:model} only as a lower bound and whose relation to the national effect outside the model is unknown, because province fixed effects remove the common effect of immigration \citep{chodorowreich2020,wolf2023}; (A2) that level effects are permanent, which the dynamics cannot establish; (A3) that the 2015--2024 origin mix has the elasticity implied by the identifying variation, although the overidentification test rejects homogeneity across origins; and (A4) that there are no general-equilibrium effects, for instance through the supply of construction labour or incomes.
+
+Under these assumptions the implied share of national IPVA growth is $\beta\times M/G$, with $M=6.5$\,\% the cumulative net foreign-born inflow relative to population and $G=20.6$ log points the growth of the national IPVA between 2015 and 2024. Table~\ref{tab:magnitude} and figure~\ref{fig:magnitude} report it for several estimates. The central arrival-period estimate implies \shareArr\,\%, with a range of \shareArrLo{} to \shareArrHi\,\% across its AR set; the central full-period estimate implies \shareFull\,\%, with an upper bound of \shareFullHi\,\%; the original specification implied \shareOrig\,\%, and the visa-waiver episode \shareEp\,\%. Across these estimates immigration accounts for a minority of the rise in the rent index, but the figures depend on assumptions that cannot be verified and should not be read as lower bounds. Because the IPVA is a stock index, the corresponding shares for entry rents may differ.
+
+\input{tab/t7_magnitude}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=0.85\linewidth]{fig/fig7_magnitude.pdf}
+\caption{Implied contribution of immigration to national rent-index growth}\label{fig:magnitude}
+\begin{minipage}{0.85\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: panel (a), implied share $\beta\times M/G$ under assumptions A1--A4. Panel (b), estimates and robust 95\,\% sets (analytical AR; wild-bootstrap AR for the episode).
+\end{minipage}
+\end{figure}
+
+In relative terms, which require none of these assumptions, moving a municipality from the 10th to the 90th percentile of the annual inflow distribution (1.85 percentage points, table~\ref{tab:desc}) is associated with about $1.85\times\beta$ percentage points of additional annual growth of its rent index relative to its province: roughly 0.4 points with the central arrival-period estimate, against a difference of 5.7 points between the 10th and 90th percentiles of annual rent growth.
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{What the evidence supports}
+
+The estimates support three statements. First, in the arrival years 2015--2024, municipalities receiving larger predicted inflows saw somewhat faster growth in the average rent of declared contracts in force than other municipalities in their province, of about \cenArrB\,\% per percentage point of inflow in the central specification (\cenArrAR), and larger in the Colombian-Peruvian episode. Second, there is no detectable response in the years of outflows. Third, the additional population was housed within the existing registered stock in the short run, with higher occupancy of primary dwellings and no detectable response of the cadastral stock.
+
+\subsection{What is compatible with the evidence but not demonstrated}
+
+Several interpretations are compatible with the results but not established by them: that pressure diffuses across the provincial or metropolitan market; that the national effect exceeds the local one; that entry rents respond more than the stock index; that conversion of vacant and second homes is the main supply margin; that natives relocate slowly; that higher occupancy reflects constraints rather than preferences; and that effects are larger for origins that rent more. Pre-specified heterogeneity by vacancy, density, rental depth and an effective rental-demand shock that weights origins by their housing consumption yields no interaction that survives a \citet{benjamini1995} correction (appendix table~\ref{tab:het}).
+
+\subsection{What should not be inferred}
+
+The data do not show that the main adjustment is overcrowding, that occupancy entails a cost borne by immigrants or by poorer households, that immigration explains a precise share of national rent growth, that rent caps shifted pressure to new contracts, or that the relevant scale for policy is the province because pressure spreads without a distance gradient. Earlier versions of this paper made some of these statements; they are not supported by the evidence presented here.
+
+\subsection{Implications}
+
+Two implications follow without overreaching. Price indices of contracts in force are incomplete indicators of demographic pressure: entry rents, room rents and occupancy relative to dwelling size should be measured regularly, and the Catalan deposit register shows that new-contract data at the municipal level are feasible. And because the occupied stock grew through more intensive use rather than construction, policies that expand the usable stock at the market level, by building or by bringing vacant dwellings into use, act on the margins through which newcomers are housed; this paper does not estimate the effect of such policies.
+
+\section{Conclusions}\label{sec:conclusion}
+
+Immigration after 2015 increased housing demand in Spain. In the short run, it was accommodated largely within the existing stock: registered population per dwelling rose with inflows, persons per primary dwelling rose between censuses, and the registered stock did not respond detectably. Within provinces, rents of declared contracts in force rose somewhat faster in municipalities receiving larger predicted inflows during the arrival years, by about \cenArrB\,\% per percentage point of inflow, an estimate smaller than in specifications with fewer controls, whose significance depends on assumptions about the origin shocks, and which a sharper visa-waiver episode suggests may be larger in large cities. The paper does not identify the effect of immigration on the national level of rents; under explicit assumptions, immigration accounts for a minority of the rise in the rent index. Higher occupancy is a quantitatively important margin that rent indices miss. Whether it reflects household structure, constraints or welfare losses requires data on rooms, entry rents and household composition at the local level that are not yet regularly available.
+
+\section*{Statements and Declarations}
+
+\noindent\textbf{Funding} The author did not receive support from any organization for the submitted work.
+
+\medskip\noindent\textbf{Competing interests} The author has no relevant financial or non-financial interests to disclose.
+
+\medskip\noindent\textbf{Ethics approval and consent} Not applicable. The study uses publicly available aggregate statistics and involves no human participants.
+
+\medskip\noindent\textbf{Data availability} All data come from public sources: INE (IPVA; municipal register and annual population census by country of birth; 2011 and 2021 census tract indicators; central firm directory; statistics on migrations and changes of residence; household income atlas), the Directorate General for the Cadastre, the National Geographic Institute, Eurostat (EU-SILC, immigration by country of birth, local administrative units) and the Generalitat de Catalunya (Incasòl rental deposits, housing-policy areas). Analysis files and download scripts are in the replication package (Fernández-Aguilera 2026, \url{https://doi.org/10.5281/zenodo.23013308}, updated with the revision code).
+
+\medskip\noindent\textbf{Code availability} The replication package contains the code that reproduces, from the official files, every number, table and figure in the paper.
+
+\medskip\noindent\textbf{Use of generative AI} Claude (Anthropic) was used to retrieve the data, to write and run code and to draft and translate text. The author verified all results and text and is fully responsible for the article.
+
+\medskip\noindent\textbf{Author contributions} The author is solely responsible for the conception, data collection, analysis and writing of the article.
+
+\input{refs}
+
+\clearpage
+\appendix
+\section*{Appendix A. Data construction and sources}
+\addcontentsline{toc}{section}{Appendix A}
+
+\textit{Rents.} INE IPVA, tables 59060 (municipalities), 59061 (districts), 59058, 59059 and 59005 (provinces). The general index (base 2015) and its annual log difference are used. Catalan new contracts: Generalitat de Catalunya open data, ``Preu mitjà del lloguer d'habitatges per municipi'' (Incasòl deposit register), annual January--December mean rent and number of contracts.
+
+\textit{Population.} INE municipal register by country of birth (table 33573), 2003--2022, and annual population census (table 66322), 2021--2025, downloaded from INE and harmonised into 33 groups (28 countries and five continental residuals). Municipalities created after 2003 receive zero shares. Flows in year $t$ are the difference between 1 January of $t+1$ and of $t$ within the same source: register up to $t=2021$ and annual census from $t=2022$. The rebuilt instrument reproduces the one used in the earlier version of the paper exactly. Intermunicipal migration of the Spain-born: INE statistics on migrations and changes of residence, tables 69744 and 69746 (2021--2024).
+
+\textit{Censuses.} Tract-level indicators for 2011 (INE, indicators by census tract: population by region of birth, education, age, tenure, rooms and floor area of primary dwellings, households) and 2021 (population, foreign-born, dwellings, tenure, households), aggregated to municipalities. Suppressed tract cells are imputed with the municipal ratio of the variable to population.
+
+\textit{Firm directory and geography.} INE central firm directory (DIRCE), table 4721, firms by municipality and activity in 2012. Eurostat correspondence of local administrative units (LAU 2021): degree of urbanisation, coastal flag, city and functional urban area. IGN boundary lines for distances and contiguity, as in the earlier version.
+
+\textit{Cadastre and other.} Directorate General for the Cadastre, dwellings by district, aggregated to municipalities (2015--2025). INE household income atlas (2015) and experimental tourist dwellings. Generalitat de Catalunya, housing-policy areas (tensioned residential market zones and areas of strong demand). Eurostat: EU-SILC (ilc\_lvho15, ilc\_lvps15) and immigration by country of birth (migr\_imm3ctb).
+
+\textit{Sources that could not be used.} The Ministry of Housing's appraisal values (which would provide pre-2011 price trends), the bulk files of the State Reference System of Rental Prices (SERPAVI) and the Atlas of Urban Areas could not be downloaded from the environment in which the revision was produced; the Eurostat FUA delimitation is used instead of the latter. The municipal register by nationality for 1998--2002 is available from INE only at national and provincial level, so older municipal shares could not be built. Municipal births by mother's nationality and municipal registered unemployment were not obtained. These limitations are discussed in section~\ref{sec:discussion}.
+
+\textit{Replication.} The revision code rebuilds the instrument from the INE downloads and produces every number, table and figure; numbers in the text are read from the results. Estimates use \texttt{pyfixest} and \texttt{linearmodels} in Python; residualisation, Anderson-Rubin sets, the wild bootstrap, randomisation inference, AKM0 and Fieller intervals are coded explicitly.
+
+\clearpage
+\section*{Appendix B. Model derivations}
+\addcontentsline{toc}{section}{Appendix B}
+
+\textit{Local equilibrium.} Housing demand is $H_i^d=(a_NN_i+a_MM_i)R_i^{-\eta}$. Log-differentiating,
+\[
+\hat H_i^d=\frac{a_N\,dN_i+a_M\,dM_i}{a_NN_i+a_MM_i}-\eta\hat R_i=(1-\theta_i)\hat N_i+\kappa\,m_i-\eta\hat R_i,
+\]
+where $1-\theta_i=a_NN_i/(a_NN_i+a_MM_i)$, $m_i=dM_i/P_i$ and $\kappa=a_M/\bar a$. Native mobility gives $\hat N_i=-\delta(\hat R_i-\hat R_j)$ and supply $\hat H_i^s=\varepsilon\hat R_i$. Equating yields \eqref{eq:eq} with $\delta'=(1-\theta)\delta$.
+
+\textit{Proposition~\ref{prop:scale}.} Adding cross-market mobility with elasticity $\delta_J$ and averaging over the market's locations, $(\varepsilon+\eta+\delta'_J)\hat R_j=\kappa\bar m$, so $\beta_J=\kappa/(\varepsilon+\eta+\delta'_J)$. Subtracting the market equation from the local one, $\kappa(m_i-\bar m)=(\varepsilon+\eta+\delta')(\hat R_i-\hat R_j)$, so $\beta_L=\kappa/(\varepsilon+\eta+\delta')$.
+
+\textit{Absorption accounting.} In deviations from the market, $\hat R_i=\beta_Lm_i$, $\hat H_i=\varepsilon\beta_Lm_i$ and, if natives consume the average dwelling, the change in natives per inhabitant is $n_i=-\delta'\beta_Lm_i$. Population grows by $\hat P_i=m_i+n_i$ and occupancy by $\hat s_i=\hat P_i-\hat H_i$, so $c=\hat s_i/m_i=1-(\varepsilon+\delta')\beta_L$ and, since $(\varepsilon+\eta+\delta')\beta_L=\kappa$, $c=1-\kappa+\eta\beta_L$. The earlier version of the paper inverted these relations to obtain $\varepsilon+\delta'=(1-c)/\beta_L$. With the robust sets for $\beta_L$ reported in table~\ref{tab:main}, which include values close to zero, this ratio is not bounded above, and the paper does not report point values for $\varepsilon$ or $\delta'$. With $\beta_L$ small, the model attributes most of $c$ to composition, $1-\kappa$; section~\ref{sec:margins} shows that composition across continental groups does not account for the observed change, which in the model requires either newcomers with much lower $\kappa$ than settled immigrants of the same origin or a larger price term.
+
+\textit{Relation to the census decomposition.} Identity \eqref{eq:identity} is the discrete version of $\hat P_i=\hat H_i+\hat s_i$, with the occupied stock split into total stock and non-primary dwellings.
+
+\clearpage
+\section*{Appendix C. Additional tables and figures}
+\addcontentsline{toc}{section}{Appendix C}
+\input{tab/ta1_flow}
+\input{tab/ta_main_rent}
+\input{tab/ta_main_unw}
+\input{tab/ta7_loo}
+\input{tab/ta2_rotemberg}
+\input{tab/ta3_het}
+\input{tab/ta4_catalonia}
+\input{tab/ta5_alt_spatial}
+\input{tab/ta6_kappa}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{fig/figA1_lp.pdf}
+\caption{Local projections identified from innovations in the instrument}\label{fig:lp}
+\begin{minipage}{0.95\linewidth}\footnotesize\vspace{2pt}
+\textit{Notes}: coefficients $\beta_h$ of $\ln R_{i,t+h}-\ln R_{i,t-1}$ on the calendar-year inflow instrumented with its prediction, controlling for three lags of the prediction, province $\times$ year fixed effects and the indicated controls; balanced sample $t\in[2015,2020]$; population weights; 95\,\% intervals with province clusters. The first-stage $F$ in the title shows that innovations in the instrument carry little predictive power.
+\end{minipage}
+\end{figure}
+
+\end{document}

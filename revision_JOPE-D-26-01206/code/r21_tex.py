@@ -311,13 +311,13 @@ mac('shareEp', f(dv['w']['b'] * fac * 100, 1)); mac('shareOrig', f(c12[f'{O}|w']
 # ---------------------------------------------------------------- Appendix tables
 # A1: sample flow
 sf = D10['sample_flow']
-s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Sample flow}\label{tab:flow}', r'\begin{tabular}{lr}\toprule',
+s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Sample flow}\label{tab:flow}', r'\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lr}\toprule',
      f"Municipalities in the Padrón (2003--2022) & {sf['municipalities_padron']:,}\\\\",
      f"Municipalities with an IPVA (INE table 59060) & {sf['municipalities_with_ipva']:,}\\\\",
      f"Municipality-years with IPVA growth, 2012--2024 & {sf['muni_years_ipva_2012_2024']:,}\\\\",
      f"Analysis sample after dropping singleton province-years and missing covariates & {sf['analysis_obs']:,} ({sf['analysis_munis']} municipalities, {sf['analysis_provinces']} provinces)\\\\",
      f"Census long-difference sample (municipalities above 5,000 inhabitants) & {G16['census_central_w']['n']:,}\\\\",
-     r'\bottomrule\end{tabular}', r'\begin{minipage}{0.9\linewidth}\footnotesize\vspace{4pt}\textit{Notes}: the IPVA excludes the Basque Country and Navarre. '
+     r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.9\linewidth}\footnotesize\vspace{4pt}\textit{Notes}: the IPVA excludes the Basque Country and Navarre. '
      r'Province-years with a single sample municipality are dropped because the province $\times$ year fixed effect absorbs them.\end{minipage}\end{table}']
 write('ta1_flow.tex', '\n'.join(s))
 # A2: full Rotemberg
@@ -345,7 +345,7 @@ s += [r'\bottomrule\end{tabular}', r'\begin{minipage}{0.95\linewidth}\footnotesi
 write('ta3_het.tex', '\n'.join(s))
 # A4: Catalonia
 cat = C18
-s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Stock index and new-contract rents in Catalonia (Incasòl deposit register)}\label{tab:catalonia}', r'\begin{tabular}{lc}\toprule',
+s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Stock index and new-contract rents in Catalonia (Incasòl deposit register)}\label{tab:catalonia}', r'\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lc}\toprule',
      f"Municipalities matched to the analysis sample & {cat['n_munis']}\\\\",
      f"Median annual new contracts per rented main dwelling (2011 census) & {f(cat['turnover_median'])}\\\\",
      f"Correlation of annual growth: IPVA vs mean new-contract rent & {f(cat['corr_dln_new_dlnR'])}\\\\",
@@ -353,7 +353,7 @@ s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Stock index and new-con
      f"\\quad with two lags: $t$ / $t-1$ / $t-2$ & {f(cat['ols_stock_on_new_lags']['dln_new']['b'],3)} / {f(cat['ols_stock_on_new_lags']['dln_new_l1']['b'],3)} / {f(cat['ols_stock_on_new_lags']['dln_new_l2']['b'],3)}\\\\",
      f"2SLS within Catalonia, central covariates: first-stage $F$ & {f(cat['central|w|dlnR']['F'],1)}\\\\",
      f"\\quad IPVA / new-contract rent / log contracts per capita & {f(cat['central|w|dlnR']['b'])} / {f(cat['central|w|dln_new']['b'])} / {f(cat['central|w|dln_contracts']['b'])}\\\\",
-     r'\bottomrule\end{tabular}', r'\begin{minipage}{0.95\linewidth}\footnotesize\vspace{4pt}\textit{Notes}: annual (January--December) mean monthly rent and number of '
+     r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.95\linewidth}\footnotesize\vspace{4pt}\textit{Notes}: annual (January--December) mean monthly rent and number of '
      r'new contracts with a deposit lodged at Incasòl, by municipality (Generalitat de Catalunya open data). Within-Catalonia 2SLS uses municipality clusters because only '
      r'four provinces are available; the instrument is weak in this subsample and the estimates are reported for completeness.\end{minipage}\end{table}']
 write('ta4_catalonia.tex', '\n'.join(s))
