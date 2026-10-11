@@ -269,7 +269,7 @@ for lab, q in [('Companion-paper instrument (annual, centred timing), rent of al
                ('Catalonia, mean new-lease rent (not adjusted for size or value), 2015--2023', cv['d_new23']), ('Catalonia, income per consumption unit, 2015--2023', cv['d_uc'])]:
     s.append(f"{lab} & {f(q['b'])} ({f(q['se'])}) & {ar(q['ar'])} & {f(q['F'], 1)} & {q['n']}\\\\")
 s += [r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}',
-      r'\textit{Notes}: panel A, ' + f"{pv['G24|w']['n']}" + r' provinces (INE table 59005, both indices with base 2015 = 100); treatment and instrument are the population-weighted provincial means of the municipal inflow and instrument of table~\ref{tab:main}; heteroskedasticity-robust standard errors. '
+      r'\textit{Notes}: panel A, the 46 provinces of the common tax regime plus Ceuta and Melilla (INE table 59005, both indices with base 2015 = 100); treatment and instrument are the population-weighted provincial means of the municipal inflow and instrument of table~\ref{tab:main}; heteroskedasticity-robust standard errors. '
       r'Panel B: inflows and instruments summed over 2015--2019 and 2020--2024, specification of table~\ref{tab:main}. '
       r'Panel C: the panel of IPVA municipalities of the companion paper (annual inflow and instrument with centred timing, province $\times$ year fixed effects, 2003 foreign share and predetermined covariates $\times$ year, population weights) merged with annual new-lease rents '
       r'(Catalonia: mean rent; Aragón: street-adjusted index; Comunitat Valenciana: median deposit; municipalities with at least 30 leases in the year); clusters by municipality; no trimming. '

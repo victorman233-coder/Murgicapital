@@ -1,109 +1,70 @@
 # Insiders and Outsiders in the Rental Market — resumen para el autor
 
-- **Manuscrito:** `paper_v2/paper.pdf` (24 páginas).
+- **Manuscrito:** `paper_v2/paper.pdf` (32 páginas). Es la versión revisada tras la revisión multiagente; el detalle está en `Revision_multiagente.md`.
 - **Código:** `code/run_v2.sh`.
-- **Origen de las cifras:** todas proceden de los ficheros de `out/` (`e01_main.json`, `e02_panels_regulation.json`, `e03_inference.json`, `e04_panel_entry.json`, `e05_extensions.json`, `e06_flows.json`, `d15_aragon.json`, `d16_epf.json`). Pasan al texto a través de `paper_v2/tab/numbers.tex`.
+- **Origen de las cifras:** todas proceden de `out/*.json` y pasan al texto a través de `paper_v2/tab/numbers.tex`.
 
 ## Contribución central
 
-El problema de asequibilidad del alquiler en España es un problema de **entrada**. Los contratos duran al menos cinco años, las rentas en vigor se actualizan por el IPC o por un tope legal y cada año solo se renueva uno de cada seis contratos. Por eso los shocks de demanda recaen sobre el precio del contrato nuevo y sobre quién consigue entrar, no sobre los inquilinos que ya tienen contrato.
+Gran parte del deterioro de la asequibilidad del alquiler en España recae en quien **entra** en el mercado. Los contratos duran al menos cinco años, las rentas en vigor se actualizan por el IPC o por un tope legal, y cada año termina entre el 12 % y el 19 % de los contratos. Por eso el índice oficial, que promedia todos los contratos, recoge los shocks de demanda tarde y solo en parte.
 
 El artículo:
-- formaliza esto en un modelo stock–flujo con cinco predicciones:
-  - P1: la renta de entrada absorbe el shock y el índice de todos los contratos lo recoge al ritmo de la rotación λ;
-  - P2: la renta por unidad de consumo no responde y el ajuste se hace por tamaño del hogar;
-  - P3: amplificación donde la oferta y la reasignación son rígidas, con umbral turístico;
-  - P4: los inquilinos instalados no se van; entran menos hogares de fuera;
-  - P5: los topes de actualización amplían la brecha y los topes a la renta inicial la estrechan a costa de menos contratos regulados;
-- mide la brecha de entrada ajustada por calidad con la AEAT 2024, por municipio y por código postal;
-- mide la renta de entrada en cuatro registros de fianzas: Cataluña, Aragón (con efectos fijos de calle), País Vasco y C. Valenciana;
+- formaliza esto en un modelo stock-flujo. Como solo reoptimizan los hogares que firman, la elasticidad que absorbe un shock es λη y no η;
+- documenta la divergencia con la AEAT 2024, cuatro registros de fianzas y los índices del INE de contratos nuevos y existentes;
 - estima la respuesta a shocks locales de demanda con un instrumento shift-share.
-
-## Ampliación del marco teórico y de las conclusiones (tu sugerencia)
-
-**Marco teórico (sección 4, ahora con seis apartados):**
-- Brecha de estado estacionario: G* = (1−λ)(g−u)/λ.
-- Velocidad a la que el índice de todos los contratos recoge el shock: 1−(1−λ)^k.
-- Rotación endógena (*lock-in*): por qué el ajuste en cantidades recae en quienes no consiguen entrar.
-- Topes de actualización con adelanto a la renta inicial (*front-loading*): k̄ ≈ 3,7 años.
-- Incidencia: quién paga el shock.
-- Cinco predicciones en lugar de tres.
-
-**Conclusiones (cuatro párrafos):**
-- Resumen de los hechos y del mecanismo.
-- Tres implicaciones de política: medición de rentas a la firma, oferta dirigida al flujo de entrada, y diseño de la regulación.
-- Dos extensiones de datos: fianzas enlazadas por vivienda y renta de los entrantes.
 
 ## Resultados y su estatus
 
 | Resultado | Cifra | Estatus |
 |---|---|---|
-| Renta de los insiders (IPVA) frente a renta por unidad de consumo, 2015–2023 | +16,5 frente a +31,0 log-puntos; el ratio cae en los 703 municipios | Descriptivo |
-| Esfuerzo mediano de los hogares inquilinos (EPF) | 27,6 % (2016) → 26,4 % (2024); los que pagan más del 40 % pasan del 25 % al 19 % | Descriptivo, confirma lo anterior |
-| Contratos nuevos en Cataluña frente a la renta | +39,0 frente a +27,3 (en el 77 % de los municipios) | Descriptivo |
-| Contratos nuevos en Aragón (índice con efectos fijos de calle) | +36,1 frente a +26,5 de renta y +15,1 del IPVA; Zaragoza +37,6 frente a +14,9 | **Nuevo**, descriptivo, ajustado por localización |
-| Contratos nuevos en el País Vasco (€/m²) | +21,2 frente a +26,4 (solo el 10 % de los municipios empeora) | Descriptivo: **la tesis no es universal** |
-| Brecha de entrada ajustada por calidad (AEAT 2024) | 15,9 log-puntos; positiva en el 99,5 % de 402 municipios | Descriptivo |
-| La misma brecha por código postal (15 ciudades) | Positiva en el 99,4 % de 318 códigos; no depende del nivel de renta del barrio | Nuevo, descriptivo |
-| Rotación (fianzas de Aragón) | El 19,2 % de los contratos termina cada año (Zaragoza 15,7 %); duración mediana de 3,3 años; peso de los contratos nuevos en el INE: 17,6 % → 12,3 % | Nuevo, descriptivo |
-| Shock de demanda (+1 pp de población) → brecha de entrada | 0,57 [0,11; 1,74]; F = 11 | **Causal (IV)** |
-| → renta de entrada implícita | 0,83 [0,25; 2,21] | Causal (IV) |
-| → renta de todos los contratos | 0,22 [−0,09; 0,62] | Causal (IV), nulo |
-| → renta por unidad de consumo; tamaño del hogar | 0,08 (nulo); 1,26 [0,69; 2,51] | Causal (IV) |
-| → salidas de españoles hacia otros municipios (2021–24) | −0,01 [−0,40; 0,27] | **Nuevo**, causal (IV), nulo |
-| → llegadas de españoles desde otros municipios | −0,54 [−2,00; −0,14] por 100 habitantes | **Nuevo**, causal (IV): el ajuste en cantidades también es de entrada |
-| Rigidez geográfica × shock → brecha | 0,49 (p = 0,019); 0,48 (p = 0,003) neto de turismo | Causal con salvedades (F parcial 5,9) |
-| Costa × shock → brecha | +0,59 (ee 0,23) | Heterogeneidad |
-| Umbral turístico (Hansen) | 2,4 % de viviendas turísticas; intervalo 2,4–3,2 % para rentas; se rechaza una pendiente común (p < 0,01) | Cuasi-experimental (colapso covid) |
-| Topes de actualización 2022–24 | Explican como máximo el 58 % del aumento de la brecha nacional, de 2,3 a 12,7 puntos | Contable (cota superior) |
-| Tope de zona tensionada (Cataluña) | Cuota de contratos de temporada +1,8 pp; contratos regulares −14 % | DiD |
-| Prima por m² de los inquilinos extranjeros (EPF) | De −3,0 % a +0,6 % (cambio +3,5; p = 0,08) | Descriptivo, evidencia débil |
-| Canal de tenencia y efectos sobre las rentas de la periferia | No se sostienen | Nulos |
+| Renta de todos los contratos (IPVA) frente a renta por unidad de consumo, 2015–2023 | +16,5 frente a +31,0 log-puntos; el ratio cae en los 703 municipios | Descriptivo, firme |
+| Brecha de entrada INE (nuevos frente a existentes) | 2,3 (2021) → 12,7 (2024); se amplía en todas las provincias | Descriptivo, firme |
+| Brecha ajustada por valor (AEAT 2024) | 15,9 log-puntos; positiva en el 99,5 % de 402 municipios; ≈ 18,4 frente a contratos existentes | Descriptivo, firme |
+| Renta de entrada frente a ingresos: Cataluña y Aragón | +11,7 y +9,5 desde 2015; **+1,7 y +4,0 desde 2018** | Descriptivo, sensible al año base |
+| País Vasco | La renta de entrada crece menos que la renta. Dentro de la región, la diferencia aumenta con la entrada: 0,65 (0,28) | Descriptivo |
+| Rotación (fianzas de Aragón) | 17,4 % anual (rango 14,9–19,2 %); Zaragoza 14,9 %; duración mediana 3,8 años | Descriptivo, con salvedades |
+| Esfuerzo mediano de los inquilinos (EPF, punto medio del intervalo) | 27,6 % (2016) → 25,4 % (2024); por encima del 40 %: 26 % → 18 % | Descriptivo |
+| Shock → renta de entrada implícita | 0,83 [0,25; 2,21]; GMM por orígenes 0,45 (0,11) | Causal (IV); firme en signo y orden |
+| Shock → renta de todos los contratos | 0,22 [−0,09; 0,62]; GMM 0,25 (0,06) | Causal (IV) |
+| Shock → brecha de entrada (nivel 2024) | 0,57 [0,11; 1,74]; GMM 0,21; solo Colombia 0,06 | Causal (IV); **tamaño no robusto** |
+| Brecha en cambios (índices provinciales) | 2015–2024: 0,13 (0,22); 2021–2024: 0,33 (0,14) | Positivo pero impreciso |
+| Calendario: entrada reciente frente a antigua | No concluyente; las estimaciones puntuales van en contra del modelo | Declarado |
+| Shock → renta por unidad de consumo; tamaño del hogar | 0,08 (no detectable); 1,26 [0,69; 2,51] | Causal (IV) |
+| Shock → llegadas de españoles; salidas de españoles | −0,54 [−2,00; −0,14]; −0,01 (no detectable) | Causal (IV); compatible también con evitación nativa |
+| Rigidez geográfica × shock → brecha | 0,49 (*p* = 0,021). No se separa de la costa; efecto en la media 0,12 | Débil |
+| Turismo | Reasignación de contratos por encima de ~3 % de viviendas turísticas, pero con tendencias previas (*p* < 0,001) | **Descriptivo** |
+| Topes de actualización 2022–23 | Como máximo el 58 % del ensanchamiento nacional | Contable (cota del efecto mecánico) |
+| Tope catalán en zonas tensionadas | Cuota de contratos de temporada +1,8 pp; rentas −4 a −5 %; contratos −18 % (estudio compañero) | DiD, con tendencias previas en el número de contratos |
+| Tenencia; efectos sobre las rentas de la periferia | Hay tendencias previas; efectos sobre las rentas de la periferia pequeños e imprecisos | No se sostienen |
 
-## Diagnóstico de la identificación (importante)
+## Qué cambió en la revisión
 
-1. **Inferencia por permutaciones y AKM: no informativa.** En la diferencia larga solo hay una realización de 33 shocks de origen. Esos shocks tienen colas muy largas porque algunos orígenes eran pequeños en 2003. Al recentrar el instrumento permutando orígenes desaparece la primera etapa (F = 0,08), y los intervalos AKM no están acotados. En el artículo compañero, con panel anual, sí funcionaba.
-2. **Consecuencia.** La identificación descansa en la exogeneidad de las cuotas de asentamiento de 2003. Tres orígenes acumulan el 84 % del peso de Rotemberg: Colombia, Perú y Rumanía. El texto lo dice así y cita a Goldsmith-Pinkham et al. y a Jaeger et al.
-3. **Lo que aguanta:**
-   - Con el control de suma de cuotas (Borusyak–Hull–Jaravel), la brecha queda en 0,64 [0,24; 3,64], con F = 5,6.
-   - Quitando cualquiera de los cinco orígenes principales, el efecto está entre 0,56 y 0,96 y los intervalos excluyen el cero.
-   - La cuota rumana de 2003 se asocia con un menor crecimiento previo de los alquileres (t = −4,4). Sin Rumanía, el resultado no cambia.
-4. **Panel anual (Cataluña, Aragón y Valencia), donde los shocks varían cada año:**
-   - Va en la misma dirección: entrada 0,53 frente a stock 0,00.
-   - Es impreciso: p de aleatorización 0,08 para la entrada.
-   - El instrumento del año siguiente predice el alquiler de este año (−1,34; ee 0,81): las series anuales de fianzas tienen mucho ruido.
-   - Corrobora el signo, no la magnitud.
-5. **Placebo con orígenes ricos.** El punto estimado va en la dirección esperada (−0,82 frente a 0,37), pero la primera etapa de esos orígenes es débil (F = 1,3).
+Lo principal; el detalle está en `Revision_multiagente.md`, §5:
 
-## Otras salvedades (recogidas en el texto)
+- Tabla 1 corregida: había un error de escala.
+- Supuesto explícito sobre la brecha de 2015, acotado entre el 15 % y el 31 %.
+- Pruebas nuevas de identificación:
+  - GMM por orígenes y estimaciones con un solo origen;
+  - control por la entrada 2003–2014;
+  - otros pesos y exclusión de provincias;
+  - conjuntos Anderson-Rubin por bootstrap salvaje.
+- Brecha medida en cambios con los índices provinciales y prueba de calendario.
+- Turismo pasa a ser descriptivo.
+- Rigidez geográfica junto con la costa.
+- Modelo con λ en la ecuación de la renta de entrada y P4 derivada.
+- Resumen, introducción y conclusiones con el alcance que permiten los datos.
+- 13 referencias nuevas, verificadas en Crossref.
 
-- La brecha de la AEAT es de un solo año (2024).
-- La renta de los entrantes no se observa en datos abiertos. La EPF no identifica a quién se acaba de mudar.
-- La interacción de rigidez tiene un F parcial de 5,9.
-- Sin ponderar, la primera etapa es débil (F = 2,3).
-- El ejercicio de los topes de actualización es contable. A escala provincial no se observa el desacoplamiento entre contratos existentes y nuevos que podría esperarse.
-- El censo de 2021 (personas que se mudaron el año anterior) no se ha usado. Las estadísticas de migraciones del INE dan esa información año a año y por nacionalidad.
+## Qué debe decidir el autor
 
-## Datos nuevos descargados (todos abiertos)
-
-- **Gobierno de Aragón:** microdatos del registro de fianzas (recurso 100): 458.392 fianzas de vivienda desde 1996, con calle y estado de devolución.
-- **INE, Estadística de Migraciones y Cambios de Residencia:** tablas 69743 y 69745.
-- **INE, Encuesta de Presupuestos Familiares:** microdatos de 2016 a 2024 (23.274 hogares-año inquilinos).
-- **Fuentes de la ronda anterior:** EMAL, fianzas de la GVA, temporada en Cataluña, AEAT por municipio y código postal, MIVAU, ADRH 30832/30825 y Copernicus DEM.
-- **Referencias nuevas:** cuatro, verificadas en Crossref (Adão et al. 2019, Borusyak y Hull 2023, Hansen 2000, Jaeger et al. 2018).
-
-No se ha usado ningún dato con acceso restringido.
+1. **Enfoque del artículo.** Puede presentarse como artículo de medición con evidencia causal complementaria, más defendible con los datos actuales, o como artículo causal, que es el enfoque actual (`Revision_multiagente.md`, §7).
+2. **Cita del artículo compañero.** «Unpublished manuscript» o «under review».
+3. **Revisión independiente.** La revisión cruzada (fase 4) no fue independiente: los agentes se cortaron por el límite de gasto. Conviene una lectura editorial humana.
+4. **Pipeline.** Relanzar el pipeline completo desde cero (`run_v2.sh`) para generar el manifiesto SHA-256 de las descargas.
 
 ## Revistas sugeridas
 
-En orden de ajuste: *Journal of Urban Economics*, *Regional Science and Urban Economics*, *Journal of Housing Economics*.
-
-Para JUE, la debilidad principal es la identificación por cuotas de asentamiento con pocos orígenes dominantes. Lo que más la reforzaría:
-- fianzas enlazadas por vivienda, que permitirían medir el reajuste directamente;
-- varios años de la estadística de la AEAT para tener un panel de la brecha.
-
-## Qué debe revisar el autor
-
-- La redacción, la afiliación y la declaración de IA (incluida tal como la pediste).
-- El tono de la sección de identificación. He preferido decir abiertamente que la inferencia por permutaciones no es informativa en la diferencia larga.
-- Si quiere que el artículo de inmigración (Fernández-Aguilera 2026) figure como «unpublished manuscript» o como «under review».
+En orden de ajuste con la versión actual:
+1. *Journal of Housing Economics*.
+2. *Regional Science and Urban Economics*.
+3. *Journal of Urban Economics*, si se consigue un panel de la brecha o fianzas enlazadas por vivienda.

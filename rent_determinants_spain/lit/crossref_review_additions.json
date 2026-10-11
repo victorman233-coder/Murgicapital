@@ -1,0 +1,171 @@
+{
+ "adams2024": {
+  "doi": "10.1257/aeri.20220685",
+  "title": "Disentangling Rent Index Differences: Data, Methods, and Scope",
+  "container": "American Economic Review: Insights",
+  "year": 2024,
+  "volume": "6",
+  "issue": "2",
+  "page": "230-245",
+  "authors": [
+   "Adams",
+   "Loewenstein",
+   "Montag",
+   "Verbrugge"
+  ]
+ },
+ "arnott1995": {
+  "doi": "10.1257/jep.9.1.99",
+  "title": "Time for Revisionism on Rent Control?",
+  "container": "Journal of Economic Perspectives",
+  "year": 1995,
+  "volume": "9",
+  "issue": "1",
+  "page": "99-120",
+  "authors": [
+   "Arnott"
+  ]
+ },
+ "basu2000": {
+  "doi": "10.1111/1468-0297.00571",
+  "title": "The Economics of Tenancy Rent Control",
+  "container": "The Economic Journal",
+  "year": 2000,
+  "volume": "110",
+  "issue": "466",
+  "page": "939-962",
+  "authors": [
+   "Basu",
+   "Emerson"
+  ]
+ },
+ "calvo1983": {
+  "doi": "10.1016/0304-3932(83)90060-0",
+  "title": "Staggered prices in a utility-maximizing framework",
+  "container": "Journal of Monetary Economics",
+  "year": 1983,
+  "volume": "12",
+  "issue": "3",
+  "page": "383-398",
+  "authors": [
+   "Calvo"
+  ]
+ },
+ "card2001": {
+  "doi": "10.1086/209979",
+  "title": "Immigrant Inflows, Native Outflows, and the Local Labor Market Impacts of Higher Immigration",
+  "container": "Journal of Labor Economics",
+  "year": 2001,
+  "volume": "19",
+  "issue": "1",
+  "page": "22-64",
+  "authors": [
+   "Card"
+  ]
+ },
+ "crone2010": {
+  "doi": "10.1162/rest_a_00015",
+  "title": "Rents Have Been Rising, Not Falling, in the Postwar Period",
+  "container": "Review of Economics and Statistics",
+  "year": 2010,
+  "volume": "92",
+  "issue": "3",
+  "page": "628-642",
+  "authors": [
+   "Crone",
+   "Nakamura",
+   "Voith"
+  ]
+ },
+ "glaeser2003": {
+  "doi": "10.1257/000282803769206188",
+  "title": "The Misallocation of Housing Under Rent Control",
+  "container": "American Economic Review",
+  "year": 2003,
+  "volume": "93",
+  "issue": "4",
+  "page": "1027-1046",
+  "authors": [
+   "Glaeser",
+   "Luttmer"
+  ]
+ },
+ "goodman1985": {
+  "doi": "10.2307/3145802",
+  "title": "Length-of-Residence Discounts and Rental Housing Demand: Theory and Evidence",
+  "container": "Land Economics",
+  "year": 1985,
+  "volume": "61",
+  "issue": "2",
+  "page": "93",
+  "authors": [
+   "Goodman",
+   "Kawai"
+  ]
+ },
+ "lindbeck2001": {
+  "doi": "10.1257/jep.15.1.165",
+  "title": "Insiders versus Outsiders",
+  "container": "Journal of Economic Perspectives",
+  "year": 2001,
+  "volume": "15",
+  "issue": "1",
+  "page": "165-188",
+  "authors": [
+   "Lindbeck",
+   "Snower"
+  ]
+ },
+ "monras2023": {
+  "doi": "10.24148/wp2023-28",
+  "title": "The Effect of Second-Generation Rent Controls: New Evidence from Catalonia",
+  "container": "Federal Reserve Bank of San Francisco, Working Paper Series",
+  "year": 2023,
+  "volume": "2023",
+  "issue": "28",
+  "page": "01-69",
+  "authors": [
+   null,
+   "Monras",
+   "Montalvo",
+   null
+  ]
+ },
+ "sa2015": {
+  "doi": "10.1111/ecoj.12158",
+  "title": "Immigration and House Prices in the UK",
+  "container": "The Economic Journal",
+  "year": 2014,
+  "volume": "125",
+  "issue": "587",
+  "page": "1393-1424",
+  "authors": [
+   "Sá"
+  ]
+ },
+ "saiz2011": {
+  "doi": "10.1257/pol.3.2.169",
+  "title": "Immigration and the Neighborhood",
+  "container": "American Economic Journal: Economic Policy",
+  "year": 2011,
+  "volume": "3",
+  "issue": "2",
+  "page": "169-188",
+  "authors": [
+   "Saiz",
+   "Wachter"
+  ]
+ },
+ "sims2007": {
+  "doi": "10.1016/j.jue.2006.06.004",
+  "title": "Out of control: What can we learn from the end of Massachusetts rent control?",
+  "container": "Journal of Urban Economics",
+  "year": 2007,
+  "volume": "61",
+  "issue": "1",
+  "page": "129-151",
+  "authors": [
+   "Sims"
+  ]
+ }
+}
