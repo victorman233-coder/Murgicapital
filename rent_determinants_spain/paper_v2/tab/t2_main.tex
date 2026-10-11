@@ -1,26 +1,29 @@
 \begin{table}[!htbp]\centering\small
 \caption{Where a local demand shock goes: rents, entry rents, incomes and households}\label{tab:main}
-\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lcccccc}\toprule
-Outcome & 2SLS & SE & AR 95\% set & First-stage $F$ & $N$ & Mean\\\midrule
-\multicolumn{7}{l}{\textit{A. Rents}}\\
-Rent, all leases, 2015--2024 & 0.22 & (0.16) & [$-$0.09, 0.62] & 21.0 & 695 & 0.200\\
-Entry gap, per euro of cadastral value, 2024 & 0.57 & (0.30) & [0.11, 1.74] & 11.0 & 402 & 0.159\\
-Entry gap, per m$^2$, 2024 & 0.50 & (0.32) & [0.06, 1.90] & 11.0 & 402 & 0.163\\
-Entry gap, raw, 2024 & 0.71 & (0.27) & [0.30, 1.73] & 11.0 & 402 & 0.139\\
-Implied entry rent (all leases + quality-adjusted gap) & 0.83 & (0.37) & [0.25, 2.21] & 11.0 & 402 & 0.363\\
-\multicolumn{7}{l}{\textit{B. Incomes and households, 2015--2023}}\\
-Income per consumption unit (median) & 0.08 & (0.30) & [$-$0.42, 0.97] & 16.0 & 695 & 0.310\\
-Income per person & $-$0.09 & (0.29) & [$-$0.60, 0.74] & 16.0 & 695 & 0.318\\
-Income per household & 0.89 & (0.37) & [0.34, 2.14] & 16.0 & 695 & 0.293\\
-Household size & 1.26 & (0.38) & [0.69, 2.51] & 16.0 & 695 & $-$0.022\\
-\multicolumn{7}{l}{\textit{C. Affordability}}\\
-Insiders: rent of all leases minus income per consumption unit & 0.18 & (0.34) & [$-$0.76, 0.81] & 16.0 & 695 & $-$0.144\\
-Entrants: implied entry rent minus income per consumption unit & 0.75 & (0.37) & [$-$0.06, 1.74] & 11.0 & 402 & 0.057\\
-\multicolumn{7}{l}{\textit{D. Quantities and falsification}}\\
-Population & 0.82 & (0.27) & [0.17, 1.34] & 21.0 & 695 & 0.065\\
-Dwelling stock (cadastre) & $-$0.26 & (0.23) & [$-$0.81, 0.18] & 21.0 & 695 & 0.038\\
-Rent of all leases, 2012--2015 (pre-period) & $-$0.09 & (0.13) & [$-$0.31, 0.28] & 20.9 & 694 & $-$0.035\\
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccccc}\toprule
+Outcome & 2SLS & SE & AR 95\,\% set & WCR-AR 95\,\% set & First-stage $F$ & $N$ & Mean\\\midrule
+\multicolumn{8}{l}{\textit{A. Rents}}\\
+Rent, all leases, 2015--2024 & 0.22 & (0.16) & [$-$0.09, 0.62] & [$-$0.06, 0.64] & 21.0 & 695 & 0.200\\
+Entry gap, value-adjusted, 2024 (level) & 0.57 & (0.30) & [0.11, 1.74] & [0.10, 1.54] & 11.0 & 402 & 0.159\\
+Entry gap, per m$^2$, 2024 (level) & 0.50 & (0.32) & [0.06, 1.90] & -- & 11.0 & 402 & 0.163\\
+Entry gap, raw, 2024 (level) & 0.71 & (0.27) & [0.30, 1.73] & -- & 11.0 & 402 & 0.139\\
+Implied entry rent (rent of all leases + value-adjusted gap)$^a$ & 0.83 & (0.37) & [0.25, 2.21] & [0.30, 2.04] & 11.0 & 402 & 0.363\\
+\multicolumn{8}{l}{\textit{B. Incomes and households, 2015--2023}}\\
+Income per consumption unit (median) & 0.08 & (0.30) & [$-$0.42, 0.97] & [$-$0.44, 0.92] & 16.0 & 695 & 0.310\\
+Income per person & $-$0.09 & (0.29) & [$-$0.60, 0.74] & -- & 16.0 & 695 & 0.318\\
+Income per household & 0.89 & (0.37) & [0.34, 2.14] & -- & 16.0 & 695 & 0.293\\
+Household size (income atlas) & 1.26 & (0.38) & [0.69, 2.51] & [0.68, 2.76] & 16.0 & 695 & $-$0.022\\
+Household size implied by income per household and per person & 0.99 & (0.25) & [0.60, 1.75] & -- & 16.0 & 695 & --\\
+Number of households (population minus household size) & $-$0.41 & (0.39) & [$-$1.65, 0.19] & -- & 16.0 & 695 & --\\
+\multicolumn{8}{l}{\textit{C. Affordability}}\\
+Insiders: rent of all leases minus income per consumption unit & 0.18 & (0.34) & [$-$0.76, 0.81] & -- & 16.0 & 695 & $-$0.144\\
+Entrants: implied entry rent minus income per consumption unit & 0.75 & (0.37) & [$-$0.06, 1.74] & [0.00, 1.68] & 11.0 & 402 & 0.057\\
+Entrants, rents and incomes both over 2015--2023 & 0.90 & (0.48) & [$-$0.16, 2.30] & -- & 9.6 & 402 & --\\
+\multicolumn{8}{l}{\textit{D. Quantities and falsification}}\\
+Population & 0.82 & (0.27) & [0.17, 1.34] & [0.08, 1.38] & 21.0 & 695 & 0.065\\
+Dwelling stock (cadastre) & $-$0.26 & (0.23) & [$-$0.81, 0.18] & [$-$0.92, 0.24] & 21.0 & 695 & 0.038\\
+Rent of all leases, 2012--2015 (pre-period) & $-$0.09 & (0.13) & [$-$0.31, 0.28] & -- & 20.9 & 694 & $-$0.035\\
 \bottomrule\end{tabular}\end{adjustbox}
 \begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
-\textit{Notes}: one observation per municipality. Treatment: cumulative net foreign-born inflow between 1 January 2015 and 1 January 2025 (2024 for panels B and C, insiders) relative to 2015 population, instrumented with the corresponding sum of leave-own-province-out shift-share predictions (33 origins, 2003 settlement). All regressions include province fixed effects and predetermined controls (2011 census: log population, renting, vacancy, tertiary education, share aged 65+; 2012: construction, industry and trade-hospitality shares of firms, firms per capita; coastal and FUA-core indicators), population weights and standard errors clustered by province. Entry-gap outcomes are available for the municipalities above 20,000 inhabitants in the AEAT statistics. AR: Anderson-Rubin set.
+\textit{Notes}: one observation per municipality; coefficients in log points per percentage point of inflow. Treatment: cumulative net foreign-born inflow from 1 January 2015 to 1 January 2025 (to 1 January 2024 for the outcomes measured to 2023: panel B, the insiders row and the last entrants row) relative to 2015 population, instrumented with the corresponding sum of leave-own-province-out shift-share predictions (33 origins, 2003 settlement). All regressions include province fixed effects and predetermined controls (2011 census: log population, renting, vacancy, tertiary education, share aged 65+; 2012: construction, industry and trade-hospitality shares of firms, firms per capita; coastal and FUA-core indicators), 2015 population weights and standard errors clustered by province with the CRV1 small-sample correction. Entry-gap outcomes are available for the municipalities above 20,000 inhabitants in the AEAT statistics. AR: Anderson-Rubin set; WCR-AR: wild cluster restricted bootstrap Anderson-Rubin set (Webb weights, 4,999 draws); $F$: cluster-robust first-stage $F$. $^a$ The entry gap is observed only in 2024; the implied entry rent measures the growth of entry rents since 2015 only if the 2015 gap is unrelated to the instrument (section~\ref{sec:strategy}).
 \end{minipage}\end{table}

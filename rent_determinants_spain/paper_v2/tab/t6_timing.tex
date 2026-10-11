@@ -1,0 +1,35 @@
+\begin{table}[!htbp]\centering\small
+\caption{The entry gap in changes, timing, annual panel and other registers}\label{tab:timing}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lcccc}\toprule
+\multicolumn{5}{l}{\textit{A. Provinces: INE indices of new and existing leases (base 2015 = 100), 2SLS on the provincial inflow}}\\
+ & Population weights & Adding log population & Unweighted & First-stage $F$\\
+$\ln(\text{new}/\text{existing})$ in 2024 = change since 2015 & 0.13 (0.22) & 0.39 (0.27) & 0.30 (0.32) & 5.6\\
+Change in $\ln(\text{new}/\text{existing})$, 2021--2024 & 0.33** (0.14) & 0.47** (0.18) & 0.40 (0.25) & 5.6\\
+\midrule
+\multicolumn{5}{l}{\textit{B. Earlier and recent inflows (two endogenous regressors)}}\\
+ & Inflow 2015--2019 & Inflow 2020--2024 & Correlation of instruments & $N$\\
+Entry gap (value-adjusted), 2024 & 1.70 (1.06) & 0.09 (0.77) & 0.94 & 402\\
+Implied entry rent & 1.52 (0.97) & 0.54 (0.57) & 0.94 & 402\\
+Rent, all leases, 2015--2024 & $-$0.14 (0.38) & 0.37 (0.26) & 0.94 & 695\\
+\midrule
+\multicolumn{5}{l}{\textit{C. Annual panel with year-varying shocks: Catalonia, Aragón and Comunitat Valenciana, 2012--2024}}\\
+ & 2SLS (SE) & AR 95\,\% set & Randomisation set$^r$ & $F$; $N$\\
+New-lease rent, annual growth & 0.33 (0.75) & [$-$2.41, 1.86] & [$-$0.38, 1.18] & 7.9; 2,097\\
+Rent of all leases, annual growth & 0.01 (0.11) & [$-$0.43, 0.22] & [$-$0.18, 0.24] & 7.9; 2,097\\
+Change in the entry gap & 0.32 (0.74) & [$-$2.24, 1.90] & [$-$0.46, 1.15] & 7.9; 2,097\\
+\midrule
+\multicolumn{5}{l}{\textit{D. Instrument, weights and registers}}\\
+ & 2SLS (SE) & AR 95\,\% set & $F$ & $N$\\
+Companion-paper instrument (annual, centred timing), rent of all leases & 0.41 (0.16) & [0.03, 0.75] & 17.9 & 695\\
+Companion-paper instrument, entry gap (value-adjusted) & 0.43 (0.29) & [$-$0.03, 1.27] & 20.0 & 402\\
+Companion-paper instrument, entry gap (raw) & 0.57 (0.27) & [0.15, 1.40] & 20.0 & 402\\
+Unweighted, rent of all leases & 0.25 (0.37) & [$-$0.36, 1.79] & 8.7 & 695\\
+Unweighted, entry gap (value-adjusted) & 1.09 (1.13) & [$-\infty$, $\infty$] & 2.3 & 402\\
+Basque Country, new-lease rent per m$^2$, 2016--2023 & 0.85 (0.75) & [$-$1.42, 2.26] & 11.5 & 67\\
+Basque Country, entrants' affordability (per m$^2$) & 1.23 (0.59) & [0.30, 3.10] & 17.2 & 63\\
+Catalonia, mean new-lease rent (not adjusted for size or value), 2015--2023 & $-$0.55 (0.30) & [$-$1.25, $-$0.04] & 61.4 & 288\\
+Catalonia, income per consumption unit, 2015--2023 & 0.62 (0.44) & [$-$0.42, 1.38] & 61.4 & 288\\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: panel A, 48 provinces (INE table 59005, both indices with base 2015 = 100); treatment and instrument are the population-weighted provincial means of the municipal inflow and instrument of table~\ref{tab:main}; heteroskedasticity-robust standard errors. Panel B: inflows and instruments summed over 2015--2019 and 2020--2024, specification of table~\ref{tab:main}. Panel C: the panel of IPVA municipalities of the companion paper (annual inflow and instrument with centred timing, province $\times$ year fixed effects, 2003 foreign share and predetermined covariates $\times$ year, population weights) merged with annual new-lease rents (Catalonia: mean rent; Aragón: street-adjusted index; Comunitat Valenciana: median deposit; municipalities with at least 30 leases in the year); clusters by municipality; no trimming. $^r$ Randomisation-inference set: origin shock paths permuted across origins (2,000 draws), recentred instrument, cluster-robust $t$ statistic. Panel D: companion-paper instrument, sum of annual centred shift-share predictions over 2016--2024 for its 699 IPVA municipalities \citep{fernandez2026}. Basque Country and Catalonia: long-difference instrument of this paper; controls are the 2011 log population, renting and vacancy shares; province fixed effects (Basque Country: three provinces, clusters by municipality). *** $p<0.01$, ** $p<0.05$, * $p<0.1$.
+\end{minipage}\end{table}

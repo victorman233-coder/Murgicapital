@@ -69,17 +69,24 @@ res['main_aeat_sample'] = {y: iv(y, d=Xa) for y in ['dlnR', 'entry', 'AE']}
 res['main_unw'] = {y: iv(y, w=None) for y in ['dlnR', 'G_vr', 'entry']}
 
 # ---------------------------------------------------------------- supply rigidity: demand x geographic constraint
+def wstd(v, w):
+    """Standardise with population-weighted mean and standard deviation."""
+    mu = np.average(v, weights=w)
+    return (v - mu) / np.sqrt(np.average((v - mu) ** 2, weights=w))
+
+
 def iv_inter(y, r, d=None):
     d = (X if d is None else d).dropna(subset=[y, 'x2024', 'Z2024', r] + CEN).copy()
-    d['R'] = (d[r] - np.average(d[r], weights=d.P15)) / d[r].std()
+    d['R'] = wstd(d[r], d.P15)
     d['xR'] = d.x2024 * d.R; d['ZR'] = d.Z2024 * d.R
     Rs = Resid(d, ['cpro'], CEN + ['R'], w='P15')
     rr = pd.DataFrame({c: Rs(d[c].values) for c in [y, 'x2024', 'xR', 'Z2024', 'ZR']}, index=d.index)
-    m = IV2SLS(rr[y], None, rr[['x2024', 'xR']], rr[['Z2024', 'ZR']], weights=d.P15).fit(cov_type='clustered', clusters=d.cpro)
+    m = IV2SLS(rr[y], None, rr[['x2024', 'xR']], rr[['Z2024', 'ZR']], weights=d.P15).fit(cov_type='clustered', clusters=d.cpro, debiased=True)
     fs = m.first_stage.diagnostics
     return dict(b_x=float(m.params['x2024']), se_x=float(m.std_errors['x2024']), b_xR=float(m.params['xR']), se_xR=float(m.std_errors['xR']),
                 p_xR=float(m.pvalues['xR']), n=int(m.nobs), F_part=[float(v) for v in fs['f.stat'].values],
-                cov=float(m.cov.loc['x2024', 'xR']))
+                cov=float(m.cov.loc['x2024', 'xR']), mu=float(np.average(d[r], weights=d.P15)),
+                sd=float(np.sqrt(np.average((d[r] - np.average(d[r], weights=d.P15)) ** 2, weights=d.P15))))
 res['rigidity'] = {f'{y}|{r}': iv_inter(y, r) for y in ['dlnR', 'G_vr', 'entry', 'dlnviv', 'AE'] for r in ['undev10', 'steep10', 'sea10']}
 # split by terciles of undevelopable land (simpler, transparent)
 X['undev_t'] = pd.qcut(X.undev10.rank(method='first'), 3, labels=['low', 'mid', 'high'])
@@ -153,12 +160,12 @@ print('tenure gap', res['tenure_gap_pti'], res['pti_n'])
 # ---------------------------------------------------------------- robustness: rigidity interaction net of tourism x demand; companion-paper instrument
 def iv_inter2(y, r, extra):
     d = X.dropna(subset=[y, 'x2024', 'Z2024', r] + CEN).copy()
-    d['R'] = (d[r] - np.average(d[r], weights=d.P15)) / d[r].std(); d['T'] = (d.vut20 - np.average(d.vut20, weights=d.P15)) / d.vut20.std()
+    d['R'] = wstd(d[r], d.P15); d['T'] = wstd(d.vut20, d.P15)
     d['xR'] = d.x2024 * d.R; d['ZR'] = d.Z2024 * d.R; d['xT'] = d.x2024 * d['T']; d['ZT'] = d.Z2024 * d['T']
     Rs = Resid(d, ['cpro'], CEN + ['R', 'T'], w='P15')
     en = ['x2024', 'xR'] + (['xT'] if extra else []); ins = ['Z2024', 'ZR'] + (['ZT'] if extra else [])
     rr = pd.DataFrame({c: Rs(d[c].values) for c in [y] + en + ins}, index=d.index)
-    m = IV2SLS(rr[y], None, rr[en], rr[ins], weights=d.P15).fit(cov_type='clustered', clusters=d.cpro)
+    m = IV2SLS(rr[y], None, rr[en], rr[ins], weights=d.P15).fit(cov_type='clustered', clusters=d.cpro, debiased=True)
     return {k: dict(b=float(m.params[k]), se=float(m.std_errors[k]), p=float(m.pvalues[k])) for k in en}
 res['rigidity_net_tourism'] = {f'{y}|{r}': iv_inter2(y, r, True) for y in ['G_vr', 'entry', 'AE'] for r in ['undev10', 'sea10', 'steep10']}
 L2 = load('a02_local.json'); B3 = load('b03_aeat_entry_gap.json')

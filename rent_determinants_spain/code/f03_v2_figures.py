@@ -60,19 +60,19 @@ for p in pv.index:
     a.plot(pv.columns, pv.loc[p].values, color=G4, lw=0.6)
 a.plot(nat.index, nat.values, color=K, lw=1.6, marker='o', ms=3, label='Spain')
 a.set_xticks([2021, 2022, 2023, 2024]); a.set_ylabel('log(new) − log(existing), ×100')
-a.set_title('(a) Entry gap since 2015, INE indices'); a.text(2021.05, nat.max() * 0.95, 'grey: 48 provinces', fontsize=6.6, color=G1)
+a.set_title('(a) Entry gap since 2015, INE indices'); a.text(2021.05, nat.max() * 0.95, 'grey: 46 provinces, Ceuta, Melilla', fontsize=6.6, color=G1)
 b = ax[1]
 vals = [100 * AE.G_vr[AE['size'] == k].values for k in SIZE_LABELS]
 bp = b.boxplot(vals, widths=0.5, patch_artist=True, showfliers=False, medianprops=dict(color=K, lw=1.2), whiskerprops=dict(color=G1, lw=0.7),
                capprops=dict(color=G1, lw=0.7), boxprops=dict(facecolor=G4, edgecolor=G1, lw=0.7))
 b.axhline(0, color=G1, lw=0.6)
 b.set_xticks(range(1, 6)); b.set_xticklabels(labs, rotation=30, ha='right', fontsize=7); b.tick_params(axis='x', length=0)
-b.set_ylabel('Quality-adjusted entry gap, 2024 (log pts)'); b.set_title('(b) Entry gap in levels, AEAT 2024')
+b.set_ylabel('Value-adjusted entry gap, 2024 (log pts)'); b.set_title('(b) Entry gap in levels, AEAT 2024')
 sv(fig, 'fig2_entry_gap')
 
 # ------------------------------------------------------------- Fig 3: where the demand shock goes (2SLS)
 m = E1['main']
-rows = [('Rent, all leases (2015' + D + '24)', 'dlnR'), ('Entry gap, quality-adjusted (2024)', 'G_vr'), ('Implied entry rent', 'entry'),
+rows = [('Rent, all leases (2015' + D + '24)', 'dlnR'), ('Entry gap, value-adjusted (2024 level)', 'G_vr'), ('Implied entry rent', 'entry'),
         ('Income per consumption unit', 'd_uc'), ('Income per person', 'd_pp'), ('Income per household', 'd_hh'), ('Household size', 'd_hhsize'),
         ('Population', 'dP2024'), ('Dwelling stock (cadastre)', 'dlnviv'),
         ('Affordability, insiders', 'AI'), ('Affordability, entrants', 'AE')]
@@ -92,10 +92,11 @@ sv(fig, 'fig3_where_shock_goes')
 # ------------------------------------------------------------- Fig 4: supply rigidity and the entry gap (marginal effect)
 X1 = pd.read_parquet(f'{CL}/e01_X.parquet')
 r = E1['rigidity']['G_vr|undev10']; rr = E1['rigidity']['dlnR|undev10']
-u = X1.undev10.dropna(); mu = np.average(u, weights=X1.loc[u.index, 'P15']); sd = u.std()
-grid = np.linspace(np.percentile(u, 5), np.percentile(u, 95), 40); zs = (grid - mu) / sd
+u = X1.dropna(subset=['G_vr']).undev10.dropna()
+grid = np.linspace(np.percentile(u, 5), np.percentile(u, 95), 40)
 fig, a = plt.subplots(figsize=(4.4, 3.0))
-for rr_, lab, col, ls in [(r, 'Entry gap (quality-adjusted)', K, '-'), (rr, 'Rent, all leases', G2, (0, (3, 1.5)))]:
+for rr_, lab, col, ls in [(r, 'Entry gap (value-adjusted)', K, '-'), (rr, 'Rent, all leases', G2, (0, (3, 1.5)))]:
+    zs = (grid - rr_['mu']) / rr_['sd']                      # standardised as in each regression's own sample
     me = rr_['b_x'] + rr_['b_xR'] * zs
     se = np.sqrt(rr_['se_x'] ** 2 + zs ** 2 * rr_['se_xR'] ** 2 + 2 * zs * rr_['cov'])
     if col == K:
@@ -103,7 +104,7 @@ for rr_, lab, col, ls in [(r, 'Entry gap (quality-adjusted)', K, '-'), (rr, 'Ren
     a.plot(100 * grid, me, color=col, lw=1.4, ls=ls, label=lab)
 a.axhline(0, color=G3, lw=0.7)
 a.set_ylim(-2.2, 2.6)
-a.set_xlabel('Undevelopable land within 10 km (% of area: sea or slope >15%)'); a.set_ylabel('Effect of a 1 pp inflow')
+a.set_xlabel('Undevelopable land within 10 km (% of area: sea or slope >15%)'); a.set_ylabel('Log points per 1 pp inflow')
 a.legend(loc='upper left', fontsize=6.8); a.set_title('Demand shock × geographic constraint', fontsize=8)
 sv(fig, 'fig4_rigidity')
 
@@ -150,13 +151,13 @@ a.plot(yi.index, 100 * yi.values, color=G3, lw=1.2, marker='s', ms=2.5, mfc='whi
 a.axhline(0, color=G4, lw=0.6); a.set_ylabel('Log points relative to 2015'); a.set_title('(a) Zaragoza', fontsize=8)
 a.legend(frameon=False, fontsize=6.5, loc='upper left')
 a = ax[1]
-sv_ = pd.DataFrame(E5['turnover']['survival']); age = 2026 - sv_.cohort
+sv_ = pd.DataFrame(E5['turnover']['survival']); age = E5['turnover']['snapshot'] - sv_.cohort - 0.5   # age at download, from mid-year (as in e05)
 pp, hh = E5['turnover']['open_share']['p_never'], E5['turnover']['open_share']['hazard']
-gr = np.linspace(0.5, 14.5, 100)
+gr = np.linspace(0, 14.5, 100)
 a.scatter(age, 100 * sv_.open_share, s=14, color=K, zorder=3, label='Deposits not returned, Aragón')
 a.scatter(age, 100 * sv_.open_share_zgz, s=14, facecolors='white', edgecolors=G2, zorder=3, label='Zaragoza')
 a.plot(gr, 100 * (pp + (1 - pp) * np.exp(-hh * gr)), color=G2, lw=1.0, label='Fitted $p+(1-p)e^{-ha}$')
-a.set_xlabel('Years since the lease was signed'); a.set_ylabel('% of leases still open'); a.set_ylim(0, 100)
+a.set_xlabel('Years since the deposit (mid-year of cohort to download date)'); a.set_ylabel('% of leases still open'); a.set_ylim(0, 100)
 a.set_title('(b) Lease survival by cohort (2012' + D + '25)', fontsize=8); a.legend(frameon=False, fontsize=6.5)
 sv(fig, 'fig7_aragon')
 print('v2 figures written')

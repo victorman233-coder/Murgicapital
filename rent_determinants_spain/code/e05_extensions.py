@@ -18,13 +18,33 @@ res = {}
 # ------------------------------------------------------------------ (1) turnover from lease survival (Aragón)
 Sv = pd.read_parquet(f'{CL}/aragon_survival.parquet')
 Sv = Sv[Sv.cohort.between(2012, 2025)].copy()
-Sv['age'] = 2026.0 - Sv.cohort                          # register downloaded in 2026; mid-cohort to snapshot ~ age
+# age at the snapshot: date of download of the register (file time) minus mid-year of signature
+import datetime as _dt
+_t = _dt.datetime.fromtimestamp(os.path.getmtime(f'{RAW}/aragon/fianzas_100.csv'))
+SNAP = _t.year + (_t.timetuple().tm_yday - 0.5) / 365.25
 f = lambda a, p, h: p + (1 - p) * np.exp(-h * a)
-out = {}
+
+
+def fit(age, y, p_fix=None):
+    if p_fix is None:
+        (p, h), cov = curve_fit(f, age, y, p0=[0.1, 0.2], bounds=([0, 0], [1, 2])); se = float(np.sqrt(cov[1, 1]))
+    else:
+        (h,), cov = curve_fit(lambda a, h: f(a, p_fix, h), age, y, p0=[0.2], bounds=([0], [2])); p = p_fix; se = float(np.sqrt(cov[0, 0]))
+    med = np.log((1 - p) / (0.5 - p)) / h if p < 0.5 else np.nan        # median of S(a) with the plateau
+    return dict(p_never=float(p), hazard=float(h), annual_exit=float(1 - np.exp(-h)), se_h=se, median_duration=float(med))
+
+
+out = {'snapshot': SNAP}
+Sv['age'] = SNAP - Sv.cohort - 0.5                     # baseline: signature at mid-year of the cohort
 for col in ['open_share', 'open_share_zgz']:
-    (p, h), cov = curve_fit(f, Sv.age.values, Sv[col].values, p0=[0.1, 0.2], bounds=([0, 0], [1, 2]))
-    out[col] = dict(p_never=float(p), hazard=float(h), annual_exit=float(1 - np.exp(-h)), se_h=float(np.sqrt(cov[1, 1])),
-                    median_duration=float(np.log(2) / h))
+    out[col] = fit(Sv.age.values, Sv[col].values)
+# sensitivity to the timing convention: signature at the start of the year; previous convention (2026 - cohort)
+out['sens_age'] = {lab: fit(a.values, Sv.open_share.values)['annual_exit'] for lab, a in
+                   [('mid_year', SNAP - Sv.cohort - 0.5), ('start_year', SNAP - Sv.cohort), ('age_2026', 2026.0 - Sv.cohort)]}
+# cohorts signed under the 3-year minimum (2012-2018) and the 5-year minimum (2019-2025), plateau fixed at the pooled estimate
+pp = out['open_share']['p_never']
+for lab, q in [('pre2019', Sv[Sv.cohort <= 2018]), ('post2019', Sv[Sv.cohort >= 2019])]:
+    out[f'cohorts_{lab}'] = fit(q.age.values, q.open_share.values, p_fix=pp)
 N = pd.read_parquet(f'{CL}/national.parquet')
 out['ine_w_new'] = N.w_new.dropna().round(4).to_dict()
 out['survival'] = Sv[['cohort', 'open_share', 'open_share_zgz']].round(4).to_dict('records')
@@ -112,7 +132,7 @@ for y in ['lnn', 'lnrent']:
         Fb.append(nobs * (sb0 - sbt) / sbt)
     pval = float(np.mean(np.array(Fb) >= Fsup))
     _, bh, _ = ssr(Y, Xstep[tau_hat])
-    thr[y] = dict(tau_hat=float(tau_hat), ci=ci, Fsup=float(Fsup), p_boot=pval, B=B,
+    thr[y] = dict(tau_hat=float(tau_hat), ci_lr_homoskedastic=ci, Fsup=float(Fsup), p_boot=pval, B=B,
                   slope_below=dict(covid=float(bh[0]), recov=float(bh[1]), late=float(bh[2])),
                   slope_above=dict(covid=float(bh[0] + bh[6]), recov=float(bh[1] + bh[7]), late=float(bh[2] + bh[8])),
                   grid=[float(grid_tau.min()), float(grid_tau.max())], munis_above=int((uniq > tau_hat).sum()), munis=int(len(uniq)),

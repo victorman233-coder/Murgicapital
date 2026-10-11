@@ -37,7 +37,7 @@ N.loc[N.year.diff().ne(1) & N.cmun.eq(N.cmun.shift()), 'dln_new'] = np.nan
 N = N.dropna(subset=['dln_new'])
 d = d0.merge(N[['cmun', 'year', 'dln_new', 'reg', 'n']], on=['cmun', 'year'], how='inner')
 d['dG'] = d.dln_new - d.dlnR
-d = d[d.dln_new.abs() < 0.5].reset_index(drop=True)        # drop implausible jumps (|growth| > 65%)
+d = d.reset_index(drop=True)                               # no trimming on the outcome
 res['sample'] = dict(n=len(d), munis=int(d.cmun.nunique()), by_region=d.groupby('reg').cmun.nunique().to_dict(),
                      years=[int(d.year.min()), int(d.year.max())], provinces=int(d.cpro.nunique()))
 print(res['sample'])

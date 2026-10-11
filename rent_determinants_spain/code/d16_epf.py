@@ -3,7 +3,8 @@ Households renting at market price (REGTEN = 3): annual rent paid for the main r
 by the household weight, so the household amount is GASTO / FACTOR), monthly net household income (IMPEXAC, exact amount;
 from 2024 mostly reported in intervals, so an interval-midpoint measure INTERIN is built for every year), equivalence scale
 (UC2), floor area (SUPERF), age and nationality of the reference person, region and municipality size.
-Output: epf_renters.parquet (one row per renting household and year) and out/d16_epf.json with weighted summaries by group:
+Output: epf_renters.parquet (one row per renting household and year) and out/d16_epf.json with weighted summaries by group
+(the interval-midpoint income is the comparable measure across years, because exact income is missing for most of 2024):
 young (reference person under 35), foreign nationality, and the rest, which are likelier to be recent entrants."""
 import io, zipfile
 import numpy as np, pandas as pd
@@ -77,7 +78,9 @@ for (y, gname), q in list(R.groupby(['ANOENC', 'group'])) + [((y, 'all'), q) for
     tab.append(dict(year=int(y), group=gname, n=len(q), rent=wq(q.rent_m.values, w), rent_m2=wq(q.rent_m2.values, w),
                     inc=wq(q.inc_exact.values, w), inc_uc=wq(q.inc_uc.values, w), size=float(np.average(q.NMIEMB, weights=w)),
                     burden=wq(q.burden.values, w), burden_mid=wq(q.burden_mid.values, w),
-                    over40=float(np.average((q.burden > 0.4)[q.burden.notna()], weights=w[q.burden.notna()])) if q.burden.notna().any() else np.nan))
+                    over40=float(np.average((q.burden > 0.4)[q.burden.notna()], weights=w[q.burden.notna()])) if q.burden.notna().any() else np.nan,
+                    over40_mid=float(np.average((q.burden_mid > 0.4)[q.burden_mid.notna()], weights=w[q.burden_mid.notna()])),
+                    n_mid=int(q.burden_mid.notna().sum())))
 T = pd.DataFrame(tab).sort_values(['group', 'year'])
 res['table'] = T.round(4).to_dict('records')
 print(T[T.year.isin([2016, 2019, 2023, 2024])].round(3).to_string())
