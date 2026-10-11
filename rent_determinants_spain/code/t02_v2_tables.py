@@ -46,7 +46,7 @@ s += [r'\addlinespace', r'\multicolumn{7}{l}{\textit{Entry gap: new leases relat
       r'AEAT: tax statistics of dwellings declared in 2024, municipalities above 20,000 inhabitants; the entry gap is $\ln(\text{rent}_{new}/\text{value}_{new})-\ln(\text{rent}_{all}/\text{value}_{all})$. '
       r'$^a$ Share of municipalities with a positive gap.', r'\end{minipage}\end{table}']
 W('t1_facts.tex', '\n'.join(s))
-m('insR', pc(GT['all']['dR'] / 100)); m('insY', pc(GT['all']['inc_uc'] / 100)); m('insGap', pc(GT['all']['gap_uc'] / 100))
+m('insN', GT['all']['n']); m('insR', pc(GT['all']['dR'] / 100)); m('insY', pc(GT['all']['inc_uc'] / 100)); m('insGap', pc(GT['all']['gap_uc'] / 100))
 m('catR', pc(E2['cat_desc']['d_new'])); m('catY', pc(E2['cat_desc']['d_uc'])); m('catGap', pc(E2['cat_desc']['d_new'] - E2['cat_desc']['d_uc'])); m('catShare', pc(E2['cat_desc']['share_AE_pos'], 0))
 m('basR', pc(E2['bas_desc']['d_new_m2'])); m('basY', pc(E2['bas_desc']['d_uc'])); m('basGap', pc(E2['bas_desc']['d_new_m2'] - E2['bas_desc']['d_uc'])); m('basShare', pc(E2['bas_desc']['share_AE_pos'], 0))
 m('valR', pc(E2['val_desc']['d_dep'])); m('valY', pc(E2['val_desc']['d_uc']))
@@ -117,7 +117,7 @@ s += [r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.97\linewi
       r'the inflow coefficient is the effect at the population-weighted mean of the constraint. '
       r'Constraints: share of land within 10 km of the municipality centroid that is sea or has slope above 15\,\% (Copernicus DEM GLO-90), and each component. '
       r'Same fixed effects, controls, weights and clustering as table~\ref{tab:main}. $F$: first-stage partial $F$ statistics. The columns on tourism add the inflow interacted with the share of dwellings in tourist use (2020) and its instrument; '
-      r'the columns on the coast add the inflow interacted with the coastal indicator and its instrument (three endogenous regressors). The rows ``Coast (indicator)'' interact the inflow with the coastal indicator alone. '
+      r'the columns on the coast add the inflow interacted with the coastal indicator and its instrument (three endogenous regressors). The rows labelled Coast (indicator) interact the inflow with the coastal indicator alone. '
       r'*** $p<0.01$, ** $p<0.05$, * $p<0.1$.', r'\end{minipage}\end{table}']
 W('t3_rigidity.tex', '\n'.join(s))
 q = rg['G_vr|undev10']; m('rigB', f(q['b_xR'])); m('rigP', f(q['p_xR'], 3)); m('rigSe', f(q['se_xR'])); m('rigFi', f(q['F_part'][1], 1))
@@ -127,6 +127,11 @@ q = rg['entry|undev10']; m('rigEntry', f(q['b_xR'])); m('rigEntryP', f(q['p_xR']
 q = rg['dlnR|undev10']; m('rigStock', f(q['b_xR'])); q = rg['dlnviv|undev10']; m('rigViv', f(q['b_xR']))
 q = rg['G_vr|sea10']; m('rigSea', f(q['b_xR'])); m('rigSeaP', f(q['p_xR'], 3)); q = rg['G_vr|steep10']; m('rigSteep', f(q['b_xR'])); m('rigSteepP', f(q['p_xR'], 3))
 q = rg['AE|undev10']; m('rigAE', f(q['b_xR'])); m('rigAEP', f(q['p_xR'], 3))
+q = rg['G_vr|undev10']; Ug = np.linspace(-2, 4, 6001)
+lb_ = q['b_x'] + q['b_xR'] * Ug - 1.96 * np.sqrt(q['se_x'] ** 2 + Ug ** 2 * q['se_xR'] ** 2 + 2 * Ug * q['cov'])
+thr = q['mu'] + Ug[lb_ > 0].min() * q['sd']                    # undevelopable share above which the 95 % band of the effect on the gap excludes 0
+dd = XP.dropna(subset=['G_vr', 'undev10'])
+m('rigThr', pc(thr, 0)); m('rigThrPop', pc(dd.P15[dd.undev10 > thr].sum() / dd.P15.sum(), 0)); m('rigThrN', int((dd.undev10 > thr).sum()))
 q = gc['G_vr|undev10']; m('gcU', f(q['xU']['b'])); m('gcUSe', f(q['xU']['se'])); m('gcUP', f(pt(q['xU']['b'], q['xU']['se']), 2)); m('gcC', f(q['xC']['b'])); m('gcCSe', f(q['xC']['se']))
 q = gc['G_vr|coast_only']; m('coastOnly', f(q['xC']['b'])); m('coastOnlySe', f(q['xC']['se'])); m('coastOnlyX', f(q['x2024']['b']))
 q = gc['entry|undev10']; m('gcUentry', f(q['xU']['b'])); m('gcUentrySe', f(q['xU']['se']))
@@ -151,9 +156,9 @@ s += [r'\midrule', r'\multicolumn{7}{l}{\textit{B. Rent cap in stressed (tension
       f"Wave 2 (2024Q4) & \\multicolumn{{2}}{{c}}{{{f(100 * z['sh_seas']['post2']['b'], 2)}{star(z['sh_seas']['post2']['p'])} ({f(100 * z['sh_seas']['post2']['se'], 2)})}} & "
       f"\\multicolumn{{2}}{{c}}{{{f(z['ln_seas']['post2']['b'])}{star(z['ln_seas']['post2']['p'])} ({f(z['ln_seas']['post2']['se'])})}} & \\multicolumn{{2}}{{c}}{{{f(z['ln_n']['post2']['b'])}{star(z['ln_n']['post2']['p'])} ({f(z['ln_n']['post2']['se'])})}}\\\\",
       r'\midrule', r'\multicolumn{7}{l}{\textit{C. Tenure: price-to-income in 2021 (s.d.) $\times$ year, rent of all leases (reference 2021)}}\\',
-      ' & '.join(['2019', '2020', '2022', '2023', '2024', 'Entry gap 2024', '']) + r'\\',
-      ' & '.join([f"{f(100 * te[f'pti_{y}']['b'], 2)}{star(te[f'pti_{y}']['p'])}" for y in (2019, 2020, 2022, 2023, 2024)] +
-                 [f"{f(100 * E1['tenure_gap_pti']['pti_s']['b'], 2)}", '']) + r'\\',
+      ' & '.join(['', '2019', '2020', '2022', '2023', '2024', 'Entry gap 2024']) + r'\\',
+      ' & '.join(['Coefficient'] + [f"{f(100 * te[f'pti_{y}']['b'], 2)}{star(te[f'pti_{y}']['p'])}" for y in (2019, 2020, 2022, 2023, 2024)] +
+                 [f"{f(100 * E1['tenure_gap_pti']['pti_s']['b'], 2)}"]) + r'\\',
       r'\midrule', r'\multicolumn{7}{l}{\textit{D. Spillovers: shift-share shock of the core city on peripheral municipalities of the same FUA (reduced form)}}\\',
       r' & Rent, all leases & Entry gap & Population & Inflow & Dwellings & \\',
       'Own shock & ' + ' & '.join([f"{f(sp[y]['Z2024']['b'])}{star(sp[y]['Z2024']['p'])}" for y in ['dlnR', 'G_vr', 'dP2024', 'x2024', 'dlnviv']]) + r' & \\',
@@ -393,7 +398,7 @@ for r in rt['top5']:
     o_ = r['origin']; sg = ov['G_vr']['single'].get(f'Z_{o_}')
     cells = ' & '.join(f"{f(ov[y]['single'][f'Z_{o_}']['b'])} ({f(ov[y]['single'][f'Z_{o_}']['se'])})" for y in YS) if sg else ' & & '
     s.append(f"{TOPN[o_]} & {f(r['alpha'], 3)} & {f(r['beta'])} & {cells} & {f(sg['F'], 1) if sg else ''}\\\\")
-s.append(f"Other 28 origins (sum) & {f(1 - sum(r['alpha'] for r in rt['top5']), 3)} & & & & & \\\\")
+s.append(f"Other 28 origins (net sum) & {f(1 - sum(r['alpha'] for r in rt['top5']), 3)} & & & & & \\\\")
 s.append(f"All origins except Colombia, Peru and Romania (one instrument) & & & " + ' & '.join(f"{f(ov[y]['single']['Z_rest']['b'])} ({f(ov[y]['single']['Z_rest']['se'])})" for y in YS) + f" & {f(ov['G_vr']['single']['Z_rest']['F'], 1)}\\\\")
 s.append(f"Sum of negative weights & {f(rt['sum_neg_alpha'], 3)} & & & & & \\\\")
 s += [r'\midrule', r'\multicolumn{7}{l}{\textit{B. Balance: standardised coefficient ($t$ statistic) of the 2003 origin share on predetermined characteristics, conditional on controls}}\\',
@@ -434,3 +439,17 @@ s += [r'\midrule', r'\multicolumn{5}{l}{\textit{C. Basque Country: entry rent pe
 W('tA2_measurement.tex', '\n'.join(s))
 W('numbers.tex', '\n'.join(mac) + '\n')
 print('v2 tables and', len(mac), 'macros')
+
+# ------------------------------------------------------------------ absolute values for verbal statements ("fell by ...") and other text macros
+A_ = lambda k, v: m(k, v.replace('$-$', ''))
+A_('insGapAbs', pc(GT['all']['gap_uc'] / 100)); A_('insGapAAbs', f(GT['size:10-20k']['gap_uc'], 1)); A_('insGapEAbs', f(GT['size:>500k']['gap_uc'], 1))
+A_('flInSpAbs', f(dp['in_sp']['b'])); A_('flNetSpAbs', f(dp['net_sp']['b']))
+A_('capRentAbs', pc(z1['lnrent']['pooled']['post']['b'])); A_('capRentNeverAbs', pc(z1n['lnrent']['pooled']['post']['b']))
+A_('capNAbs', pc(z1['lnn']['pooled']['post']['b'], 0)); A_('capNdetAbs', pc(z1['lnn']['detrended']['post']['b'], 0))
+A_('regLnOneAbs', f(z['ln_n']['post1']['b'])); A_('catPreDropAbs', pc(CH['d_2008_2015'])); A_('epfFpremAbs', pc(pcg['fy']['b']))
+m('vaMeanSeven', f(mg['0.7'], 1)); m('vaMeanOne', f(mg['1.0'], 1))
+sz = XP.dropna(subset=['G_vr', 'P15']).copy(); sz['size'] = pd.cut(sz.P15, SIZE_EDGES, labels=SIZE_LABELS)
+med = sz.groupby('size', observed=True).G_vr.median() * 100
+m('gapMedLo', f(med.min(), 1)); m('gapMedHi', f(med.max(), 1))
+W('numbers.tex', '\n'.join(mac) + '\n')
+print('text macros', len(mac), med.round(1).to_dict())
