@@ -26,4 +26,15 @@ curl -sSL -o aeat/aeat_newcontracts_muni_2024.html "https://sede.agenciatributar
 curl -sSL -o aeat/aeat_newcontracts_cp_2024.html "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2024/jrubik582b4eeccd4e39730277d218cc788357e33967da.html"
 # MIVAU (apps.fomento.gob.es): appraised value of free-market housing, municipalities >25k, quarterly 2005-2026
 curl -sSL -o mivau/valor_tasado_muni.xls "https://apps.fomento.gob.es/BoletinOnline2/sedal/35103500.XLS"
+# Aragón: lease-deposit register microdata (Gobierno de Aragón open data, resource 100, CC BY 4.0)
+mkdir -p aragon
+curl -sSL --retry 3 -o aragon/fianzas_100.csv "https://opendata.aragon.es/GA_OD_Core/download?resource_id=100&formato=csv"
+# INE Estadística de Migraciones y Cambios de Residencia: moves between municipalities by nationality, 2021-2024
+curl -sSL --retry 3 -o emcr_69743.csv "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/69743.csv"
+curl -sSL --retry 3 -o emcr_69745.csv "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/69745.csv"
+# INE Encuesta de Presupuestos Familiares: public-use microdata 2016-2024 and record layouts
+mkdir -p epf
+for f in disreg_epf.zip dr_EPF_2024.zip datos_2016.zip datos_2017.zip datos_2018.zip datos_2019.zip datos_2020.zip datos_2021.zip datos_2022.zip datos_2023.zip datos_2024.zip; do
+  [ -s epf/$f ] || curl -sSL --retry 3 -o epf/$f "https://www.ine.es/ftp/microdatos/epf2006/$f"
+done
 echo done

@@ -4,6 +4,7 @@ from rd_common import *
 
 TV = os.path.join(HERE, '..', 'paper_v2', 'tab'); os.makedirs(TV, exist_ok=True)
 E1 = load('e01_main.json'); E2 = load('e02_panels_regulation.json'); B1 = load('b01_affordability.json'); B3 = load('b03_aeat_entry_gap.json')
+E3 = load('e03_inference.json'); E4 = load('e04_panel_entry.json'); E5 = load('e05_extensions.json'); E6 = load('e06_flows.json')
 F = load('a01_facts.json'); T3 = load('a03_tourism.json'); R4 = load('a04_regulation.json'); GT = load('b02_gap_by_type.json')
 f = lambda x, d=2: '--' if x is None or not np.isfinite(x) else ('$-$' if x < 0 else '') + f'{abs(x):.{d}f}'
 pc = lambda x, d=1: f(100 * x, d)
@@ -23,6 +24,7 @@ rows = [
     ('All leases (IPVA), Spain', '2015--2023', '703 municipalities', 100 * GT['all']['dR'] / 100, GT['all']['inc_uc'] / 100, GT['all']['share_gap_pos']),
     ('New leases (deposits), Catalonia', '2015--2023', f"{E2['cat_desc']['n']} municipalities", E2['cat_desc']['d_new'], E2['cat_desc']['d_uc'], E2['cat_desc']['share_AE_pos']),
     ('New leases per m$^2$ (deposits), Basque Country', '2016--2023', f"{E2['bas_desc']['n']} municipalities", E2['bas_desc']['d_new_m2'], E2['bas_desc']['d_uc'], E2['bas_desc']['share_AE_pos']),
+    ('New leases, street-adjusted index (deposits), Aragón', '2015--2023', f"{E2['ara_desc']['n']} municipalities", E2['ara_desc']['d_new'], E2['ara_desc']['d_uc'], E2['ara_desc']['share_AE_pos']),
     ('Deposits on new leases, Comunitat Valenciana', '2020--2023', f"{E2['val_desc']['n']} municipalities", E2['val_desc']['d_dep'], E2['val_desc']['d_uc'], None),
 ]
 s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Rents of insiders and entrants against incomes}\label{tab:facts}',
@@ -37,7 +39,7 @@ s += [r'\addlinespace', r'\multicolumn{7}{l}{\textit{Entry gap: new leases relat
       r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}',
       r'\textit{Notes}: income is the median net income per consumption unit of the municipality (INE household income atlas). Means weighted by 2015 population. '
       r'IPVA: index of all leases in force (tax returns). Deposit registers record leases at signature: mean rent in Catalonia (contracts of more than one year), '
-      r'rent per m$^2$ built in the Basque Country (free-market collective main residences), deposit amount in the Comunitat Valenciana (one month of rent by law; partial coverage). '
+      r'rent per m$^2$ built in the Basque Country (free-market collective main residences), an index of rents per contract with street fixed effects in Aragón, deposit amount in the Comunitat Valenciana (one month of rent by law; partial coverage). '
       r'AEAT: tax statistics of dwellings declared in 2024, municipalities above 20,000 inhabitants; the entry gap is $\ln(\text{rent}_{new}/\text{value}_{new})-\ln(\text{rent}_{all}/\text{value}_{all})$. '
       r'$^a$ Share of municipalities with a positive gap.', r'\end{minipage}\end{table}']
 W('t1_facts.tex', '\n'.join(s))
@@ -153,19 +155,104 @@ rows = [('Companion-paper instrument (annual, centred timing), rent of all lease
         ('Companion-paper instrument, entry gap (raw)', ci['G']), ('Unweighted, rent of all leases', uw['dlnR']), ('Unweighted, entry gap (quality-adjusted)', uw['G_vr']),
         ('Basque Country, new-lease rent per m$^2$, 2016--2023', bi['d_new_m2_23']), ('Basque Country, entrants\' affordability (per m$^2$)', bi['AE']),
         ('Catalonia, mean new-lease rent (not quality-adjusted), 2015--2023', cv['d_new23']), ('Catalonia, income per consumption unit, 2015--2023', cv['d_uc'])]
-s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Robustness: instrument, weights, registers and quality adjustment}\label{tab:robust}',
-     r'\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccc}\toprule', r' & 2SLS & SE & AR 95\% set & $F$ & $N$\\\midrule']
+ss = E4['ld_sumshares']; lo = E4['leave_one_origin_out']; pn = E4['panel']
+rowsA = [('Entry gap (quality-adjusted), controlling for the 2003 foreign-born share', ss['G_vr']), ('Implied entry rent, same control', ss['entry']),
+         ('Rent of all leases, same control', ss['dlnR']), ('Household size, same control', ss['d_hhsize'])]
+rowsA += [(f'Entry gap, instrument without {en}', lo[f'G_vr|{o}']) for o, en in [('Colombia', 'Colombia'), ('Perú', 'Peru'), ('Rumanía', 'Romania')]]
+rowsB = [('New-lease rent, annual growth', pn['dln_new']), ('Rent of all leases, annual growth', pn['dlnR']), ('Change in the entry gap', pn['dG'])]
+s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Robustness: identification, instrument, weights, registers and quality adjustment}\label{tab:robust}',
+     r'\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccc}\toprule', r' & 2SLS & SE & AR 95\% set & $F$ & $N$\\\midrule',
+     r'\multicolumn{6}{l}{\textit{A. Shift-share identification (long difference)}}\\']
+for lab, q in rowsA:
+    s.append(f"{lab} & {f(q['b'])} & ({f(q['se'])}) & {ar(q['ar'])} & {f(q['F'], 1)} & {q.get('n', ss['G_vr']['n'])}\\\\")
+s.append(r'\multicolumn{6}{l}{\textit{B. Annual panel with year-varying shocks: Catalonia, Aragón and Comunitat Valenciana, 2012--2024}}\\')
+for lab, q in rowsB:
+    s.append(f"{lab} & {f(q['b'])} & ({f(q['se'])}) & {ar(q['ri']['all']['ci_t'])}$^r$ & {f(q['F'], 1)} & {q['n']}\\\\")
+s.append(r'\multicolumn{6}{l}{\textit{C. Instrument, weights and registers}}\\')
 for lab, q in rows:
     s.append(f"{lab} & {f(q['b'])} & ({f(q['se'])}) & {ar(q['ar'])} & {f(q['F'], 1)} & {q['n']}\\\\")
 s += [r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}',
       r'\textit{Notes}: companion-paper instrument: sum of annual centred shift-share predictions over 2016--2024 for the 699 IPVA municipalities (Fernández-Aguilera 2026). '
       r'Basque Country and Catalonia: long-difference instrument of this paper; controls are the 2011 log population, renting and vacancy shares; province fixed effects '
-      r'(Basque Country: three provinces, clusters by municipality). The Catalan deposit register reports the mean rent per contract, which is not adjusted for the size or quality of the dwelling.',
+      r'(Basque Country: three provinces, clusters by municipality). The Catalan deposit register reports the mean rent per contract, which is not adjusted for the size or quality of the dwelling. '
+      r'Panel A adds to the specification of table~\ref{tab:main} the 2003 foreign-born share scaled as the instrument, the sum of exposure shares (Borusyak, Hull and Jaravel 2022), or drops from the instrument one of the three origins with the largest Rotemberg weights. '
+      r'Panel B: the panel of IPVA municipalities of the companion paper (annual inflow and instrument with centred timing, province $\times$ year fixed effects, 2003 foreign share and predetermined covariates $\times$ year, population weights) merged with annual new-lease rents '
+      r'(Catalonia: mean rent; Aragón: street-adjusted index; Comunitat Valenciana: median deposit; municipalities with at least 30 leases in the year); clusters by municipality. '
+      r'$^r$ Randomisation-inference set: origin shock paths permuted across origins (2,000 draws), recentred instrument, cluster-robust $t$ statistic.',
       r'\end{minipage}\end{table}']
 W('t5_robust.tex', '\n'.join(s))
 m('ciStock', f(ci['stock']['b'])); m('ciGap', f(ci['G_vr']['b'])); m('ciGapAR', ar(ci['G_vr']['ar'])); m('ciGapRaw', f(ci['G']['b'])); m('ciGapRawAR', ar(ci['G']['ar']))
 m('basIv', f(bi['d_new_m2_23']['b'])); m('basIvAR', ar(bi['d_new_m2_23']['ar'])); m('basAE', f(bi['AE']['b'])); m('basAEAR', ar(bi['AE']['ar']))
 m('catIv', f(cv['d_new23']['b'])); m('catIvAR', ar(cv['d_new23']['ar']))
 m('unwGapF', f(uw['G_vr']['F'], 1))
+# ------------------------------------------------------------------ identification, Aragón, turnover, regulation, threshold, flows, EPF: macros
+m('ssGap', f(ss['G_vr']['b'])); m('ssGapAR', ar(ss['G_vr']['ar'])); m('ssGapF', f(ss['G_vr']['F'], 1)); m('ssEntry', f(ss['entry']['b'])); m('ssEntryAR', ar(ss['entry']['ar']))
+m('ssHs', f(ss['d_hhsize']['b'])); m('ssStock', f(ss['dlnR']['b'])); m('ssStockAR', ar(ss['dlnR']['ar']))
+lv = [lo[f'G_vr|{o}']['b'] for o in ['Colombia', 'Perú', 'Rumanía', 'Ecuador', 'Resto_America']]
+m('looMin', f(min(lv))); m('looMax', f(max(lv)))
+rt = E3['G_vr']['rotemberg']; m('rotTop', pc(sum(r['alpha'] for r in rt['top5'][:3]), 0)); m('rotCol', f(rt['top5'][0]['alpha'])); m('rotNeg', f(rt['sum_neg_alpha']))
+m('riFall', f(E3['G_vr']['ri']['all']['F'], 2)); m('riFcont', f(E3['G_vr']['ri']['continent']['F'], 1))
+m('pnNew', f(pn['dln_new']['b'])); m('pnStock', f(pn['dlnR']['b'])); m('pnGap', f(pn['dG']['b'])); m('pnF', f(pn['dln_new']['F'], 1))
+m('pnRInew', ar(pn['dln_new']['ri']['all']['ci_t'])); m('pnRIpNew', f(pn['dln_new']['ri']['all']['p0_t'], 3)); m('pnRIpGap', f(pn['dG']['ri']['all']['p0_t'], 3))
+m('pnN', f"{E4['sample']['n']:,}"); m('pnMunis', E4['sample']['munis'])
+ld_ = E4['lead_rf']['dln_new']; m('pnLead', f(ld_['b'])); m('pnLeadSe', f(ld_['se']))
+pl = E3['placebo_rich']['G_vr']; m('plRich', f(pl['joint']['x_rich']['b'])); m('plRichSe', f(pl['joint']['x_rich']['se'])); m('plOth', f(pl['joint']['x_oth']['b']))
+m('plOthSe', f(pl['joint']['x_oth']['se'])); m('plDiff', f(pl['diff'])); m('plDiffSe', f(pl['se_diff'])); m('plRichF', f(pl['separate']['rich']['F'], 1))
+bal = E4['rotemberg_balance']; m('balRomPre', f(bal['Rumanía|dlnR_pre']['t'], 1)); m('balColPre', f(bal['Colombia|dlnR_pre']['t'], 1)); m('balPerPre', f(bal['Perú|dlnR_pre']['t'], 1))
+ad = E2['ara_desc']; m('araR', pc(ad['d_new'])); m('araY', pc(ad['d_uc'])); m('araS', pc(ad['d_stock'])); m('araShare', pc(ad['share_AE_pos'], 0)); m('araN', ad['n'])
+m('araGap', pc(ad['d_new'] - ad['d_uc'])); m('araNs', ad['n_stock']); m('zgzR', pc(ad['zgz']['d_new'])); m('zgzS', pc(ad['zgz']['d_stock'])); m('zgzY', pc(ad['zgz']['d_uc']))
+DA = load('d15_aragon.json'); m('araDep', f"{DA['n_deposits']:,}"); m('araMatch', pc(DA['match_rate'], 2))
+tv = E5['turnover']; m('lamAll', pc(tv['open_share']['annual_exit'])); m('lamZgz', pc(tv['open_share_zgz']['annual_exit'])); m('medDur', f(tv['open_share']['median_duration'], 1))
+m('wNewOne', pc(tv['ine_w_new']['2021'])); m('wNewFour', pc(tv['ine_w_new']['2024']))
+uc = E5['update_cap_national']; m('capWedge', pc(uc['wedge']['2022'])); m('capWedgeB', pc(uc['wedge']['2023'])); m('capGcf', pc(uc['G_2024_no_cap'])); m('capShare', pc(uc['share_widening_cap'], 0))
+m('exTwoTwo', pc(uc['existing']['2022'])); m('piTwoTwo', pc(uc['pi']['2022']))
+up = E5['update_cap_provinces']; m('corrExOne', f(up['2021']['corr'])); m('corrExTwo', f(up['2022']['corr'])); m('sdExOne', f(up['2021']['sd_exist'])); m('sdExTwo', f(up['2022']['sd_exist']))
+th = E5['tourism_threshold']; m('tauHat', f(th['lnn']['tau_hat'], 1)); m('tauRentLo', f(th['lnrent']['ci'][0], 1)); m('tauRentHi', f(th['lnrent']['ci'][1], 1))
+m('tauPn', '$<$0.002' if th['lnn']['p_boot'] == 0 else f(th['lnn']['p_boot'], 3)); m('tauPr', f(th['lnrent']['p_boot'], 3)); m('tauAbove', th['lnn']['munis_above']); m('tauMunis', th['lnn']['munis'])
+ht = E5['heterogeneity']; m('hetCoast', f(ht['coast|G_vr']['b_int'])); m('hetCoastSe', f(ht['coast|G_vr']['se_int'])); m('hetBigS', f(ht['big|dlnR']['b_int'])); m('hetCoreS', f(ht['core|dlnR']['b_int']))
+m('hetBigSse', f(ht['big|dlnR']['se_int'])); m('hetCoreSse', f(ht['core|dlnR']['se_int']))
+cp = E5['aeat_cp']; m('cpN', cp['n_cp']); m('cpCities', cp['n_cities']); m('cpMean', pc(cp['mean'])); m('cpShare', pc(cp['share_pos'], 1)); m('cpWithin', pc(cp['share_within'], 0))
+m('cpGrad', f(cp['grad_rent']['lrent']['b'], 3)); m('cpGradSe', f(cp['grad_rent']['lrent']['se'], 3))
+dp = E6['displacement']
+for k, nm in [('out_sp', 'OutSp'), ('in_sp', 'InSp'), ('net_sp', 'NetSp'), ('out_fx', 'OutFx'), ('in_fx', 'InFx')]:
+    m(f'fl{nm}', f(dp[k]['b'])); m(f'fl{nm}AR', ar(dp[k]['ar'])); m(f'fl{nm}M', f(dp[k]['ymean'], 1))
+m('flF', f(dp['in_sp']['F'], 1)); m('flN', E6['n'])
+spf = E6['spillovers']; m('spInSpCore', f(spf['in_sp']['Z_corep']['b'])); m('spInSpCoreSe', f(spf['in_sp']['Z_corep']['se'])); m('spInFxCore', f(spf['in_fx']['Z_corep']['b']))
+m('spInFxCoreP', f(spf['in_fx']['Z_corep']['p'], 3))
+EP = load('d16_epf.json'); et = pd.DataFrame(EP['table']); g_ = lambda yr, gr, v: et[(et.year == yr) & (et.group == gr)][v].iloc[0]
+m('epfBurdOne', pc(g_(2016, 'all', 'burden'))); m('epfBurdNine', pc(g_(2024, 'all', 'burden'))); m('epfOverOne', pc(g_(2016, 'all', 'over40'), 0)); m('epfOverNine', pc(g_(2024, 'all', 'over40'), 0))
+m('epfRentG', pc(np.log(g_(2024, 'all', 'rent') / g_(2016, 'all', 'rent')))); m('epfIncG', pc(np.log(g_(2024, 'all', 'inc_uc') / g_(2016, 'all', 'inc_uc'))))
+m('epfN', f"{sum(EP['n_renters'].values()):,}")
+pcg = EP['premium_change']; m('epfFprem', pc(pcg['fy']['b'])); m('epfFchg', pc(pcg['fy:late']['b'])); m('epfFchgSe', pc(pcg['fy:late']['se'])); m('epfFchgP', f(pcg['fy:late']['p'], 2))
+m('epfYchg', pc(pcg['yy:late']['b'])); m('epfYchgSe', pc(pcg['yy:late']['se']))
+
+# ------------------------------------------------------------------ Table 6: margins of adjustment
+P = r'\,\%'; EP_N = f"{sum(EP['n_renters'].values()):,}"
+s = [r'\begin{table}[!htbp]\centering\small', r'\caption{Margins of adjustment: residential flows, heterogeneity, turnover and renters}\label{tab:margins}',
+     r'\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccc}\toprule',
+     r'\multicolumn{6}{l}{\textit{A. Moves between municipalities per 100 residents, 2021--2024, per point of foreign-born inflow (2SLS)}}\\',
+     r' & 2SLS & SE & AR 95\% set & $F$ & Mean\\']
+for k, lab in [('out_sp', 'Out-migration of Spanish nationals'), ('in_sp', 'In-migration of Spanish nationals'), ('net_sp', 'Net migration of Spanish nationals'),
+               ('out_fx', 'Out-migration of foreign nationals'), ('in_fx', 'In-migration of foreign nationals')]:
+    q = dp[k]; s.append(f"{lab} & {f(q['b'])} & ({f(q['se'])}) & {ar(q['ar'])} & {f(q['F'], 1)} & {f(q['ymean'], 2)}\\\\")
+s += [r'\midrule', r'\multicolumn{6}{l}{\textit{B. Heterogeneity: inflow and inflow $\times$ indicator (2SLS)}}\\',
+      r' & \multicolumn{2}{c}{Entry gap} & \multicolumn{2}{c}{Rent, all leases} & Share\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}', r' & Inflow & $\times$ indicator & Inflow & $\times$ indicator & \\']
+for D, lab in [('coast', 'Coastal municipality'), ('big', 'More than 100,000 inhabitants'), ('core', 'Core city of a FUA'), ('rent_hi', 'Renting share in 2011 above mean')]:
+    a, b_ = ht[f'{D}|G_vr'], ht[f'{D}|dlnR']
+    s.append(f"{lab} & {f(a['b'])} ({f(a['se'])}) & {f(a['b_int'])} ({f(a['se_int'])}) & {f(b_['b'])} ({f(b_['se'])}) & {f(b_['b_int'])} ({f(b_['se_int'])}) & {pc(a['share'], 0)}{P}\\\\")
+s += [r'\midrule', r'\multicolumn{6}{l}{\textit{C. Turnover, updates and renters}}\\',
+      f"Annual exit rate of leases, Aragón register: all; Zaragoza & \\multicolumn{{2}}{{c}}{{{pc(tv['open_share']['annual_exit'])}{P}; {pc(tv['open_share_zgz']['annual_exit'])}{P}}} & \\multicolumn{{3}}{{l}}{{median duration {f(tv['open_share']['median_duration'], 1)} years}}\\\\",
+      f"Weight of new leases in the INE index: 2021; 2024 & \\multicolumn{{2}}{{c}}{{{pc(tv['ine_w_new']['2021'])}{P}; {pc(tv['ine_w_new']['2024'])}{P}}} & & & \\\\",
+      f"Entry gap (INE): 2021; 2024; 2024 without update caps & \\multicolumn{{2}}{{c}}{{{pc(uc['G_2021'])}; {pc(uc['G_2024'])}; {pc(uc['G_2024_no_cap'])}}} & \\multicolumn{{3}}{{l}}{{share of widening due to caps $\\le$ {pc(uc['share_widening_cap'], 0)}{P}}}\\\\",
+      f"Renters' median rent-to-income ratio (EPF): 2016; 2024 & \\multicolumn{{2}}{{c}}{{{pc(g_(2016, 'all', 'burden'))}{P}; {pc(g_(2024, 'all', 'burden'))}{P}}} & \\multicolumn{{3}}{{l}}{{share above 40\\,\\%: {pc(g_(2016, 'all', 'over40'), 0)}{P}; {pc(g_(2024, 'all', 'over40'), 0)}{P}}}\\\\",
+      f"Rent per m$^2$ premium of foreign-national renters: 2016--18; change to 2022--24 & \\multicolumn{{2}}{{c}}{{{pc(pcg['fy']['b'])}{P}; {pc(pcg['fy:late']['b'])} ({pc(pcg['fy:late']['se'])})}} & \\multicolumn{{3}}{{l}}{{young natives: change {pc(pcg['yy:late']['b'])} ({pc(pcg['yy:late']['se'])})}}\\\\",
+      r'\bottomrule\end{tabular}\end{adjustbox}', r'\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}',
+      r'\textit{Notes}: panel A, INE Estadística de Migraciones y Cambios de Residencia (tables 69743 and 69745), moves between Spanish municipalities in 2021--2024 per 100 residents in 2021; '
+      r'treatment: foreign-born net inflow over the same years relative to 2021 population (points), instrumented with the shift-share prediction for 2021--2024; controls, fixed effects, weights and clusters as table~\ref{tab:main}. '
+      r'Panel B: 2SLS with the inflow and its interaction with the indicator, instrumented with the prediction and its interaction; same specification. '
+      r'Panel C: exit rate from $S(a)=p+(1-p)e^{-ha}$ fitted to the share of each deposit cohort (2012--2025) not yet returned; the update-cap accounting adds back to existing-lease growth the difference between CPI inflation and the cap for the share of each year in which the cap applied, an upper bound because not all leases are indexed to the CPI. '
+      r'EPF: INE household budget survey, households renting at market price (' + EP_N + r' household-years, 2016--2024); premium from a weighted regression of log rent per m$^2$ on nationality and age of the reference person by period, log floor area and year, region and municipality-size fixed effects; robust standard errors in parentheses.',
+      r'\end{minipage}\end{table}']
+W('t6_margins.tex', '\n'.join(s))
 W('numbers.tex', '\n'.join(mac) + '\n')
 print('v2 tables and', len(mac), 'macros')

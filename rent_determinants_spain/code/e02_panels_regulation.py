@@ -1,5 +1,6 @@
 """Entry-gap paper: panels of new leases and regulation.
-(a) Entry rents vs incomes in the deposit registers: Catalonia (mean rent, 2015-2023) and the Basque Country (rent per m2, 2016-2023),
+(a) Entry rents vs incomes in the deposit registers: Catalonia (mean rent, 2015-2023), the Basque Country (rent per m2, 2016-2023)
+    and Aragón (street-adjusted index, 2015-2023),
     and the response of entry rents to the long-difference demand shock (all municipalities with data).
 (b) Tourism reversal on new leases (Catalonia, quarterly): non-linear exposure bins x collapse / recovery.
 (c) Regulation: Catalan tensioned-zone cap and substitution towards seasonal leases (2023Q1-2025Q4);
@@ -62,6 +63,25 @@ gm = G.pivot_table(index='cmun', columns='year', values='dep_med'); gn = G.pivot
 Vq = pd.DataFrame({'d_dep': np.log(gm[2023] / gm[2020]), 'd_uc': np.log(uc[2023] / uc[2020]).reindex(gm.index), 'n20': gn[2020]}).join(LD).join(C11)
 Vq = Vq[Vq.n20 >= 30].dropna(subset=['d_dep', 'P15']); Vq['cpro'] = Vq.index.str[:2]; Vq['cmun'] = Vq.index
 res['val_desc'] = dict(n=len(Vq), d_dep=wmean(Vq.d_dep.values, Vq.P15.values), d_uc=wmean(Vq.d_uc.dropna().values, Vq.dropna(subset=['d_uc']).P15.values))
+# ---------------------------------------------------------------- Aragón: street-adjusted entry-rent index from the deposit register
+Ar = pd.read_parquet(f'{CL}/aragon_muni.parquet')
+ai = Ar.pivot_table(index='cmun', columns='year', values='idx_street'); am = Ar.pivot_table(index='cmun', columns='year', values='rent_med')
+an = Ar.pivot_table(index='cmun', columns='year', values='n')
+ip = pd.read_parquet(f'{CL}/muni_panel.parquet').pivot_table(index='cmun', columns='year', values='lnR')
+Aq = pd.DataFrame({'d_new': ai[2023] - ai[2015], 'd_new24': ai[2024] - ai[2015], 'd_med': np.log(am[2023] / am[2015]),
+                   'd_stock': (ip[2023] - ip[2015]).reindex(ai.index), 'd_uc': np.log(uc[2023] / uc[2015]).reindex(ai.index),
+                   'n15': an[2015]}).join(LD).join(C11)
+Aq = Aq.dropna(subset=['d_new', 'P15']); Aq['cpro'] = Aq.index.str[:2]; Aq['cmun'] = Aq.index
+Aq['AE'] = Aq.d_new - Aq.d_uc; Aq['gap'] = Aq.d_new - Aq.d_stock
+res['ara_desc'] = dict(n=len(Aq), d_new=wmean(Aq.d_new.values, Aq.P15.values), d_med=wmean(Aq.d_med.values, Aq.P15.values),
+                       d_uc=wmean(Aq.d_uc.dropna().values, Aq.dropna(subset=['d_uc']).P15.values),
+                       d_stock=wmean(Aq.d_stock.dropna().values, Aq.dropna(subset=['d_stock']).P15.values),
+                       share_AE_pos=float((Aq.AE.dropna() > 0).mean()), share_gap_pos=float((Aq.gap.dropna() > 0).mean()),
+                       n_stock=int(Aq.d_stock.notna().sum()),
+                       zgz=dict(d_new=float(Aq.loc['50297', 'd_new']), d_stock=float(Aq.loc['50297', 'd_stock']), d_uc=float(Aq.loc['50297', 'd_uc'])))
+print('Aragón', res['ara_desc'])
+res['ara_iv'] = {y: iv(Aq, y, x='x2023', z='Z2023') for y in ['d_new', 'AE', 'gap']}
+print('Aragón IV', {y: (round(v['b'], 3), round(v['se'], 3), round(v['F'], 1), v['ar']) for y, v in res['ara_iv'].items()})
 
 # ---------------------------------------------------------------- (b) tourism reversal on Catalan new leases: exposure bins
 Cq = pd.read_parquet(f'{CL}/cat_q.parquet'); Cq = Cq[Cq.year <= 2025].copy()

@@ -1,0 +1,29 @@
+\begin{table}[!htbp]\centering\small
+\caption{Margins of adjustment: residential flows, heterogeneity, turnover and renters}\label{tab:margins}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccc}\toprule
+\multicolumn{6}{l}{\textit{A. Moves between municipalities per 100 residents, 2021--2024, per point of foreign-born inflow (2SLS)}}\\
+ & 2SLS & SE & AR 95\% set & $F$ & Mean\\
+Out-migration of Spanish nationals & $-$0.01 & (0.13) & [$-$0.40, 0.27] & 10.1 & 9.93\\
+In-migration of Spanish nationals & $-$0.54 & (0.31) & [$-$2.00, $-$0.14] & 10.1 & 9.59\\
+Net migration of Spanish nationals & $-$0.53 & (0.27) & [$-$1.82, $-$0.19] & 10.1 & $-$0.34\\
+Out-migration of foreign nationals & 0.85 & (0.22) & [0.55, 1.86] & 10.1 & 4.09\\
+In-migration of foreign nationals & 0.60 & (0.16) & [0.36, 1.28] & 10.1 & 4.05\\
+\midrule
+\multicolumn{6}{l}{\textit{B. Heterogeneity: inflow and inflow $\times$ indicator (2SLS)}}\\
+ & \multicolumn{2}{c}{Entry gap} & \multicolumn{2}{c}{Rent, all leases} & Share\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & Inflow & $\times$ indicator & Inflow & $\times$ indicator & \\
+Coastal municipality & $-$0.05 (0.38) & 0.59 (0.23) & 0.21 (0.17) & 0.02 (0.13) & 46\,\%\\
+More than 100,000 inhabitants & 0.54 (0.45) & 0.05 (0.48) & 0.48 (0.27) & $-$0.45 (0.20) & 57\,\%\\
+Core city of a FUA & 0.30 (0.51) & 0.28 (0.42) & 0.59 (0.29) & $-$0.42 (0.18) & 75\,\%\\
+Renting share in 2011 above mean & 0.12 (0.50) & 0.62 (0.54) & 0.50 (0.23) & $-$0.29 (0.24) & 47\,\%\\
+\midrule
+\multicolumn{6}{l}{\textit{C. Turnover, updates and renters}}\\
+Annual exit rate of leases, Aragón register: all; Zaragoza & \multicolumn{2}{c}{19.2\,\%; 15.7\,\%} & \multicolumn{3}{l}{median duration 3.3 years}\\
+Weight of new leases in the INE index: 2021; 2024 & \multicolumn{2}{c}{17.6\,\%; 12.3\,\%} & & & \\
+Entry gap (INE): 2021; 2024; 2024 without update caps & \multicolumn{2}{c}{2.3; 12.7; 6.7} & \multicolumn{3}{l}{share of widening due to caps $\le$ 58\,\%}\\
+Renters' median rent-to-income ratio (EPF): 2016; 2024 & \multicolumn{2}{c}{27.6\,\%; 26.4\,\%} & \multicolumn{3}{l}{share above 40\,\%: 25\,\%; 19\,\%}\\
+Rent per m$^2$ premium of foreign-national renters: 2016--18; change to 2022--24 & \multicolumn{2}{c}{$-$3.0\,\%; 3.5 (2.0)} & \multicolumn{3}{l}{young natives: change 0.6 (2.6)}\\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: panel A, INE Estadística de Migraciones y Cambios de Residencia (tables 69743 and 69745), moves between Spanish municipalities in 2021--2024 per 100 residents in 2021; treatment: foreign-born net inflow over the same years relative to 2021 population (points), instrumented with the shift-share prediction for 2021--2024; controls, fixed effects, weights and clusters as table~\ref{tab:main}. Panel B: 2SLS with the inflow and its interaction with the indicator, instrumented with the prediction and its interaction; same specification. Panel C: exit rate from $S(a)=p+(1-p)e^{-ha}$ fitted to the share of each deposit cohort (2012--2025) not yet returned; the update-cap accounting adds back to existing-lease growth the difference between CPI inflation and the cap for the share of each year in which the cap applied, an upper bound because not all leases are indexed to the CPI. EPF: INE household budget survey, households renting at market price (23,274 household-years, 2016--2024); premium from a weighted regression of log rent per m$^2$ on nationality and age of the reference person by period, log floor area and year, region and municipality-size fixed effects; robust standard errors in parentheses.
+\end{minipage}\end{table}

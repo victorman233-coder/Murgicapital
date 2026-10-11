@@ -134,4 +134,29 @@ a.axhline(0, color=G3, lw=0.7); a.axvline(-0.5, color=G2, lw=0.6, ls=(0, (1, 1.5
 a.set_xlabel('Quarters relative to the cap (wave 1, 2024Q2)'); a.set_ylabel('Seasonal share of new leases (pp)')
 a.set_title('Tensioned-zone cap and seasonal leases, Catalonia', fontsize=8)
 sv(fig, 'fig6_cap_seasonal')
+
+# ------------------------------------------------------------- Fig 7: Aragón register: entry rents, rents of all leases and incomes; lease survival
+E5 = load('e05_extensions.json')
+Ar = pd.read_parquet(f'{CL}/aragon_muni.parquet')
+z = '50297'
+ai = Ar[Ar.cmun == z].set_index('year').idx_street.loc[2012:2024]
+st = (pr.loc[z] - pr.loc[z, 2015]).loc[2012:2024]
+yi = np.log(uc.loc[z] / uc.loc[z, 2015]).loc[2015:2023]
+fig, ax = plt.subplots(1, 2, figsize=(6.9, 3.0), gridspec_kw={'wspace': 0.32})
+a = ax[0]
+a.plot(ai.index, 100 * ai.values, color=K, lw=1.4, marker='o', ms=3, label='New leases (street-adjusted)')
+a.plot(st.index, 100 * st.values, color=G2, lw=1.2, ls=(0, (4, 1.5)), label='All leases (IPVA)')
+a.plot(yi.index, 100 * yi.values, color=G3, lw=1.2, marker='s', ms=2.5, mfc='white', label='Income per consumption unit')
+a.axhline(0, color=G4, lw=0.6); a.set_ylabel('Log points relative to 2015'); a.set_title('(a) Zaragoza', fontsize=8)
+a.legend(frameon=False, fontsize=6.5, loc='upper left')
+a = ax[1]
+sv_ = pd.DataFrame(E5['turnover']['survival']); age = 2026 - sv_.cohort
+pp, hh = E5['turnover']['open_share']['p_never'], E5['turnover']['open_share']['hazard']
+gr = np.linspace(0.5, 14.5, 100)
+a.scatter(age, 100 * sv_.open_share, s=14, color=K, zorder=3, label='Deposits not returned, Aragón')
+a.scatter(age, 100 * sv_.open_share_zgz, s=14, facecolors='white', edgecolors=G2, zorder=3, label='Zaragoza')
+a.plot(gr, 100 * (pp + (1 - pp) * np.exp(-hh * gr)), color=G2, lw=1.0, label='Fitted $p+(1-p)e^{-ha}$')
+a.set_xlabel('Years since the lease was signed'); a.set_ylabel('% of leases still open'); a.set_ylim(0, 100)
+a.set_title('(b) Lease survival by cohort (2012' + D + '25)', fontsize=8); a.legend(frameon=False, fontsize=6.5)
+sv(fig, 'fig7_aragon')
 print('v2 figures written')

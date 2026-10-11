@@ -7,17 +7,7 @@
 import io, os, re, unicodedata
 import numpy as np, pandas as pd
 WORK = os.environ.get('WORK', '/home/user/work'); RAW = f'{WORK}/rent/raw'; CL = f'{WORK}/rent/clean'
-
-
-def norm(s):
-    s = unicodedata.normalize('NFKD', str(s)).encode('ascii', 'ignore').decode().lower().strip()
-    m = re.match(r'^(.*?)\s*\((el|la|los|las|l\'|els|les|o|a|os|as)\)$', s) or re.match(r'^(.*?),\s*(el|la|los|las|l\'|els|les|o|a|os|as)$', s)
-    if m:
-        s = m.group(2) + ' ' + m.group(1)
-    s = {'palma de mallorca': 'palma', 'mahon': 'mao', 'san cristobal laguna': 'san cristobal de la laguna',
-         'santa coloma gramanet': 'santa coloma de gramenet', 'santa eulalia del rio': 'santa eularia des riu'}.get(s, s)
-    s = s.split('/')[0]
-    return re.sub(r'[^a-z]', '', s)
+from rd_common import norm
 
 
 # ------------------------------------------------------------------ Basque Country (EMAL), annual tables by municipality (>5k)

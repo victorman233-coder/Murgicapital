@@ -1,5 +1,5 @@
 """Shared paths and helpers for the rent-determinants analysis."""
-import json, os, sys
+import json, os, re, sys, unicodedata
 import numpy as np, pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVCODE = os.path.join(HERE, '..', '..', 'revision_JOPE-D-26-01206', 'code')
@@ -44,3 +44,14 @@ def coefs(m, names):
                           lo=float(r['2.5%']), hi=float(r['97.5%']))
     out['n'] = int(m._N)
     return out
+
+
+def norm(s):
+    s = unicodedata.normalize('NFKD', str(s)).encode('ascii', 'ignore').decode().lower().strip()
+    m = re.match(r'^(.*?)\s*\((el|la|los|las|l\'|els|les|o|a|os|as)\)$', s) or re.match(r'^(.*?),\s*(el|la|los|las|l\'|els|les|o|a|os|as)$', s)
+    if m:
+        s = m.group(2) + ' ' + m.group(1)
+    s = {'palma de mallorca': 'palma', 'mahon': 'mao', 'san cristobal laguna': 'san cristobal de la laguna',
+         'santa coloma gramanet': 'santa coloma de gramenet', 'santa eulalia del rio': 'santa eularia des riu'}.get(s, s)
+    s = s.split('/')[0]
+    return re.sub(r'[^a-z]', '', s)

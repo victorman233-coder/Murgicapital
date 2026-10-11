@@ -1,7 +1,20 @@
 \begin{table}[!htbp]\centering\small
-\caption{Robustness: instrument, weights, registers and quality adjustment}\label{tab:robust}
+\caption{Robustness: identification, instrument, weights, registers and quality adjustment}\label{tab:robust}
 \begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccc}\toprule
  & 2SLS & SE & AR 95\% set & $F$ & $N$\\\midrule
+\multicolumn{6}{l}{\textit{A. Shift-share identification (long difference)}}\\
+Entry gap (quality-adjusted), controlling for the 2003 foreign-born share & 0.64 & (0.31) & [0.24, 3.64] & 5.6 & 402\\
+Implied entry rent, same control & 0.84 & (0.41) & [0.30, 4.80] & 5.6 & 402\\
+Rent of all leases, same control & 0.18 & (0.14) & [$-$0.04, 0.91] & 7.4 & 695\\
+Household size, same control & 0.65 & (0.21) & [0.35, 1.80] & 7.7 & 695\\
+Entry gap, instrument without Colombia & 0.96 & (0.55) & [0.24, 5.61] & 5.8 & 402\\
+Entry gap, instrument without Peru & 0.68 & (0.39) & [0.12, 2.30] & 10.6 & 402\\
+Entry gap, instrument without Romania & 0.59 & (0.38) & [0.03, 3.03] & 6.4 & 402\\
+\multicolumn{6}{l}{\textit{B. Annual panel with year-varying shocks: Catalonia, Aragón and Comunitat Valenciana, 2012--2024}}\\
+New-lease rent, annual growth & 0.53 & (0.70) & [$-$0.17, 1.41]$^r$ & 7.9 & 2095\\
+Rent of all leases, annual growth & 0.00 & (0.11) & [$-$0.18, 0.24]$^r$ & 7.9 & 2095\\
+Change in the entry gap & 0.52 & (0.68) & [$-$0.23, 1.35]$^r$ & 7.9 & 2095\\
+\multicolumn{6}{l}{\textit{C. Instrument, weights and registers}}\\
 Companion-paper instrument (annual, centred timing), rent of all leases & 0.41 & (0.16) & [0.03, 0.75] & 17.9 & 695\\
 Companion-paper instrument, entry gap (quality-adjusted) & 0.43 & (0.29) & [$-$0.03, 1.27] & 20.0 & 402\\
 Companion-paper instrument, entry gap (raw) & 0.57 & (0.27) & [0.15, 1.40] & 20.0 & 402\\
@@ -13,5 +26,5 @@ Catalonia, mean new-lease rent (not quality-adjusted), 2015--2023 & $-$0.55 & (0
 Catalonia, income per consumption unit, 2015--2023 & 0.62 & (0.44) & [$-$0.42, 1.38] & 61.4 & 288\\
 \bottomrule\end{tabular}\end{adjustbox}
 \begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
-\textit{Notes}: companion-paper instrument: sum of annual centred shift-share predictions over 2016--2024 for the 699 IPVA municipalities (Fernández-Aguilera 2026). Basque Country and Catalonia: long-difference instrument of this paper; controls are the 2011 log population, renting and vacancy shares; province fixed effects (Basque Country: three provinces, clusters by municipality). The Catalan deposit register reports the mean rent per contract, which is not adjusted for the size or quality of the dwelling.
+\textit{Notes}: companion-paper instrument: sum of annual centred shift-share predictions over 2016--2024 for the 699 IPVA municipalities (Fernández-Aguilera 2026). Basque Country and Catalonia: long-difference instrument of this paper; controls are the 2011 log population, renting and vacancy shares; province fixed effects (Basque Country: three provinces, clusters by municipality). The Catalan deposit register reports the mean rent per contract, which is not adjusted for the size or quality of the dwelling. Panel A adds to the specification of table~\ref{tab:main} the 2003 foreign-born share scaled as the instrument, the sum of exposure shares (Borusyak, Hull and Jaravel 2022), or drops from the instrument one of the three origins with the largest Rotemberg weights. Panel B: the panel of IPVA municipalities of the companion paper (annual inflow and instrument with centred timing, province $\times$ year fixed effects, 2003 foreign share and predetermined covariates $\times$ year, population weights) merged with annual new-lease rents (Catalonia: mean rent; Aragón: street-adjusted index; Comunitat Valenciana: median deposit; municipalities with at least 30 leases in the year); clusters by municipality. $^r$ Randomisation-inference set: origin shock paths permuted across origins (2,000 draws), recentred instrument, cluster-robust $t$ statistic.
 \end{minipage}\end{table}
