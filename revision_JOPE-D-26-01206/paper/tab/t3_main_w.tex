@@ -1,0 +1,38 @@
+\begin{table}[!htbp]\centering\small
+\caption{Effect of immigrant inflows on rent growth: estimates and inference (population weights)}\label{tab:main}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lcccc}\toprule
+ & (1) Minimal & (2) Original & (3) Central & (4) Central + size FE \\ \midrule
+\multicolumn{5}{l}{\textit{A. Full period, 2012--2024}}\\
+OLS & 0.16 & 0.07 & 0.07 & 0.06 \\
+Reduced form & 0.30 & 0.11 & 0.05 & 0.01 \\
+First-stage $F$ & 34.5 & 32.2 & 29.0 & 30.0 \\
+2SLS & 0.55 & 0.30 & 0.13 & 0.01 \\
+ & (0.13) & (0.12) & (0.10) & (0.13) \\
+AR 95\% set, province clusters & [0.33, 0.87] & [0.09, 0.58] & [$-$0.08, 0.35] & [$-$0.23, 0.30] \\
+AR 95\% set, wild bootstrap & [0.31, 0.90] & [0.03, 0.59] & [$-$0.15, 0.36] & [$-$0.31, 0.32] \\
+Randomisation, all origins & [0.37, 0.76] & [0.15, 0.44] & [0.02, 0.26] & [$-$0.10, 0.24] \\
+Randomisation, size terciles & [0.24, 0.82] & [0.07, 0.48] & [$-$0.05, 0.36] & [$-$0.18, 0.39] \\
+Randomisation, within continents & $(-\infty,\infty)$ & $(-\infty,\infty)$ & $(-\infty,\infty)$ & $(-\infty,\infty)$ \\
+2SLS with national shocks & 0.49 & 0.22 & 0.10 & 0.00 \\
+AKM0 95\% set, shocks clustered by origin & [0.31, 1.04] & [$-$0.08, 0.90] & [$-$0.65, 0.44] & [$-$0.78, 0.54] \\
+Observations & 9,060 & 9,060 & 9,060 & 8,449 \\
+\midrule
+\multicolumn{5}{l}{\textit{B. Arrival period, 2015--2024}}\\
+OLS & 0.23 & 0.12 & 0.12 & 0.12 \\
+Reduced form & 0.31 & 0.14 & 0.09 & 0.05 \\
+First-stage $F$ & 22.8 & 14.6 & 14.4 & 16.4 \\
+2SLS & 0.62 & 0.45 & 0.24 & 0.13 \\
+ & (0.15) & (0.16) & (0.11) & (0.12) \\
+AR 95\% set, province clusters & [0.38, 1.05] & [0.21, 0.99] & [0.07, 0.59] & [$-$0.06, 0.52] \\
+AR 95\% set, wild bootstrap & [0.40, 1.50] & [0.19, 0.96] & [0.06, 0.59] & [$-$0.07, 0.51] \\
+Randomisation, all origins & [0.46, 0.84] & [0.28, 0.62] & [0.15, 0.34] & [0.06, 0.28] \\
+Randomisation, size terciles & [0.39, 0.88] & [0.26, 0.64] & [0.13, 0.43] & [0.03, 0.35] \\
+Randomisation, within continents & $(-\infty,\infty)$ & [$-\infty$, 1.16] & [$-\infty$, 1.00] & $(-\infty,\infty)$ \\
+2SLS with national shocks & 0.57 & 0.36 & 0.20 & 0.13 \\
+AKM0 95\% set, shocks clustered by origin & [0.41, 3.21] & [0.13, $\infty$] & [$-$0.56, 0.82] & [$-$0.68, 0.52] \\
+Observations & 6,972 & 6,972 & 6,972 & 6,502 \\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: dependent variable $\Delta\ln R_{it}$, annual growth of the municipal IPVA; treatment $m_{it}$, foreign-born inflow over population (centred timing); instrument $z_{it}$, 2003 shares of 33 origins times national growth excluding the own province. All columns include province $\times$ year fixed effects and the 2003 foreign-born share interacted with every year. Column 2 adds the original covariates (log income per person 2015, log population 2011, 2011 shares of renting households and non-primary dwellings) $\times$ year; column 3 replaces them with the central set of predetermined covariates (2011 census: log population, renting share, non-primary share, tertiary-education share, share aged 65+; 2012 firm directory: shares of construction, industry and trade-transport-hospitality firms and firms per capita; coastal and FUA-core indicators) $\times$ year; column 4 adds province $\times$ size class $\times$ year fixed effects. Anderson-Rubin (AR) sets invert the reduced-form test with province-clustered errors (analytical) or with 4,999 restricted wild-bootstrap draws with Webb weights. Randomisation sets permute the growth paths of origins 2,000 times within the indicated strata, recentre the instrument and invert the studentised reduced-form test. The last two rows use national (not leave-out) shocks; AKM0 is the null-imposed exposure-robust test of \citet{adao2019} with origin-year shocks clustered by origin. $\infty$ denotes an unbounded set. Weights: 2003 population.
+\end{minipage}\end{table}

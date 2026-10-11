@@ -1,0 +1,19 @@
+# Specification registry of the revision (defined in the referee report before estimation; see Informe, section C.3)
+outcome: dlnR            # annual log change of the municipal IPVA (contracts in force)
+treatment: xc            # foreign-born inflow, centred timing (mid-year t-1 to mid-year t) over population Jan t-1
+instrument: Zc           # sum_o s_io(2003) * g_ot(leave-own-province-out national growth), centred timing
+fixed_effects: province x year (cy)
+exposure_control: forsh_base x every year      # 2003 foreign-born share
+specifications:
+  minimal: []
+  original: [lninc15, lnpop11, rent11, vac11]  # earlier version; lninc15 measured inside the sample period
+  central:  [lnpop11, rent11, vac11, tert11, sh65_11, sh_constr12, sh_ind12, sh_trade_hosp12, firms12_pc, coastal, city_core]
+  central_size_fe: {controls: central, fixed_effects: province x size class x year}
+weights: [w (2003 population), w_rent (rented main dwellings 2011), unweighted]
+periods: [2012-2024 (full), 2015-2024 (arrivals)]
+inference:
+  ar_province: analytical Anderson-Rubin, province clusters
+  ar_wcr: restricted wild cluster bootstrap AR, Webb weights, 4999 draws
+  randomisation: 2000 permutations of origin growth paths within strata {all, size terciles, continents}; studentised statistic
+  akm0: national-shock instrument, origin-year shocks clustered by origin
+heterogeneity_family: [vac11, log density 2011, rent11, effective rental-demand shock]   # BH-adjusted

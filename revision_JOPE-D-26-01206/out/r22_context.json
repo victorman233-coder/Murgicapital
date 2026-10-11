@@ -1,0 +1,14 @@
+{
+ "n_inflow": 8117,
+ "n_decrease": 1425,
+ "inflow_median": 2.2620169651272386,
+ "inflow_p90": 8.86333066122727,
+ "n_rent": 701,
+ "rent_median": 20.796000000000014,
+ "n_polygons": 8212,
+ "n_polygons_nodata_inflow": 95,
+ "corr_inflow_rent": 0.42494986362575177,
+ "silc_tenure_missing_years": [
+  2023
+ ]
+}

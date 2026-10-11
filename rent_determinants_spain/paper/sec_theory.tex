@@ -1,0 +1,45 @@
+\section{A framework for the determinants of local rents}\label{sec:theory}
+
+This section sets out a stock-flow model of a local market for long-term residential rentals. It serves three purposes: it organises the candidate determinants into a small number of channels, it states which of them can be identified from differences across municipalities and which only move all municipalities together, and it maps market rents into the rent index that is observed. The model follows the asset-and-space framework of \citet{dipasquale1992}, the user-cost approach to tenure choice of \citet{poterba1984}, and the landlord's choice between long- and short-term letting of \citet{barron2021}.
+
+\subsection{Uses of the housing stock}
+
+Municipality $i$ has a stock of $H_{it}$ dwellings in year $t$. Each dwelling is owner-occupied, let to a resident household on a long-term lease ($L$), let to visitors as a tourist dwelling ($S$), or kept out of the residential market as a second home or vacant unit ($V$). Construction changes $H_{it}$ slowly; in the short run the relevant margin is the allocation of the existing stock across uses.
+
+\textit{Demand for long-term rentals.} Let $N_{it}$ be the resident population and $\theta_{it}$ the share of it that rents. The share renting falls with the rent relative to the user cost of owner-occupation, $\theta_{it}=\theta(R_{it}/U_t)$, where $U_t$ summarises mortgage rates, credit standards and expected price growth \citep{poterba1984,himmelberg2005}. Each renter consumes $q_{it}=A\,Y_{it}^{\alpha}R_{it}^{-\eta}$ dwellings per person, where $Y_{it}$ is income and $\eta\ge0$ is the price elasticity of space per person: a high $\eta$ means that households absorb higher rents by sharing dwellings or living at higher density rather than by paying more for the same space. Demand in dwelling units is $D_{it}=\theta_{it}N_{it}q_{it}$, so that
+\begin{equation}\label{eq:demand}
+d\ln D_{it}= d\ln N_{it}+\alpha\, d\ln Y_{it}+\varepsilon_\theta\, d\ln U_t-(\eta+\varepsilon_\theta)\,d\ln R_{it},
+\end{equation}
+with $\varepsilon_\theta=-\partial\ln\theta/\partial\ln(R/U)>0$.
+
+\textit{Supply of long-term rentals.} An owner who lets a dwelling chooses the long-term market if the rent $R_{it}$ exceeds the expected net revenue from tourist letting, $P^S_{it}-c_j$, where $P^S_{it}$ is tourist revenue per dwelling and $c_j$ is an owner-specific cost of operating a tourist let (management, regulation, risk), distributed with cdf $G$. The share of lettable dwellings in tourist use is $s_{it}=G(P^S_{it}-R_{it})$. Owners also move dwellings between the rental market, owner-occupation and non-use as relative returns change, and the stock grows with rents in the long run with elasticity $\sigma_i$, which is low where land is scarce or development is restricted \citep{saiz2010,glaeser2018,hilber2016}. Writing $\varepsilon_\ell$ for the elasticity of the long-term rental share with respect to the rent, long-term supply satisfies
+\begin{equation}\label{eq:supply}
+d\ln L_{it}=(\sigma_i+\varepsilon_{\ell})\,d\ln R_{it}-\psi_{i}\,d\ln P^S_{it}+d\ln \tilde H_{it},
+\end{equation}
+where $\psi_i=\frac{s_i}{1-s_i}\,e_s$ is the elasticity of long-term supply with respect to tourist revenue, $e_s$ the elasticity of the tourist share with respect to $P^S$, and $d\ln\tilde H_{it}$ captures changes in the stock that are predetermined with respect to current rents.
+
+\textit{Regulation.} A cap $\bar R_{it}$ on new-contract rents makes the long-term return $\min(R_{it},\bar R_{it})$. Where the cap binds, it lowers the rent on new contracts and moves owners at the margin to tourist or seasonal letting, sale or non-use: it reduces $L_{it}$ at a given market-clearing rent \citep{autor2014,diamond2019,jofre2023}.
+
+\subsection{Equilibrium and predictions}
+
+Equating \eqref{eq:demand} and \eqref{eq:supply},
+\begin{equation}\label{eq:equilibrium}
+d\ln R_{it}=\frac{1}{\Psi_i}\Big[\underbrace{d\ln N_{it}}_{\text{population}}+\underbrace{\alpha\,d\ln Y_{it}}_{\text{income}}+\underbrace{\psi_i\,d\ln P^S_{it}}_{\text{tourist demand}}-\underbrace{d\ln\tilde H_{it}}_{\text{supply}}+\underbrace{\varepsilon_\theta\,d\ln U_t}_{\text{user cost}}\Big],\qquad \Psi_i=\eta+\varepsilon_\theta+\varepsilon_\ell+\sigma_i .
+\end{equation}
+Equation \eqref{eq:equilibrium} delivers five predictions that structure the empirical analysis.
+
+\begin{description}
+\item[P1 (amplification).] A given demand shock raises rents more where $\Psi_i$ is small: where new supply is inelastic ($\sigma_i$ low), where few dwellings can be reallocated to long-term letting ($\varepsilon_\ell$ low), and where households cannot or do not absorb higher rents by sharing ($\eta$ low). Large, dense and land-constrained municipalities should show larger elasticities than small ones.
+\item[P2 (tourist diversion).] Tourist demand affects long-term rents only through $\psi_i$, which is zero where there is no tourist-letting market and rises with the share of the stock in tourist use. The effect is symmetric: a collapse in tourist demand should lower long-term rents and raise the number of new long-term contracts most where tourist dwellings were most prevalent.
+\item[P3 (rent caps).] A binding cap on new-contract rents lowers measured new-contract rents in covered municipalities and reduces the number of new long-term contracts, with larger effects in the upper part of the rent distribution, where the cap binds.
+\item[P4 (common shocks).] The user cost of owning, credit standards, national legislation and inflation enter through $d\ln U_t$ and through terms common to all municipalities. Designs that compare municipalities within a year absorb them. Their contribution to national rent growth can only be assessed from national time series, without cross-sectional identification.
+\item[P5 (ownership).] The identity of landlords enters the framework only through the distribution of costs $c_j$ (professional operators may face lower costs of tourist letting, raising $\psi_i$) or through market power, which requires a degree of local concentration. Without data on ownership by municipality the framework does not deliver a testable prediction for the effect of large investors on long-term rents.
+\end{description}
+
+\subsection{From market rents to the observed index}
+
+The rent index used in this paper, the INE IPVA, is computed from rents declared in personal income-tax returns and covers all leases in force, not only new ones. Suppose that each year a share $\lambda_{it}$ of leases is new and signed at the market rent $R_{it}$, while existing leases are updated by a rule $u_t$ (the consumer price index, or a legal cap). The log of the average rent across leases then evolves approximately as
+\begin{equation}\label{eq:index}
+\Delta\ln\bar R_{it}\approx\lambda_{it}\big(\ln R_{it}-\ln\bar R_{i,t-1}\big)+(1-\lambda_{it})\,u_t .
+\end{equation}
+Equation \eqref{eq:index} has three implications. First, the stock index responds to market rents with a lag, so short-run elasticities estimated on it understate the response of new-contract rents by a factor of the order of $\lambda$ \citep{genesove2003,ambrose2015}. Second, a cap on the annual update of existing leases, such as the 2\,\% limit of 2022--2023, lowers the growth of the stock index even if market rents do not change. Third, a policy that regulates only new contracts is best evaluated with data on new contracts; this is why section~\ref{sec:regulation} uses the Catalan register of rental deposits, which records new contracts only.

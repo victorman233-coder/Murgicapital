@@ -1,0 +1,30 @@
+\begin{table}[!htbp]\centering\small
+\caption{Local demand and supply: long differences 2015--2024 within provinces}\label{tab:local}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lccccc}\toprule
+Outcome (2015--2024) on foreign-born inflow 2016--2024 & 2SLS & SE & AR 95\% set & First-stage $F$ & $N$\\\midrule
+\multicolumn{6}{l}{\textit{A. Population weights}}\\
+Log rent index (all leases) & 0.41 & (0.16) & [0.03, 0.75] & 17.9 & 695\\
+Log population & 1.08 & (0.16) & [0.73, 1.46] & 17.9 & 695\\
+Log rent index per log point of population & 0.38 & (0.15) & [0.03, 0.75] & 13.5 & 695\\
+Log dwellings (cadastre) & $-$0.06 & (0.24) & [$-$0.50, 0.56] & 17.9 & 695\\
+Falsification: log rent index 2012--2015 & $-$0.02 & (0.18) & [$-$0.37, 0.43] & 17.9 & 694\\
+\addlinespace
+\multicolumn{6}{l}{\textit{B. Unweighted}}\\
+Log rent index (all leases) & 0.36 & (0.32) & [$-$0.40, 2.33] & 5.2 & 695\\
+Log dwellings (cadastre) & 0.33 & (0.59) & [$-$0.58, $\infty$] & 5.2 & 695\\
+\addlinespace
+\multicolumn{6}{l}{\textit{C. Log rent index by size and location (population weights)}}\\
+Municipalities below 50,000 inhabitants & 0.43 & (0.34) & [$-\infty$, $\infty$] & 3.1 & 562\\
+Municipalities of 50,000 or more & 0.61 & (0.32) & [0.00, 2.46] & 5.9 & 133\\
+Inland & 0.31 & (0.30) & [$-$0.30, 0.97] & 33.1 & 403\\
+Coastal & 0.32 & (0.15) & [$-$0.23, 0.64] & 7.6 & 292\\
+\midrule
+\multicolumn{6}{l}{\textit{D. Descriptive horse race, OLS (coefficient per standard deviation of each regressor)}}\\
+Foreign-born inflow 2016--2024 & 0.0110*** & (0.0020) & & & 695\\
+Log net income per person 2015--2023 & 0.0039* & (0.0021) & & & 695\\
+Tourist-dwelling share 2020 & 0.0011 & (0.0032) & & & 695\\
+Log dwellings 2015--2024 & 0.0012 & (0.0020) & & & 695\\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: one observation per municipality. The inflow is the sum over 2016--2024 of the annual net change in the foreign-born population relative to population (centred timing), instrumented with the corresponding sum of shift-share predictions (33 origins, 2003 settlement, national growth excluding the own province). All regressions include province fixed effects and the central controls of the companion paper (2011 census: log population, renting, vacancy, tertiary education, share aged 65+; 2012: construction, industry and trade-hospitality shares of firms, firms per capita; coastal and FUA-core indicators). Standard errors clustered by province; AR: Anderson-Rubin set. Panel D: OLS with the same fixed effects and controls; none of these regressors is instrumented. *** $p<0.01$, ** $p<0.05$, * $p<0.1$.
+\end{minipage}\end{table}

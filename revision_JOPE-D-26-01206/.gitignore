@@ -1,0 +1,6 @@
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+code/__pycache__/
+tests/__pycache__/

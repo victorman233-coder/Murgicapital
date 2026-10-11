@@ -1,0 +1,32 @@
+\begin{table}[!htbp]\centering\small
+\caption{Robustness of the long-difference estimates: identification, inference, weights and provinces}\label{tab:robust}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lcccc}\toprule
+ & Entry gap & Implied & Rent, & First-stage\\
+ & (value-adjusted) & entry rent & all leases & $F$ (gap)\\\midrule
+\multicolumn{5}{l}{\textit{A. Baseline (table~\ref{tab:main})}}\\
+2SLS; AR set & 0.57 (0.30) & 0.83 (0.37) & 0.22 (0.16) & 11.0\\
+ & {\footnotesize [0.11, 1.74]} & {\footnotesize [0.25, 2.21]} & {\footnotesize [$-$0.09, 0.62]} & \\
+{\footnotesize WCR-AR set} & {\footnotesize [0.10, 1.54]} & {\footnotesize [0.30, 2.04]} & {\footnotesize [$-$0.06, 0.64]} & \\
+\multicolumn{5}{l}{\textit{B. Identification}}\\
+Control: 2003 foreign-born share (sum of exposure shares) & 0.64 (0.31) & 0.84 (0.41) & 0.18 (0.14) & 5.6\\
+ & {\footnotesize [0.24, 3.64]} & {\footnotesize [0.30, 4.80]} & {\footnotesize [$-$0.04, 0.91]} & \\
+Control: foreign-born inflow 2003--2014 & 0.59 (0.31) & 0.85 (0.39) & 0.22 (0.16) & 11.6\\
+ & {\footnotesize [0.13, 1.76]} & {\footnotesize [0.26, 2.30]} & {\footnotesize [$-$0.07, 0.62]} & \\
+Four instruments: Colombia, Peru, Romania, rest (two-step GMM) & 0.21 (0.11) & 0.45 (0.11) & 0.25 (0.06) & \\
+ & {\footnotesize Hansen $J$ $p$ = 0.12} & {\footnotesize Hansen $J$ $p$ = 0.34} & {\footnotesize Hansen $J$ $p$ = 0.08} & \\
+Single instrument: Colombia & 0.06 (0.20) & 0.59 (0.29) & 0.47 (0.19) & 14.7\\
+Single instrument: Peru & 0.15 (0.13) & 0.27 (0.25) & 0.04 (0.17) & 17.0\\
+Single instrument: Romania & 0.46 (0.23) & 0.67 (0.26) & 0.24 (0.13) & 4.4\\
+Dropping one of the five origins with largest Rotemberg weights (range) & 0.56 to 0.96 & 0.87 to 1.02 & 0.04 to 0.27 & \\
+\multicolumn{5}{l}{\textit{C. Weights and influential provinces}}\\
+Square-root population weights & 0.73 (0.52) & 0.92 (0.58) & 0.20 (0.22) & 6.7\\
+ & {\footnotesize [0.00, 4.06]} & {\footnotesize [0.12, 4.69]} & {\footnotesize [$-$0.18, 0.81]} & \\
+Without the provinces of Madrid and Barcelona & 0.53 (0.41) & 0.81 (0.51) & 0.24 (0.20) & 6.5\\
+ & {\footnotesize [$-$0.07, 3.06]} & {\footnotesize [0.06, 3.98]} & {\footnotesize [$-$0.13, 0.81]} & \\
+Without the province of Málaga & 0.43 (0.28) & 0.68 (0.32) & 0.23 (0.17) & 12.1\\
+ & {\footnotesize [0.00, 1.41]} & {\footnotesize [0.15, 1.78]} & {\footnotesize [$-$0.09, 0.62]} & \\
+Leaving out one province at a time (range) & 0.43 to 0.75 & & & \\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: 2SLS coefficients (cluster-robust standard errors) and, below, Anderson-Rubin 95\,\% sets, for the specification of table~\ref{tab:main}; $F$ refers to the entry-gap sample (402 municipalities; the rent of all leases uses 695). Panel B: the 2003 foreign-born share scaled as the instrument \citep{borusyak2022}; the 2003--2014 foreign-born inflow relative to 2003 population \citep{jaeger2018}; two-step efficient GMM with the components of the instrument for the three origins with the largest Rotemberg weights and the sum of the other 30 as separate instruments, with the Hansen test of over-identifying restrictions; the just-identified estimates with each origin component alone (the $F$ column reports the first stage in the gap sample); and the range of estimates when one of the five origins with the largest Rotemberg weights is dropped from the instrument. Panel C: the range across the 42 leave-one-province-out estimates of the entry gap; its Anderson-Rubin set includes zero only when Málaga is excluded.
+\end{minipage}\end{table}

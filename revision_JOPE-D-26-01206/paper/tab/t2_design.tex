@@ -1,0 +1,34 @@
+\begin{table}[!htbp]\centering\small
+\caption{Design diagnostics: shocks, Rotemberg weights and shock-level balance}\label{tab:design}
+\begin{adjustbox}{max width=\linewidth}\begin{tabular}{lrrrrrr}\toprule
+\multicolumn{7}{l}{\textit{A. Origin shocks, 2012--2024 (national growth over the 2003 stock)}}\\
+Effective number of origins (inverse HHI of exposure) & 15.8 & \multicolumn{5}{l}{Largest exposure weight: 0.13 (Morocco)}\\
+Mean first-order autocorrelation of shocks & 0.64 & \multicolumn{5}{l}{Mean pairwise correlation, all origins: 0.71}\\
+Mean correlation within continent & \multicolumn{6}{l}{Europe 0.68, Africa 0.89, Americas 0.85, Asia 0.67}\\
+Overidentification with 33 instruments: Hansen $J$ (df) & 137.4 (32) & \multicolumn{5}{l}{$p$-value 0.000; LIML 0.17 (0.09)}\\
+\midrule\multicolumn{7}{l}{\textit{B. Largest Rotemberg weights (original specification, population weights)}}\\
+Origin & $\hat\alpha_o$ & $\hat\beta_o$ & $F_o$ & Share 2003 & $g_{2012-14}$ & $g_{2015-24}$\\
+Romania & 0.314 & 0.39 & 27.0 & 0.042 & $-$1.12 & $-$1.20\\
+Colombia & 0.210 & 0.68 & 14.9 & 0.079 & $-$0.07 & 2.41\\
+United Kingdom & 0.140 & $-$0.52 & 6.1 & 0.053 & $-$0.64 & $-$0.02\\
+Peru & 0.103 & $-$0.05 & 60.1 & 0.022 & $-$0.14 & 3.34\\
+Germany & 0.100 & $-$0.54 & 12.1 & 0.057 & $-$0.34 & $-$0.04\\
+Ukraine & 0.051 & $-$0.24 & 0.8 & 0.013 & 0.06 & 2.92\\
+Venezuela & 0.047 & 1.55 & 2.1 & 0.025 & 0.05 & 6.30\\
+Russia & 0.044 & $-$0.02 & 5.6 & 0.009 & 0.44 & 2.06\\
+Sum of negative weights & $-$0.166 & \multicolumn{5}{l}{Contribution of the eight largest weights: 0.196 of 0.303}\\
+\midrule\multicolumn{7}{l}{\textit{C. Shock-level balance: 2015--2024 origin growth on exposure-weighted characteristics (standardised)}}\\
+Characteristic & \multicolumn{2}{c}{Coefficient (s.e.)} & $p$ & \multicolumn{2}{c}{Within continent (s.e.)} & $p$\\
+Log population, 2011 & \multicolumn{2}{c}{0.31 (0.26)} & 0.236 & \multicolumn{2}{c}{$-$0.50 (0.50)} & 0.328\\
+Renting share, 2011 & \multicolumn{2}{c}{0.59 (0.23)} & 0.018 & \multicolumn{2}{c}{0.06 (0.46)} & 0.896\\
+Non-primary share, 2011 & \multicolumn{2}{c}{$-$0.34 (0.17)} & 0.052 & \multicolumn{2}{c}{0.20 (0.22)} & 0.376\\
+Tertiary education, 2011 & \multicolumn{2}{c}{0.51 (0.25)} & 0.049 & \multicolumn{2}{c}{0.04 (0.50)} & 0.941\\
+Share aged 65+, 2011 & \multicolumn{2}{c}{0.22 (0.25)} & 0.388 & \multicolumn{2}{c}{0.09 (0.33)} & 0.784\\
+Coastal & \multicolumn{2}{c}{0.01 (0.29)} & 0.966 & \multicolumn{2}{c}{0.40 (0.31)} & 0.206\\
+Construction firms share, 2012 & \multicolumn{2}{c}{$-$0.87 (0.23)} & 0.001 & \multicolumn{2}{c}{$-$1.21 (0.43)} & 0.008\\
+Trade-transport-hospitality share, 2012 & \multicolumn{2}{c}{$-$0.34 (0.28)} & 0.221 & \multicolumn{2}{c}{0.42 (0.54)} & 0.446\\
+Rent growth 2012--2014 & \multicolumn{2}{c}{0.11 (0.28)} & 0.703 & \multicolumn{2}{c}{0.38 (0.23)} & 0.106\\
+\bottomrule\end{tabular}\end{adjustbox}
+\begin{minipage}{0.97\linewidth}\footnotesize\vspace{4pt}
+\textit{Notes}: panel A uses calendar-year national growth rates $g_{ot}=\Delta F_{ot}/F_{o,2003}$ for 2012--2024 and exposure weights $\sum_i\omega_i s_{io}$; the overidentification test uses the 33 origin components of the instrument as separate instruments (two-step GMM, province clusters). Panel B: decomposition $\hat\beta=\sum_o\hat\alpha_o\hat\beta_o$ of \citet{goldsmith2020} for the leave-out instrument with the original covariates; $F_o$ is the first-stage $F$ of each origin component; $g$ are cumulative growth rates over the 2003 stock. Panel C: 33 origins, weights equal to exposure; heteroskedasticity-robust standard errors; ``within continent adds continent fixed effects.
+\end{minipage}\end{table}
